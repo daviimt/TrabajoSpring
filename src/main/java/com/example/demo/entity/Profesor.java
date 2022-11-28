@@ -1,40 +1,45 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Alumnos {
+public class Profesor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idAlumnos;
+	private int idProfesor;
 	private String nombre;
 	private String apellidos;
 	private String email;
 	private String usuario;
 	private String password;
-	private String foto;
-	public Alumnos() {
+	
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="curso")
+	private List<Curso> cursosList;
+	
+	public Profesor() {
 		super();
 	}
-	public Alumnos(int idAlumno, String nombre, String apellidos, String email, String usuario, String password,
-			String foto) {
+	public Profesor(int id, String nombre, String apellidos, String email, String usuario, String password) {
 		super();
-		this.idAlumnos = idAlumno;
+		this.idProfesor = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.usuario = usuario;
 		this.password = password;
-		this.foto = foto;
 	}
-	public int getIdAlumno() {
-		return idAlumnos;
+	public int getId() {
+		return idProfesor;
 	}
-	public void setIdAlumno(int idAlumno) {
-		this.idAlumnos = idAlumno;
+	public void setId(int id) {
+		this.idProfesor = id;
 	}
 	public String getNombre() {
 		return nombre;
@@ -66,16 +71,11 @@ public class Alumnos {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFoto() {
-		return foto;
-	}
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
 	@Override
 	public String toString() {
-		return "Alumnos [idAlumno=" + idAlumnos + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + "]";
+		return "Profesores [idProfesores=" + idProfesor + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
+				+ ", usuario=" + usuario + ", password=" + password + "]";
 	}
+	
 	
 }

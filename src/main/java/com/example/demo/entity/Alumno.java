@@ -1,38 +1,51 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Profesores {
+public class Alumno {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idProfesores;
+	private int idAlumnos;
 	private String nombre;
 	private String apellidos;
 	private String email;
 	private String usuario;
 	private String password;
+	private String foto;
 	
-	public Profesores() {
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="alumno")
+	private List<Matricula> matriculaList;
+	
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="alumno")
+	private List<Comentario> comentarioList;
+	
+	public Alumno() {
 		super();
 	}
-	public Profesores(int id, String nombre, String apellidos, String email, String usuario, String password) {
+	public Alumno(int idAlumno, String nombre, String apellidos, String email, String usuario, String password,
+			String foto) {
 		super();
-		this.idProfesores = id;
+		this.idAlumnos = idAlumno;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.usuario = usuario;
 		this.password = password;
+		this.foto = foto;
 	}
-	public int getId() {
-		return idProfesores;
+	public int getIdAlumno() {
+		return idAlumnos;
 	}
-	public void setId(int id) {
-		this.idProfesores = id;
+	public void setIdAlumno(int idAlumno) {
+		this.idAlumnos = idAlumno;
 	}
 	public String getNombre() {
 		return nombre;
@@ -64,11 +77,16 @@ public class Profesores {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 	@Override
 	public String toString() {
-		return "Profesores [idProfesores=" + idProfesores + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", usuario=" + usuario + ", password=" + password + "]";
+		return "Alumnos [idAlumno=" + idAlumnos + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
+				+ ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + "]";
 	}
-	
 	
 }

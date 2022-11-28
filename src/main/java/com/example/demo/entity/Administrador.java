@@ -1,21 +1,29 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Administradores {
+public class Administrador {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idAdministradores;
 	private String usuario;
 	private String password;
-	public Administradores() {
+	
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="administrador")
+	private List<Noticia> noticiasList;
+	
+	public Administrador() {
 		super();
 	}
-	public Administradores(int idAdministradores, String usuario, String password) {
+	public Administrador(int idAdministradores, String usuario, String password) {
 		super();
 		this.idAdministradores = idAdministradores;
 		this.usuario = usuario;
