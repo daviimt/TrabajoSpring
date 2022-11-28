@@ -2,7 +2,7 @@ package com.example.demo.models;
 
 import java.util.Date;
 
-public class CursosModel {
+public class CursoModel {
 	
 	private int idCursos;
 	private String nombre;
@@ -12,10 +12,10 @@ public class CursosModel {
 	private Date fechaInicio;
 	private Date fechaFin;
 	
-	public CursosModel() {
+	public CursoModel() {
 		super();
 	}
-	public CursosModel(int idCurso, String nombre, String descripcion, int nivel, int idProfesor, Date fechaInicio,
+	public CursoModel(int idCurso, String nombre, String descripcion, int nivel, int idProfesor, Date fechaInicio,
 			Date fechaFin) {
 		super();
 		this.idCursos = idCurso;

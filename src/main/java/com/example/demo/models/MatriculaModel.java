@@ -1,16 +1,16 @@
 package com.example.demo.models;
 
-public class MatriculasModel {
+public class MatriculaModel {
 	
 	private int idMatriculas;
 	private int idAlumno;
 	private int idCurso;
 	private int valoracion;
 	
-	public MatriculasModel() {
+	public MatriculaModel() {
 		super();
 	}
-	public MatriculasModel(int idMatriculas, int idAlumno, int idCurso, int valoracion) {
+	public MatriculaModel(int idMatriculas, int idAlumno, int idCurso, int valoracion) {
 		super();
 		this.idMatriculas = idMatriculas;
 		this.idAlumno = idAlumno;

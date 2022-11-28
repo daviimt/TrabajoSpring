@@ -1,6 +1,6 @@
 package com.example.demo.models;
 
-public class ProfesoresModel {
+public class ProfesorModel {
 	private int idProfesores;
 	private String nombre;
 	private String apellidos;
@@ -8,10 +8,10 @@ public class ProfesoresModel {
 	private String usuario;
 	private String password;
 	
-	public ProfesoresModel() {
+	public ProfesorModel() {
 		super();
 	}
-	public ProfesoresModel(int id, String nombre, String apellidos, String email, String usuario, String password) {
+	public ProfesorModel(int id, String nombre, String apellidos, String email, String usuario, String password) {
 		super();
 		this.idProfesores = id;
 		this.nombre = nombre;

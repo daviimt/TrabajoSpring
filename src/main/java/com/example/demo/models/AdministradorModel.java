@@ -1,13 +1,13 @@
 package com.example.demo.models;
 
-public class AdministradoresModel {
+public class AdministradorModel {
 	private int idAdministradores;
 	private String usuario;
 	private String password;
-	public AdministradoresModel() {
+	public AdministradorModel() {
 		super();
 	}
-	public AdministradoresModel(int idAdministradores, String usuario, String password) {
+	public AdministradorModel(int idAdministradores, String usuario, String password) {
 		super();
 		this.idAdministradores = idAdministradores;
 		this.usuario = usuario;

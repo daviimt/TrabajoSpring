@@ -1,17 +1,17 @@
 package com.example.demo.models;
 
 
-public class NoticiasModel {
+public class NoticiaModel {
 	private int idNoticias;
 	private String titulo;
 	private String descripcion;
 	private String imagen;
 	private int idAdministrador;
 	
-	public NoticiasModel() {
+	public NoticiaModel() {
 		super();
 	}
-	public NoticiasModel(int idNoticias, String titulo, String descripcion, String imagen, int idAdministrador) {
+	public NoticiaModel(int idNoticias, String titulo, String descripcion, String imagen, int idAdministrador) {
 		super();
 		this.idNoticias = idNoticias;
 		this.titulo = titulo;

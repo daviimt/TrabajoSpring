@@ -1,16 +1,16 @@
 package com.example.demo.models;
 
-public class ComentariosModel {
+public class ComentarioModel {
 
 	private int idComentarios;
 	private int idAlumno;
 	private int idCurso;
 	private String comentario;
 	
-	public ComentariosModel() {
+	public ComentarioModel() {
 		super();
 	}
-	public ComentariosModel(int idComentarios, int idAlumno, int idCurso, String comentario) {
+	public ComentarioModel(int idComentarios, int idAlumno, int idCurso, String comentario) {
 		super();
 		this.idComentarios = idComentarios;
 		this.idAlumno = idAlumno;
