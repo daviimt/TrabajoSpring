@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.entity.Comentario;
 import com.example.demo.models.ComentarioModel;
 
-public interface comentarioService {
+public interface ComentarioService {
 
 
 	public abstract List<ComentarioModel> ListAllAdmin();

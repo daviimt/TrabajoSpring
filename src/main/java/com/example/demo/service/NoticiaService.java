@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.entity.Noticia;
 import com.example.demo.models.NoticiaModel;
 
-public interface noticiaService {
+public interface NoticiaService {
 
 	public abstract List<NoticiaModel> ListAllNoticias();
 	public abstract Noticia addNoticia(NoticiaModel noticiaModel);

@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.entity.Profesor;
 import com.example.demo.models.ProfesorModel;
 
-public interface profesorService {
+public interface ProfesorService {
 
 	public abstract List<ProfesorModel> ListAllProfesores();
 	public abstract Profesor addProfesor(ProfesorModel profModel);

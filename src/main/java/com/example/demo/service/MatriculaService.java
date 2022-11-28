@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.entity.Matricula;
 import com.example.demo.models.MatriculaModel;
 
-public interface matriculaService {
+public interface MatriculaService {
 	public abstract List<MatriculaModel> ListAllMatriculas();
 	public abstract Matricula addMatricula(MatriculaModel matriculaModel);
 	public abstract int removeMatricula(int id);

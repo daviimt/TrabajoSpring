@@ -6,7 +6,7 @@ import com.example.demo.entity.Administrador;
 import com.example.demo.entity.Alumno;
 import com.example.demo.models.AlumnoModel;
 
-public interface alumnoService {
+public interface AlumnoService {
 
 	public abstract List<AlumnoModel> ListAllAdmin();
 	public abstract Administrador addAdmin(AlumnoModel adminModel);
