@@ -20,7 +20,7 @@ public class Profesor {
 	private String usuario;
 	private String password;
 	
-	@OneToMany(cascade= CascadeType.ALL, mappedBy="curso")
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="profesor")
 	private List<Curso> cursosList;
 	
 	public Profesor() {

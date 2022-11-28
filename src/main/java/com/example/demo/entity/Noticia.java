@@ -18,7 +18,7 @@ public class Noticia {
 	
 	@ManyToOne
 	@JoinColumn(name="administradorId")
-	private Administrador Administrador;
+	private Administrador administrador;
 	
 	public Noticia() {
 		super();
@@ -30,7 +30,7 @@ public class Noticia {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		Administrador = administrador;
+		this.administrador = administrador;
 	}
 
 	public int getIdNoticias() {
@@ -66,18 +66,20 @@ public class Noticia {
 	}
 
 	public Administrador getAdministrador() {
-		return Administrador;
+		return administrador;
 	}
 
 	public void setAdministrador(Administrador administrador) {
-		Administrador = administrador;
+		this.administrador = administrador;
 	}
 
 	@Override
 	public String toString() {
-		return "Noticias [idNoticias=" + idNoticias + ", titulo=" + titulo + ", descripcion=" + descripcion
-				+ ", imagen=" + imagen + ", Administrador=" + Administrador + "]";
+		return "Noticia [idNoticias=" + idNoticias + ", titulo=" + titulo + ", descripcion=" + descripcion + ", imagen="
+				+ imagen + ", administrador=" + administrador + "]";
 	}
+
+	
 	
 	
 	
