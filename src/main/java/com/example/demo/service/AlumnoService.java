@@ -8,10 +8,10 @@ import com.example.demo.models.AlumnoModel;
 
 public interface AlumnoService {
 
-	public abstract List<AlumnoModel> ListAllAdmin();
-	public abstract Administrador addAdmin(AlumnoModel adminModel);
-	public abstract int removeAdmin(int id);
-	public abstract Alumno updateAdmin(AlumnoModel adminModel);
-	public abstract Alumno transform(AlumnoModel adminModel);
-	public abstract AlumnoModel transform(Alumno admin);
+	public abstract List<AlumnoModel> ListAllAlumnos();
+	public abstract Alumno addAlumno(AlumnoModel alumnoModel);
+	public abstract int removeAlumno(int id);
+	public abstract Alumno updateAlumno(AlumnoModel alumnoModel);
+	public abstract Alumno transform(AlumnoModel alumnoModel);
+	public abstract AlumnoModel transform(Alumno alumno);
 }
