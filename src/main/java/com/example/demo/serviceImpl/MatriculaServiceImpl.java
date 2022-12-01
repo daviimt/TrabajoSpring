@@ -19,7 +19,7 @@ import com.example.demo.service.MatriculaService;
 public class MatriculaServiceImpl implements MatriculaService{
 
 	@Autowired
-	@Qualifier("courseRepository")
+	@Qualifier("matriculaRepository")
 	private MatriculaRepository matriculaRepository;
 
 	@Override

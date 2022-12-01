@@ -20,12 +20,12 @@ import com.example.demo.repository.UsuarioRepository;
 public class UsuarioService implements UserDetailsService {
 
 	@Autowired
-	@Qualifier("userRepository")
+	@Qualifier("usuarioRepository")
 	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
-		Usuario usuario = usuarioRepository.findByUsername(nombreUsuario);
+		Usuario usuario = usuarioRepository.findByNombreUsuario(nombreUsuario);
 
 		UserBuilder builder = null;
 
