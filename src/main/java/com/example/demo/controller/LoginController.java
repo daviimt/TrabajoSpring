@@ -24,7 +24,7 @@ public class LoginController {
 	
 	@GetMapping("/home")
 	public String inicio(Model model) {
-		return "index1";
+		return "index";
 	}
 	
 	@GetMapping("/auth/login")
@@ -32,20 +32,20 @@ public class LoginController {
 		model.addAttribute("user",new Usuario());
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
-		return "login1";
+		return "login";
 	}
 	
 	@GetMapping("/auth/registerForm")
 	public String registerForm(Model model) {
 		model.addAttribute("user", new Usuario());
-		return "registro1";
+		return "registro";
 	}
 	
 	@PostMapping("/auth/register")
 	public String register(@ModelAttribute Usuario user,RedirectAttributes flash) {
 		usuarioService.registrar(user);
 		flash.addFlashAttribute("success","User registered successfully");
-		return "redirect:/auth/login1";
+		return "redirect:/auth/login";
 	}
 	
 }
