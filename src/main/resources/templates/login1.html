@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="form-signin" th:action="@{/auth/login}" th:object="${user}"
+		method="post">
+		<input type="hidden" name="${csrf.parameterName}" value="${csrf.token}"/>
+		<label for="inputEmail">Username</label>
+		<input type="text" class="form-control" placeholder="username" name="username" id="username"/>
+		<br>
+		<label for="inputPassword">Password</label>
+		<input type="password" class="form-control" placeholder="Password" name="password" id="password"/>
+		<br>
+		<div th:if="${error!=null}" class="alert alert-danger" role="alert">Invalid username</div>
+		<div th:if="${logout!=null}" class="alert alert-danger" role="alert">Logout successful</div>
+		<button type="submit" class="btn btn-primary">Sign in</button>
+		
+		<form class="form-inline" th:action="@{/logout}" method="post">
+		<button class="btn btn-link" type="submit">Logout</button>
+		</form>
+</form>
+</body>
+</html>

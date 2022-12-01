@@ -24,16 +24,16 @@ public class UsuarioService implements UserDetailsService {
 	private UsuarioRepository usuarioRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
-		Usuario usuario = usuarioRepository.findByNombreUsuario(nombreUsuario);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Usuario usuario = usuarioRepository.findByUsername(username);
 
 		UserBuilder builder = null;
 
 		if (usuario != null) {
-			builder = User.withUsername(nombreUsuario);
+			builder = User.withUsername(username);
 			builder.disabled(false);
-			builder.password(usuario.getContra());
-			builder.authorities(new SimpleGrantedAuthority(usuario.getRol()));
+			builder.password(usuario.getPassword());
+			builder.authorities(new SimpleGrantedAuthority(usuario.getRole()));
 
 		} else
 			throw new UsernameNotFoundException("Usuario no encontrado");
@@ -46,9 +46,9 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public Usuario registrar(Usuario usuario) {
-		usuario.setContra(passwordEncoder().encode(usuario.getContra()));
-		usuario.setActivado(true);
-		usuario.setRol("ROLE_USER");
+		usuario.setPassword(passwordEncoder().encode(usuario.getPassword()));
+		usuario.setEnabled(true);
+		usuario.setRole("ROLE_USER");
 		return usuarioRepository.save(usuario);
 	}
 }

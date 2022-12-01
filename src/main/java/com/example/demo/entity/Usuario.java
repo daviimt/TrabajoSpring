@@ -13,28 +13,28 @@ public class Usuario {
 	@GeneratedValue
 	private long id;
 
-	@Column(name = "nombreUsuario", unique = true, nullable = false)
-	private String nombreUsuario;
+	@Column(name = "username", unique = true, nullable = false)
+	private String username;
 
-	@Column(name = "contra", nullable = false)
+	@Column(name = "password", nullable = false)
 	@Size(max = 100)
-	private String contra;
+	private String password;
 
-	private boolean activado;
+	private boolean enabled;
 
-	private String rol;
+	private String role;
 
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(long id, String nombreUsuario, @Size(max = 100) String contra, boolean activado, String rol) {
+	public Usuario(long id, String username, @Size(max = 100) String password, boolean enabled, String role) {
 		super();
 		this.id = id;
-		this.nombreUsuario = nombreUsuario;
-		this.contra = contra;
-		this.activado = activado;
-		this.rol = rol;
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.role = role;
 	}
 
 	public long getId() {
@@ -45,42 +45,41 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getContra() {
-		return contra;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setContra(String contra) {
-		this.contra = contra;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public boolean isActivado() {
-		return activado;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	public void setActivado(boolean activado) {
-		this.activado = activado;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
-	public String getRol() {
-		return rol;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", contra=" + contra + ", activado="
-				+ activado + ", rol=" + rol + "]";
+		return "Usuario [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
+				+ ", role=" + role + "]";
 	}
-
 }

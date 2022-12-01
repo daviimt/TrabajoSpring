@@ -9,5 +9,5 @@ import com.example.demo.entity.Usuario;
 
 @Repository("usuarioRepository")
 public interface UsuarioRepository extends JpaRepository<Usuario, Serializable> {
-	public abstract Usuario findByNombreUsuario(String nombreUsuario);
+	public abstract Usuario findByUsername(String username);
 }
