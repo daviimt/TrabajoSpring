@@ -15,7 +15,6 @@ import com.example.demo.entity.Usuario;
 import com.example.demo.serviceImpl.UsuarioService;
 
 @Controller
-@RequestMapping("/inicio")
 public class LoginController {
 
 	@Autowired
