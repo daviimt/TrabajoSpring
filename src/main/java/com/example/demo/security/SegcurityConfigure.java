@@ -18,7 +18,7 @@ public class SegcurityConfigure {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests(
 				(requests) -> requests.antMatchers("/", "/home", "/imgs/**", "/photos/**", "/auth/**", "/webjars/**",
-						"/css/**", "/students/**", "/courses/**", "/files/**","").permitAll().anyRequest().authenticated())
+						"/css/**", "/students/**", "/courses/**", "/files/**").permitAll().anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/auth/login").defaultSuccessUrl("/home").permitAll())
 				.logout((logout) -> logout.permitAll().logoutUrl("/auth/logout").logoutSuccessUrl("/auth/login?logout"));
 
