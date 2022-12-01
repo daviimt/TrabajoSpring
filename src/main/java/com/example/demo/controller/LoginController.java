@@ -15,6 +15,7 @@ import com.example.demo.entity.Usuario;
 import com.example.demo.serviceImpl.UsuarioService;
 
 @Controller
+@RequestMapping("/inicio")
 public class LoginController {
 
 	@Autowired
@@ -23,7 +24,7 @@ public class LoginController {
 	
 	@GetMapping("/home")
 	public String inicio(Model model) {
-		return "index";
+		return "index1";
 	}
 	
 	@GetMapping("/auth/login")
@@ -31,20 +32,20 @@ public class LoginController {
 		model.addAttribute("user",new Usuario());
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
-		return "login";
+		return "login1";
 	}
 	
 	@GetMapping("/auth/registerForm")
 	public String registerForm(Model model) {
 		model.addAttribute("user", new Usuario());
-		return "registro";
+		return "registro1";
 	}
 	
 	@PostMapping("/auth/register")
 	public String register(@ModelAttribute Usuario user,RedirectAttributes flash) {
 		usuarioService.registrar(user);
 		flash.addFlashAttribute("success","User registered successfully");
-		return "redirect:/auth/login";
+		return "redirect:/auth/login1";
 	}
 	
 }
