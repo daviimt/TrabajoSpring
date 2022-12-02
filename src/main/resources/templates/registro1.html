@@ -4,7 +4,11 @@
 <head>
 <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
 <meta charset="ISO-8859-1">
+<<<<<<< HEAD
 <div th:replace ="fragments :: header"></div>
+=======
+<title>Registro de usuario</title>
+>>>>>>> branch 'master' of https://github.com/daviimt/TrabajoSpring.git
 </head>
 <body>
 <form th:action="@{/auth/register}" th:object="${alumno}" method="post">
@@ -16,12 +20,9 @@
 		<input type="text" class="form-control" th:field="*{apellidos}" placeholder="Apellidos" name="apellidos" id="apellidos"/>
 		<br>
 		<label>Email: </label>
-		<input type="text" class="form-control" th:field="*{email}" placeholder="Correo electronico" name="username" id="username"/>
+		<input type="text" class="form-control" th:field="*{email}" placeholder="Correo electronico" name="username" id="username" pattern='([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'/>
 		<br>
 		<label>Clave: </label>
-		<input type="password" class="form-control" th:field="*{password}" placeholder="Clave" name="password" id="password"/>
-		<br>
-		<label>Repetir clave: </label>
 		<input type="password" class="form-control" th:field="*{password}" placeholder="Clave" name="password" id="password"/>
 		<br>
 		<label>Foto: </label>
