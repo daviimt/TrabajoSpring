@@ -2,13 +2,12 @@
 <html xmlns:th=http://www.thymeleaf.org
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
 <meta charset="ISO-8859-1">
-<<<<<<< HEAD
+
 <div th:replace ="fragments :: header"></div>
-=======
 <title>Registro de usuario</title>
->>>>>>> branch 'master' of https://github.com/daviimt/TrabajoSpring.git
 </head>
 <body>
 <form th:action="@{/auth/register}" th:object="${alumno}" method="post">
