@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link th:href="@{/css/header.css}" rel="stylesheet" />
+	
+</head>
+<body>
+<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+  <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="container">
+     <div class="navbar-nav-scroll">
+	    <ul class="navbar-nav bd-navbar-nav flex-row">
+	      <li  th:classappend="${module == 'home' ? 'active' : ''}" class="nav-item">
+	        <a class="nav-link active" href="/" th:href="@{/}">Home</a>
+	      </li>
+	      <li sec:authorize="!isAuthenticated()" class="nav-item">
+	        <a class="nav-link" th:href="@{/auth/registerForm}">Sign Up</a>
+	      </li>
+	    </ul>
+  	</div>
+    
+    </div>
+  </div>
+  </header>
+</body>
+</html>
