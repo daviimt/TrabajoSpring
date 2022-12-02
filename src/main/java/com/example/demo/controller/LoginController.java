@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Alumno;
 import com.example.demo.entity.Usuario;
@@ -17,6 +19,7 @@ import com.example.demo.service.AlumnoService;
 import com.example.demo.serviceImpl.UsuarioService;
 
 @Controller
+@RequestMapping("/")
 public class LoginController {
 
 	@Autowired
@@ -27,10 +30,14 @@ public class LoginController {
 	@Qualifier("alumnoServiceImpl")
 	private AlumnoService alumnoService;
 	
+	@GetMapping("/")
+	public RedirectView redirect() {
+		return new RedirectView("/home");
+	}
 	
 	@GetMapping("/home")
 	public String inicio(Model model) {
-		return "index1";
+		return "home";
 	}
 	
 	@GetMapping("/auth/login")
@@ -39,13 +46,13 @@ public class LoginController {
 		model.addAttribute("user",new Usuario());
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
-		return "login1";
+		return "login";
 	}
 	
 	@GetMapping("/auth/registerForm")
 	public String registerForm(Model model) {
 		model.addAttribute("alumno", new Alumno());
-		return "registro1";
+		return "register";
 	}
 	
 	@PostMapping("/auth/register")
