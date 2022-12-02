@@ -5,8 +5,12 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
 <meta charset="ISO-8859-1">
-<title>Inicio de sesión</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<div th:replace ="fragments :: header"></div>
+<title>Inicio de sesion</title>
+<br>
 </head>
+
 <body>
 <form action="form-signin" th:action="@{/auth/login}" th:object="${user}"
 		method="post">
