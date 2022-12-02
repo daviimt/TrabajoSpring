@@ -8,22 +8,13 @@
 <title>Registro de usuario: </title>
 </head>
 <body>
-<form th:action="@{/auth/register}" th:object="${alumno}" method="post">
+<form th:action="@{/auth/register}" th:object="${user}" method="post">
 		<input type="hidden" name="${csrf.parameterName}" value="${csrf.token}"/>
-		<label>Nombre</label>
-		<input type="text" class="form-control" th:field="*{nombre}" placeholder="nombre" name="nombre" id="nombre"/>
-		<br>
-		<label>Apellidos:</label>
-		<input type="text" class="form-control" th:field="*{apellidos}" placeholder="apellidos" name="apellidos" id="apellidos"/>
-		<br>
-		<label>Email</label>
-		<input type="text" class="form-control" th:field="*{email}" placeholder="username" name="username" id="username"/>
+		<label>Username</label>
+		<input type="text" class="form-control" th:field="*{username}" placeholder="username" name="username" id="username"/>
 		<br>
 		<label>Password</label>
 		<input type="password" class="form-control" th:field="*{password}" placeholder="password" name="password" id="password"/>
-		<br>
-		<label>Foto:</label>
-		<input type="file" class="form-control" th:field="*{foto}" placeholder="foto" name="foto" id="foto"/>
 		<br>
 		<input class="btn btn-primary btn-block text-uppercase" id="boton" type="submit" value="Sign Up"/>
 		</form>
