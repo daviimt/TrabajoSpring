@@ -12,8 +12,15 @@
 </head>
 
 <body>
+<br>
+<div style="text-align:center;width: 500px;margin: auto;">
+<h1>Sing In</h1>
+</div>
+<br>
+<br>
+<br>
 	<form action="form-signin" th:action="@{/auth/login}"
-		th:object="${user}" method="post">
+		th:object="${user}" method="post" style="text-align:center;width: 500px;margin: auto;">
 		<input type="hidden" name="${csrf.parameterName}"
 			value="${csrf.token}" /> <label for="inputEmail">Email</label> <input
 			type="text" class="form-control" placeholder="Correo electronico"
@@ -25,10 +32,6 @@
 		<div th:if="${logout!=null}" class="alert alert-danger" role="alert">Logout
 			successful</div>
 		<button type="submit" class="btn btn-primary">Iniciar sesion</button>
-
-		<form class="form-inline" th:action="@{/logout}" method="post">
-			<button class="btn btn-link" type="submit">Logout</button>
-		</form>
 	</form>
 </body>
 </html>
