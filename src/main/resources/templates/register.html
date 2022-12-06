@@ -18,7 +18,7 @@
 <br>
 <br>
 <br>
-<form th:action="@{/auth/register}" th:object="${alumno}" method="post">
+<form th:action="@{/auth/register}" th:object="${alumno}" method="post" style="text-align:center;width: 500px;margin: auto;">
 		<input type="hidden" name="${csrf.parameterName}" value="${csrf.token}"/>
 		<label>Nombre: </label>
 		<input type="text" class="form-control" th:field="*{nombre}" placeholder="Nombre" name="nombre" id="nombre"/>
