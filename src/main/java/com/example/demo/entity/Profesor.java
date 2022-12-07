@@ -17,7 +17,6 @@ public class Profesor {
 	private String nombre;
 	private String apellidos;
 	private String email;
-	private String usuario;
 	private String password;
 	
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="profesor")
@@ -26,13 +25,12 @@ public class Profesor {
 	public Profesor() {
 		super();
 	}
-	public Profesor(int id, String nombre, String apellidos, String email, String usuario, String password) {
+	public Profesor(int id, String nombre, String apellidos, String email, String password) {
 		super();
 		this.idProfesor = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
-		this.usuario = usuario;
 		this.password = password;
 	}
 	public int getId() {
@@ -59,12 +57,7 @@ public class Profesor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -73,9 +66,10 @@ public class Profesor {
 	}
 	@Override
 	public String toString() {
-		return "Profesores [idProfesores=" + idProfesor + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", usuario=" + usuario + ", password=" + password + "]";
+		return "Profesor [idProfesor=" + idProfesor + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
+				+ email + ", password=" + password + ", cursosList=" + cursosList + "]";
 	}
+
 	
 	
 }
