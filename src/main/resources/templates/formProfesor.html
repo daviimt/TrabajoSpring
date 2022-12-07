@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
+
+<meta charset="ISO-8859-1">
+
+<div th:replace ="fragments :: header"></div>
+<title>Formulario Profesores</title>
+<br>
+</head>
+
+<body>
+<div style="text-align:center;width: 500px;margin: auto;">
+<h1>Formulario Profesor: </h1>
+</div>
+<br>
+<br>
+<br>
+<form th:action="@{//register}" th:object="${alumno}" method="post" style="text-align:center;width: 500px;margin: auto;">
+		<input type="hidden" name="${csrf.parameterName}" value="${csrf.token}"/>
+		<label>Nombre: </label>
+		<input type="text" class="form-control" th:field="*{nombre}" placeholder="Nombre" name="nombre" id="nombre"/>
+		<br>
+		<label>Apellidos: </label>
+		<input type="text" class="form-control" th:field="*{apellidos}" placeholder="Apellidos" name="apellidos" id="apellidos"/>
+		<br>
+		<label>Email: </label>
+		<input type="email" class="form-control" th:field="*{email}" placeholder="Correo electr&oacute;nico" name="username" id="username" pattern='([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'/>
+		<br>
+		<br>
+		<label>Clave: </label>
+		<input type="password" class="form-control" th:field="*{password}" placeholder="Clave" name="password" id="password"/>
+		<br>
+		<input type="submit" class="btn btn-primary">
+</form>
+</body>
+</html>
