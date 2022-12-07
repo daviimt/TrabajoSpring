@@ -23,7 +23,7 @@ import com.example.demo.service.CursoService;
 @RequestMapping("/alumnos")
 public class AlumnoController {
 	// Constante Cadena con el nombre de la vista
-	private static final String STUDENTS_VIEW = "alumno";
+	private static final String STUDENTS_VIEW = "alumnos";
 	private static final String FORM_VIEW = "formAlumno";
 
 	// Inyectamos el servicio
@@ -50,7 +50,7 @@ public class AlumnoController {
 			flash.addFlashAttribute("success", "Alumno eliminado con éxito");
 		} else
 			flash.addFlashAttribute("error", "No se ha podido eliminar el alumno");
-		return "redirect:/students/listStudent";
+		return "redirect:/alumnos/listAtudent";
 	}
 	
 	@PostMapping("/addAlumno")
@@ -62,7 +62,7 @@ public class AlumnoController {
 		} else {
 			alumnoService.updateAlumno(studentModel);
 			flash.addFlashAttribute("success", "Alumno actualizado satisfactoriamente");
-			return "redirect:/student/liststudent";
+			return "redirect:/alumnos/listAlumnos";
 		}
 	}
 	

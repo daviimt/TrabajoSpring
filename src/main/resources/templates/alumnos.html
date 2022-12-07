@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
+<meta charset="ISO-8859-1">
+<div th:replace="fragments :: header"></div>
+<title>Lista de alumnos</title>
+<br>
+</head>
+<body>
+	<div th:if="${alumnos.empty}">
+		<h1>No hay alumnos</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading"></div>
+		<table class="table table-striped table-bordered">
+			<thead class="thead-light">
+				<tr>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Email</th>
+					<th>Foto</th>
+				</tr>
+			</thead>
+
+			<tbody th:each="alumnos: ${alumno}">
+				<tr>
+					<th th:text=${alumno.nombre}></th>
+					<th th:text=${alumno.apellidos}></th>
+					<th th:text=${alumno.email}></th>
+					<th th:text=${alumno.foto}></th>
+					<th><a th:href="@{/alumnos/formAlumno/} + ${alumno.id}">
+                        <button type="button" class="btn btn-default">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </a>
+						<a th:href="@{/alumnos/deleteAlumno/} + ${alumno.id}" >
+                            <button type="button" class="btn btn-default">
+                            	<i class="fa-solid fa-trash" aria-hidden=true></i>
+                            </button>
+					</a> <a href="#"
+						th:onclick="'javascript:confirmDelete(\''+${alumno.id}+'\');'">
+							<i class="fas fa-user-times"> </i>
+					</a></th>
+
+					<th><a th:href="@{/alumno/addAlumno}">
+							<button type="button" class="btn btn-primary">Editar</button>
+					</a> <a th:href="@{/alumno/removeAlumno}">
+							<button type="button" class="btn btn-primary">Borrar</button>
+					</a></th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<a th:href="@{/alumnos/listAlumnos/}">
+		<button type="button" class="btn btn-primary">Regresar</button>
+	</a>
+
+	<div class="alert alert-success" th:if="${success != null}"
+		th:text="${success}"></div>
+
+
+</body>
+</html>

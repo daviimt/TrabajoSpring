@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
+<meta charset="UTF-8">
+<div th:replace="fragments :: header"></div>
+<title>Formulario alumnos</title>
+<br>
+</head>
+<body>
+	<div class="containter">
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+
+				<form action="#" th:action="@{/students/addStudent}"
+					th:object="${student}" method="post">
+					<h1
+						th:text="${student.id != 0} ? 'Editar estudiante' : 'Nuevo estudiante'">
+						Nuevo estudiante</h1>
+					<input type="hidde" th:field="*{id}" id="id">
+					<div class="form-group">
+						<label for="name">Name</label> <input type="text"
+							th:field="*{name}" class="form-control" id="name"
+							placeholder="Enter Name">
+					</div>
+
+					<div class="form-group">
+						<label for="lastname">Lastname</label> <input type="text"
+							th:field="*{lastname}" class="form-control" id="Lastname"
+							placeholder="Enter Lastname">
+					</div>
+
+					<div class="form-group">
+						<label for="age">Age</label> <input type="number"
+							th:field="*{age}" class="form-control" id="age"
+							placeholder="Enter age"><small
+							class="form-text text-danger" th:errors="*{age}"></small>
+					</div>
+
+					<label for="sex">Sex</label>
+					<div class="form-check-inline">
+						<label class="form-check-label"><input type="radio"
+							class="form-check-input" name="option" th:field="*{sex}"
+							id="Male" checked value="M">Male </label>
+					</div>
+					<div class="form-check-inline">
+						<label class="form-check-label"><input type="radio"
+							class="form-check-input" name="option" th:field="*{sex}"
+							id="Female" checked value="F">Female </label>
+					</div>
+
+					<div class="form-group">
+						<label for="grade">Grade</label> <input type="number" step="any"
+							th:field="*{grade}" class="form-control" id="grade"
+							placeholder="Enter grade">
+					</div>
+
+
+					<div class="form-group">
+						<label for="course">Choose course</label> <select
+							class="form-control selectpicker" th:field="*{course.id}"
+							id="course">
+
+							<option th:each="course: ${courses}" th:value="${course.id}"
+								th:text="${course.name}"></option>
+
+						</select>
+
+
+					</div>
+					
+					<input type="submit" class="btn btn-primary">
+
+					<div class="alert alert-success" th:if="${success != null}"
+						th:text="${success}"></div>
+					<div class="alert alert-danger" th:if="${error != null}"
+						th:text="${error}"></div>
+					<div class="alert alert-warning" th:if="${warning != null}"
+						th:text="${warning}"></div>
+					<div class="alert alert-info" th:if="${info != null}"
+						th:text="${info}"></div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
