@@ -1,5 +1,8 @@
 package com.example.demo.serviceImpl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Usuario;
+import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.UsuarioRepository;
 
 @Service("usuarioService")
@@ -68,5 +72,9 @@ public class UsuarioService implements UserDetailsService {
 		
 		usuarioRepository.save(user);
 		return a;
+	}
+	
+	public List<Usuario> listAllUsuarios() {
+		return usuarioRepository.findAll().stream().collect(Collectors.toList());
 	}
 }
