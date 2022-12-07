@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
 <meta charset="ISO-8859-1">
 <div th:replace="fragments :: header"></div>
 <title>Lista de alumnos</title>
