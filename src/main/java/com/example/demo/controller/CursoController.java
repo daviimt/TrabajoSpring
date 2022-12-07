@@ -19,8 +19,8 @@ import com.example.demo.service.CursoService;
 @Controller
 @RequestMapping("/courses")
 public class CursoController {
-	private static final String COURSES_VIEW = "courses";
-	private static final String FORM_VIEW = "formCourse";
+	private static final String COURSES_VIEW = "curso";
+	private static final String FORM_VIEW = "formCurso";
 
 	@Autowired
 	@Qualifier("cursoService")
@@ -29,24 +29,21 @@ public class CursoController {
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {
-		return new RedirectView("/courses/listCourses");
+		return new RedirectView("/courses/listCurso");
 	}
 
 //	@PreAuthorize("hasRole('ROLE_USER')")
-	@GetMapping("/listCourses")
-	public ModelAndView listCourses() {
-		//UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//String userName = userDetails.getUsername();
+	@GetMapping("/listCursos")
+	public ModelAndView listCurso() {
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
 		mav.addObject("courses", cursoService.ListAllCurso());
-		//mav.addObject("usuario", userName);
 		return mav;
 	}
 
 	// Generalmente cuando se hace alguna operacion POST con algun registro
 	// Se muestra un mensaje de la operacion y se redirecciona al listado
-	@PostMapping("/addCourse")
-	public String addCourse(@ModelAttribute("course") CursoModel cursoModel, RedirectAttributes flash) {
+	@PostMapping("/addCurso")
+	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
 
 		if (cursoModel.getIdCurso() == 0) {
 			cursoService.addCurso(cursoModel);
@@ -60,23 +57,23 @@ public class CursoController {
 	}
 
 	// Metodo de borrar
-	@PostMapping("/deleteCourse/{id}")
-	public String deleteCourse(@PathVariable("id") int id, RedirectAttributes flash) {
+	@PostMapping("/deleteCurso/{id}")
+	public String deleteCurso(@PathVariable("id") int id, RedirectAttributes flash) {
 
 		if (cursoService.removeCurso(id) == 0)
 			flash.addFlashAttribute("succes", "Curso eliminado con éxito");
 		else
-			flash.addFlashAttribute("error", "no se pudo eliminar el curso");
-		return "redirect:/courses/listCourses";
+			flash.addFlashAttribute("error", "No se pudo eliminar el curso");
+		return "redirect:/courses/listCursos";
 	}
 
-	@GetMapping(value = { "/formCourse", "/formCourse/{id}" })
-	public String formCourse(@PathVariable(name = "id", required = false) Integer id, Model model) {
+	@GetMapping(value = { "/formCurso", "/formCurso/{id}" })
+	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
 
 		if (id == null)
-			model.addAttribute("course", new CursoModel());
+			model.addAttribute("curso", new CursoModel());
 		else
-			model.addAttribute("course", cursoService.findCurso(id));
+			model.addAttribute("curso", cursoService.findCurso(id));
 		return FORM_VIEW;
 	}
 

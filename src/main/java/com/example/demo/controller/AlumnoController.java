@@ -23,8 +23,8 @@ import com.example.demo.service.CursoService;
 @RequestMapping("/students")
 public class AlumnoController {
 	// Constante Cadena con el nombre de la vista
-	private static final String STUDENTS_VIEW = "students";
-	private static final String FORM_VIEW = "formStudent";
+	private static final String STUDENTS_VIEW = "alumno";
+	private static final String FORM_VIEW = "formAlumno";
 
 	// Inyectamos el servicio
 	@Autowired
@@ -36,44 +36,44 @@ public class AlumnoController {
 	private CursoService courseService;
 
 	// Metodo para listar alumnos
-	@GetMapping("/listStudents")
-	public ModelAndView listStudents() {
+	@GetMapping("/listAlumnos")
+	public ModelAndView listAlumnos() {
 		ModelAndView mav = new ModelAndView(STUDENTS_VIEW);
 		mav.addObject("students", alumnoService.ListAllAlumnos());
 		return mav;
 	}
 
 	// Metodo para borrar
-	@PostMapping("/deleteStudent/{id}")
-	public String removeCourse(@PathVariable("id") int id, RedirectAttributes flash) {
+	@PostMapping("/deleteAlumno/{id}")
+	public String removeCurso(@PathVariable("id") int id, RedirectAttributes flash) {
 		if (alumnoService.removeAlumno(id) == 0) {
-			flash.addFlashAttribute("success", "Estudiante eliminado con éxito");
+			flash.addFlashAttribute("success", "Alumno eliminado con éxito");
 		} else
-			flash.addFlashAttribute("error", "No se ha podido eliminar el estudiante");
+			flash.addFlashAttribute("error", "No se ha podido eliminar el alumno");
 		return "redirect:/students/listStudent";
 	}
 	
-	@PostMapping("/addStudent")
-	public String addStudent(@Valid @ModelAttribute("student") AlumnoModel studentModel, BindingResult bindingResult,
+	@PostMapping("/addAlumno")
+	public String addAlumno(@Valid @ModelAttribute("student") AlumnoModel studentModel, BindingResult bindingResult,
 			RedirectAttributes flash, Model model) {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("courses", courseService.ListAllCurso());
+			model.addAttribute("curso", courseService.ListAllCurso());
 			return FORM_VIEW;
 		} else {
 			alumnoService.updateAlumno(studentModel);
-			flash.addFlashAttribute("success", "Estudiante actualizado satisfactoriamente");
+			flash.addFlashAttribute("success", "Alumno actualizado satisfactoriamente");
 			return "redirect:/student/liststudent";
 		}
 	}
 	
-	@GetMapping("/formStudent/{id}")
-	public String formCourse(@PathVariable(name = "id", required = false) Integer id, Model model) {
+	@GetMapping("/formAlumno/{id}")
+	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
 
-		model.addAttribute("courses", courseService.ListAllCurso());
+		model.addAttribute("curso", courseService.ListAllCurso());
 		if (id == null) {
-			model.addAttribute("student", new AlumnoModel());
+			model.addAttribute("alumno", new AlumnoModel());
 		} else {
-			model.addAttribute("student", alumnoService.findStudent(id));
+			model.addAttribute("alumno", alumnoService.findStudent(id));
 		}
 		return FORM_VIEW;
 	}

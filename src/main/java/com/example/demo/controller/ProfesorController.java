@@ -39,7 +39,7 @@ public class ProfesorController {
 	@PostMapping("/deleteProfesor/{id}")
 	public String removeProfesor(@PathVariable("id")int id, RedirectAttributes flash) {
 		if(profesorService.removeProfesor(id)==0) {
-			flash.addFlashAttribute("succes","Profesor eliminado con éxito");	
+			flash.addFlashAttribute("success","Profesor eliminado con éxito");	
 		}else
 			flash.addFlashAttribute("error","No se ha podido eliminar el profesor");	
 		return "redirect:/profesores/listProfesores";
@@ -65,7 +65,7 @@ public class ProfesorController {
 		else {
 			if(profesorModel.getId()==0) {
 				profesorService.addProfesor(profesorModel);
-				flash.addFlashAttribute("succes", "Profesor insertado con éxito");
+				flash.addFlashAttribute("success", "Profesor insertado con éxito");
 			}else {
 				profesorService.updateProfesor(profesorModel);
 				flash.addFlashAttribute("success", "Profesor modificado con éxito");
