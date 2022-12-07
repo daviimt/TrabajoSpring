@@ -29,10 +29,10 @@
 				<th th:text=${curso.fechaInicio}></th>
 				<th th:text=${curso.fechaFin}></th>
 				<th>
-				<a th:href="@{/cursos/formCurso} + ${curso.id}">
+				<a th:href="@{/cursos/formCurso/} + ${curso.idCurso}">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
 				</a> 
-				<a th:href="@{/cursos/deleteCurso}+ ${curso.id}" >
+				<a th:href="@{/cursos/deleteCurso/}+ ${curso.idCurso}" >
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
 				</a>
 				
@@ -42,7 +42,7 @@
 	</table>
 
 
-	<a th:href="@{/cursos/addCurso/}">
+	<a th:href="@{/cursos/formCurso/}">
 		<button type="button" class="btn btn-primary">Nuevo Curso</button>
 	</a>
 

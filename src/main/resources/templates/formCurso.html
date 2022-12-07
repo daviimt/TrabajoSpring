@@ -4,44 +4,54 @@
 <head>
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
 <meta charset="UTF-8">
+<div th:replace="fragments :: header"></div>
 <title>Formulario cursos</title>
+<br>
 </head>
+
 <body>
-	<form action="#" th:action="@{/cursos/addCurso/}"
-		th:object="${curso}" method="post">
+	<form th:action="@{/cursos/addCurso/}"
+		th:object="${curso}" method="post" style="text-align:center;width: 500px;margin: auto;">
 		
-		<h1 th:text="${curso.id != 0} ? 'Editar Curso' : 'Nuevo Curso'">Nuevo Curso</h1>
+		<h1 th:text="${curso.idCurso != 0} ? 'Editar Curso' : 'Nuevo Curso'" >Nuevo Curso</h1>
 		
-		<input type="hidden" th:field="*{id}" id="id">
+		<input type="hidden" th:field="*{idCurso}" id="idCurso">
 		
 		<div class="form-group">
-			<label for="name">Nombre</label> <input type="text" th:field="*{name}"
-				class="form-control" id="name" placeholder="Introduce el Nombre">
+			<label for="nombre">Nombre</label> <input type="text" th:field="*{nombre}"
+				class="form-control" id="nombre" placeholder="Introduce el Nombre">
 		</div>
 
 		<div class="form-group">
-			<label for="description">Descripcion</label> <input type="text"
-				th:field="*{description}" class="form-control" id="description"
-				placeholder="Enter Description">
+			<label for="descripcion">Descripcion</label> <input type="text"
+				th:field="*{descripcion}" class="form-control" id="descripcion"
+				placeholder="Introduce la descripcion">
 		</div>
 
 		<div class="form-group">
-			<label for="price">Nivel</label> <input type="text"
-				th:field="*{price}" class="form-control" id="price"
-				placeholder="Enter Price">
-		</div>
-		<div class="form-group">
-			<label for="hours">Fecha Inicio</label> <input type="text"
-				th:field="*{hours}" class="form-control" id="hours"
-				placeholder="Enter Hours">
+			<label for="nivel">Nivel</label> <input type="text"
+				th:field="*{nivel}" class="form-control" id="nivel"
+				placeholder="Introduce el nivel">
 		</div>
 		
 		<div class="form-group">
-			<label for="hours">Fecha Fin</label> <input type="text"
-				th:field="*{hours}" class="form-control" id="hours"
-				placeholder="Enter Hours">
+			<label for="idProfesor">Id profesor</label> <input type="text"
+				th:field="*{idProfesor}" class="form-control" id="idProfesor"
+				placeholder="Introduce el profe">
 		</div>
-
+		
+		<div class="form-group">
+			<label for="fechaInicio">Fecha Inicio</label> <input type="text"
+				th:field="*{fechaInicio}" class="form-control" id="fechaInicio"
+				placeholder="Introduce la fecha de inicio">
+		</div>
+		
+		<div class="form-group">
+			<label for="fechaFin">Fecha Fin</label> <input type="text"
+				th:field="*{fechaFin}" class="form-control" id="fechaFin"
+				placeholder="Introduce la fecha de fin">
+		</div>
+		<br>
 		<input type="submit" class="btn btn-primary">
 
 		<div class="alert alert-success" th:if="${success != null}"
