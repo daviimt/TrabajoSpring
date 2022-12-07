@@ -51,6 +51,11 @@ public class AlumnoServiceImpl implements AlumnoService{
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(alumno, AlumnoModel.class);
 	}
+
+	@Override
+	public AlumnoModel findStudent(int id) {
+		return transform(alumnoRepository.findById(id).orElse(null));
+	}
 	
 
 }
