@@ -41,6 +41,11 @@ public class CursoServiceImpl implements CursoService{
 	}
 
 	@Override
+	public CursoModel findCurso(int id) {
+		return transform(cursoRepository.findById(id).orElse(null));
+	}
+	
+	@Override
 	public Curso transform(CursoModel cursoModel) {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(cursoModel, Curso.class);
