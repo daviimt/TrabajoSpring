@@ -28,11 +28,11 @@ public class AlumnoController {
 
 	// Inyectamos el servicio
 	@Autowired
-	@Qualifier("studentService")
+	@Qualifier("alumnoService")
 	private AlumnoService alumnoService;
 
 	@Autowired
-	@Qualifier("courseService")
+	@Qualifier("cursoService")
 	private CursoService courseService;
 
 	// Metodo para listar alumnos

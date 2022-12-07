@@ -21,7 +21,7 @@ import com.example.demo.service.CursoService;
 public class CursoController {
 	private static final String COURSES_VIEW = "courses";
 	private static final String FORM_VIEW = "formCourse";
-	private static final String STUDENTS_VIEW = "students";
+
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
@@ -80,10 +80,4 @@ public class CursoController {
 		return FORM_VIEW;
 	}
 
-//	@GetMapping("showStudents/{id}")
-//	public String showStudents(@PathVariable("id") int id, Model model) {
-//		CursoModel course = cursoService.findCourse(id);
-//		model.addAttribute("students", cursoService.ListAllCurso(course));
-//		return STUDENTS_VIEW;
-//	}
 }

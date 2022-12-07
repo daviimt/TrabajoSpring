@@ -47,8 +47,26 @@ public class UsuarioService implements UserDetailsService {
 
 	public Usuario registrar(Usuario usuario) {
 		usuario.setPassword(passwordEncoder().encode(usuario.getPassword()));
-		usuario.setEnabled(true);
+		usuario.setEnabled(false);
 		usuario.setRole("ROL_ALUMNO");
 		return usuarioRepository.save(usuario);
+	}
+	
+	public int activar(String username) {
+		int a=0;
+		Usuario u=usuarioRepository.findByUsername(username);
+		Usuario user=new Usuario();
+		user.setPassword(passwordEncoder().encode(u.getPassword()));
+		if(u.isEnabled()==false) {
+			user.setEnabled(true);
+			a=1;
+		}else {
+			user.setEnabled(false);
+			a=0;
+		}
+		user.setRole(u.getRole());
+		
+		usuarioRepository.save(user);
+		return a;
 	}
 }
