@@ -20,14 +20,6 @@ public class ProfesorServiceImpl implements ProfesorService{
 	@Qualifier("profesorRepository")
 	private ProfesorRepository profesorRepository;
 
-//	@Autowired
-//	@Qualifier("studentRepository")
-//	private StudentRepository studentRepository;
-//	
-//	@Autowired
-//	@Qualifier("courseConverter")
-//	private CourseConverter courseConverter;
-
 	@Override
 	public List<ProfesorModel> listAllProfesores() {
 		return profesorRepository.findAll().stream().map(c -> transform(c)).collect(Collectors.toList());
@@ -59,6 +51,11 @@ public class ProfesorServiceImpl implements ProfesorService{
 	public ProfesorModel transform(Profesor course) {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(course, ProfesorModel.class);
+	}
+
+	@Override
+	public ProfesorModel findProfesor(int id) {
+		return transform(profesorRepository.findById(id).orElse(null));
 	}
 
 }

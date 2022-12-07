@@ -13,4 +13,5 @@ public interface ProfesorService {
 	public abstract Profesor updateProfesor(ProfesorModel profModel);
 	public abstract Profesor transform(ProfesorModel profModel);
 	public abstract ProfesorModel transform(Profesor profesor);
+	public abstract ProfesorModel findProfesor(int id); 
 }

@@ -21,7 +21,9 @@ import com.example.demo.serviceImpl.UsuarioService;
 @Controller
 @RequestMapping("/")
 public class LoginController {
-
+	private static final String HOME_VIEW = "home";
+	private static final String LOGIN_VIEW = "login";
+	private static final String REGISTER_VIEW = "register";
 	@Autowired
 	@Qualifier("usuarioService")
 	private UsuarioService usuarioService;
@@ -37,7 +39,7 @@ public class LoginController {
 	
 	@GetMapping("/home")
 	public String inicio(Model model) {
-		return "home";
+		return HOME_VIEW;
 	}
 	
 	@GetMapping("/auth/login")
@@ -46,13 +48,13 @@ public class LoginController {
 		model.addAttribute("user",new Usuario());
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
-		return "login";
+		return LOGIN_VIEW;
 	}
 	
 	@GetMapping("/auth/registerForm")
 	public String registerForm(Model model) {
 		model.addAttribute("alumno", new Alumno());
-		return "register";
+		return REGISTER_VIEW;
 	}
 	
 	@PostMapping("/auth/register")
