@@ -13,8 +13,6 @@ import com.example.demo.models.MatriculaModel;
 import com.example.demo.repository.MatriculaRepository;
 import com.example.demo.service.MatriculaService;
 
-
-
 @Service("matriculaService")
 public class MatriculaServiceImpl implements MatriculaService{
 

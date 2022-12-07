@@ -29,7 +29,7 @@ public class LoginController {
 	private UsuarioService usuarioService;
 	
 	@Autowired
-	@Qualifier("alumnoServiceImpl")
+	@Qualifier("alumnoService")
 	private AlumnoService alumnoService;
 	
 	@GetMapping("/")

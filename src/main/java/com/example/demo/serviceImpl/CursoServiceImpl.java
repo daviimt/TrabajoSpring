@@ -6,12 +6,13 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Curso;
 import com.example.demo.models.CursoModel;
 import com.example.demo.repository.CursoRepository;
 import com.example.demo.service.CursoService;
-
+@Service("cursoService")
 public class CursoServiceImpl implements CursoService{
 
 	@Autowired

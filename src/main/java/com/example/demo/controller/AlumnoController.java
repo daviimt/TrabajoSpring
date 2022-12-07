@@ -20,7 +20,7 @@ import com.example.demo.service.AlumnoService;
 import com.example.demo.service.CursoService;
 
 @Controller
-@RequestMapping("/students")
+@RequestMapping("/alumnos")
 public class AlumnoController {
 	// Constante Cadena con el nombre de la vista
 	private static final String STUDENTS_VIEW = "alumno";

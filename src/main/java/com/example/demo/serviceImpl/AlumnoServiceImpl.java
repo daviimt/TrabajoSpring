@@ -11,7 +11,7 @@ import com.example.demo.entity.Alumno;
 import com.example.demo.models.AlumnoModel;
 import com.example.demo.repository.AlumnoRepository;
 import com.example.demo.service.AlumnoService;
-@Service("alumnoServiceImpl")
+@Service("alumnoService")
 public class AlumnoServiceImpl implements AlumnoService{
 
 	@Autowired

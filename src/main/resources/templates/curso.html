@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<meta charset="ISO-8859-1">
+<title>Lista de cursos</title>
+</head>
+<body>
+	<table class="table table-striped table-bordered">
+		<thead class="thead-light">
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Hours</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+
+		<tbody th:each="curso: ${cursos}">
+			<tr>
+				<th th:text=${curso.nombre}></th>
+				<th th:text=${curso.descripcion}></th>
+				<th th:text=${curso.nivel}></th>
+				<th th:text=${curso.fechaInicio}></th>
+				<th th:text=${curso.fechaFin}></th>
+				<th>
+				<a th:href="@{/cursos/formCurso} + ${curso.id}">
+						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
+				</a> 
+				<a th:href="@{/cursos/deleteCurso}+ ${curso.id}" >
+						<button type="button" class="btn btn-default"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+				</a>
+				
+				</th>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<a th:href="@{/cursos/formCursos/}">
+		<button type="button" class="btn btn-primary">Nuevo Curso</button>
+	</a>
+
+	<div class="alert alert-success" th:if="${success != null}"
+		th:text="${success}"></div>
+
+
+</body>
+</html>

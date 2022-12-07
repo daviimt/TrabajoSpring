@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Administrador;
 import com.example.demo.entity.Comentario;
@@ -13,7 +14,7 @@ import com.example.demo.models.AdministradorModel;
 import com.example.demo.models.ComentarioModel;
 import com.example.demo.repository.ComentarioRepository;
 import com.example.demo.service.ComentarioService;
-
+@Service("comentarioService")
 public class ComentarioServiceImpl implements ComentarioService{
 
 	@Autowired
