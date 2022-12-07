@@ -54,7 +54,7 @@ public class ProfesorController {
 		}
 		return FORM_VIEW;
 	}
-	//Metodo add o update Profesor
+	//Metodo add / update Profesor
 	@PostMapping("/addProfesor")
 	public String addProfesor(@ModelAttribute("profesor") ProfesorModel profesorModel,
 			BindingResult bindingResult, RedirectAttributes flash, Model model) 
