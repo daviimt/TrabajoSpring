@@ -12,61 +12,40 @@
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6">
 
-				<form action="#" th:action="@{/students/addStudent}"
-					th:object="${student}" method="post">
+				<form action="#" th:action="@{/alumnos/addAlumnos}"
+					th:object="${alumno}" method="post">
 					<h1
-						th:text="${student.id != 0} ? 'Editar estudiante' : 'Nuevo estudiante'">
-						Nuevo estudiante</h1>
+						th:text="${alumno.id != 0} ? 'Editar alumno' : 'Nuevo alumno'">
+						Nuevo alumno</h1>
 					<input type="hidde" th:field="*{id}" id="id">
 					<div class="form-group">
-						<label for="name">Name</label> <input type="text"
-							th:field="*{name}" class="form-control" id="name"
-							placeholder="Enter Name">
+						<label for="nombre">Nombre</label> <input type="text"
+							th:field="*{nombre}" class="form-control" id="nombre"
+							placeholder="Introduce tu nombre">
 					</div>
 
 					<div class="form-group">
-						<label for="lastname">Lastname</label> <input type="text"
-							th:field="*{lastname}" class="form-control" id="Lastname"
-							placeholder="Enter Lastname">
+						<label for="apellidos">Apellidos</label> <input type="text"
+							th:field="*{apellidos}" class="form-control" id="Apellidos"
+							placeholder="Introduce tus apellidos">
 					</div>
 
 					<div class="form-group">
-						<label for="age">Age</label> <input type="number"
-							th:field="*{age}" class="form-control" id="age"
-							placeholder="Enter age"><small
-							class="form-text text-danger" th:errors="*{age}"></small>
-					</div>
-
-					<label for="sex">Sex</label>
-					<div class="form-check-inline">
-						<label class="form-check-label"><input type="radio"
-							class="form-check-input" name="option" th:field="*{sex}"
-							id="Male" checked value="M">Male </label>
-					</div>
-					<div class="form-check-inline">
-						<label class="form-check-label"><input type="radio"
-							class="form-check-input" name="option" th:field="*{sex}"
-							id="Female" checked value="F">Female </label>
+						<label for="email">Email</label> <input type="text"
+							th:field="*{email}" class="form-control" id="email"
+							placeholder="Introduce tu email">
 					</div>
 
 					<div class="form-group">
-						<label for="grade">Grade</label> <input type="number" step="any"
-							th:field="*{grade}" class="form-control" id="grade"
-							placeholder="Enter grade">
+						<label for="password">Clave</label> <input type="password"
+							th:field="*{password}" class="form-control" id="password"
+							placeholder="Introduce tu clave">
 					</div>
-
-
+					
 					<div class="form-group">
-						<label for="course">Choose course</label> <select
-							class="form-control selectpicker" th:field="*{course.id}"
-							id="course">
-
-							<option th:each="course: ${courses}" th:value="${course.id}"
-								th:text="${course.name}"></option>
-
-						</select>
-
-
+						<label for="foto">Foto</label> <input type="file"
+							th:field="*{foto}" class="form-control" id="foto"
+							placeholder="Introduce tu foto">
 					</div>
 					
 					<input type="submit" class="btn btn-primary">
