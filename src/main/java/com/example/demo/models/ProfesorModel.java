@@ -5,19 +5,17 @@ public class ProfesorModel {
 	private String nombre;
 	private String apellidos;
 	private String email;
-	private String usuario;
 	private String password;
 	
 	public ProfesorModel() {
 		super();
 	}
-	public ProfesorModel(int id, String nombre, String apellidos, String email, String usuario, String password) {
+	public ProfesorModel(int id, String nombre, String apellidos, String email, String password) {
 		super();
 		this.idProfesores = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
-		this.usuario = usuario;
 		this.password = password;
 	}
 	public int getId() {
@@ -44,12 +42,7 @@ public class ProfesorModel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -58,9 +51,8 @@ public class ProfesorModel {
 	}
 	@Override
 	public String toString() {
-		return "Profesores [idProfesores=" + idProfesores + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", usuario=" + usuario + ", password=" + password + "]";
+		return "ProfesorModel [idProfesores=" + idProfesores + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", email=" + email + ", password=" + password + "]";
 	}
-	
 	
 }
