@@ -3,6 +3,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
 <header class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" th:fragment="header">
@@ -33,24 +34,26 @@
           </div>
         </li>
         </ul>
-        <div class="nav-item"style="margin-left: 80%;">
-        <ul class="navbar-nav me-auto">
+        <ul class="navbar-nav me-auto" style="margin-left:80%">
         <li sec:authorize="!isAuthenticated()" class="nav-item">
-          <a class="nav-link" th:href="@{/auth/login}">Inicia sesi&oacute;n</a>
+        <a class="nav-link" th:href="@{/auth/login}">
+			<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Iniciar sesi&oacute;n"><i class="fa-solid fa-arrow-right-to-bracket" style="color:white"></i></button>
+		</a>
         </li>
         <li sec:authorize="!isAuthenticated()" class="nav-item">
-          <a class="nav-link" th:href="@{/auth/registerForm}">Registro</a>
+          <a class="nav-link" th:href="@{/auth/registerForm}">
+          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Registro usuario"><i class="fa-solid fa-user-check" style="color:white"></i></button></a>
         </li>
         <li sec:authorize="isAuthenticated()" class="nav-item">
           <a class="nav-link" th:text="'Hola ' + ${#authentication.name}"></a>
         </li>
-        <li sec:authorize="isAuthenticated()" class="nav-button">
+        <li sec:authorize="isAuthenticated()" class="nav-item">
           <form class="form-inline" th:action="@{auth/logout}" method="post">
-			<button class="btn btn-link" type="submit">Cerrar Sesi&oacute;n</button>
+			<button class="btn btn-link" type="submit"  data-toggle="tooltip" data-placement="bottom" title="Cerrar sesi&oacute;n"><i style="color:white" class="fa-solid fa-arrow-right-from-bracket"></i></button>
 		</form>
         </li>
       </ul>
-        </div>
+        
       <!--<form class="d-flex">
         <input class="form-control me-sm-2" type="text" placeholder="Search">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
