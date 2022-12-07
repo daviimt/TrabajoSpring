@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
 <meta charset="ISO-8859-1">
+<div th:replace="fragments :: header"></div>
 <title>Lista de cursos</title>
+<br>
 </head>
 <body>
 	<table class="table table-striped table-bordered">
 		<thead class="thead-light">
 			<tr>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Price</th>
-				<th>Hours</th>
-				<th>Actions</th>
+				<th>Nombre</th>
+				<th>Descripcion</th>
+				<th>Nivel</th>
+				<th>Fecha Inicio</th>
+				<th>Fecha Fin</th>
 			</tr>
 		</thead>
 
@@ -39,7 +42,7 @@
 	</table>
 
 
-	<a th:href="@{/cursos/formCursos/}">
+	<a th:href="@{/cursos/addCurso/}">
 		<button type="button" class="btn btn-primary">Nuevo Curso</button>
 	</a>
 

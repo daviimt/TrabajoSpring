@@ -17,9 +17,9 @@ import com.example.demo.models.CursoModel;
 import com.example.demo.service.CursoService;
 
 @Controller
-@RequestMapping("/courses")
+@RequestMapping("/cursos")
 public class CursoController {
-	private static final String COURSES_VIEW = "curso";
+	private static final String COURSES_VIEW = "cursos";
 	private static final String FORM_VIEW = "formCurso";
 
 	@Autowired
@@ -29,14 +29,14 @@ public class CursoController {
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {
-		return new RedirectView("/courses/listCurso");
+		return new RedirectView("/cursos/listCurso");
 	}
 
 //	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/listCursos")
 	public ModelAndView listCurso() {
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
-		mav.addObject("courses", cursoService.ListAllCurso());
+		mav.addObject("cursos", cursoService.ListAllCurso());
 		return mav;
 	}
 
@@ -53,7 +53,7 @@ public class CursoController {
 			cursoService.updateCurso(cursoModel);
 			flash.addFlashAttribute("succes", "Curso modificado con éxito");
 		}
-		return "redirect:/courses/listCourses";
+		return "redirect:/cursos/listCursos";
 	}
 
 	// Metodo de borrar
