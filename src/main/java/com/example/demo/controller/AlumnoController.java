@@ -26,7 +26,6 @@ public class AlumnoController {
 	// Constante Cadena con el nombre de la vista
 	private static final String STUDENTS_VIEW = "alumnos";
 	private static final String FORM_VIEW = "formAlumno";
-
 	// Inyectamos el servicio
 	@Autowired
 	@Qualifier("alumnoService")
