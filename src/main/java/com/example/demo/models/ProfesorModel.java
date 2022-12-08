@@ -1,7 +1,7 @@
 package com.example.demo.models;
 
 public class ProfesorModel {
-	private int idProfesores;
+	private int idProfesor;
 	private String nombre;
 	private String apellidos;
 	private String email;
@@ -12,17 +12,17 @@ public class ProfesorModel {
 	}
 	public ProfesorModel(int id, String nombre, String apellidos, String email, String password) {
 		super();
-		this.idProfesores = id;
+		this.idProfesor = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
 	}
-	public int getId() {
-		return idProfesores;
+	public int getIdProfesor() {
+		return idProfesor;
 	}
-	public void setId(int id) {
-		this.idProfesores = id;
+	public void setIdProfesor(int idProfesor) {
+		this.idProfesor = idProfesor;
 	}
 	public String getNombre() {
 		return nombre;
@@ -51,8 +51,9 @@ public class ProfesorModel {
 	}
 	@Override
 	public String toString() {
-		return "ProfesorModel [idProfesores=" + idProfesores + ", nombre=" + nombre + ", apellidos=" + apellidos
+		return "ProfesorModel [idProfesor=" + idProfesor + ", nombre=" + nombre + ", apellidos=" + apellidos
 				+ ", email=" + email + ", password=" + password + "]";
 	}
+
 	
 }

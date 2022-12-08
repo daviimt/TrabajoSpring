@@ -20,7 +20,7 @@ public class CursoServiceImpl implements CursoService{
 	private CursoRepository cursoRepository;
 	
 	@Override
-	public List<CursoModel> ListAllCurso() {
+	public List<CursoModel> ListAllCursos() {
 		return cursoRepository.findAll().stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 	}

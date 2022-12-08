@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 public class Alumno {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idAlumnos;
+	private int idAlumno;
 	private String nombre;
 	private String apellidos;
 	private String email;
@@ -33,7 +33,7 @@ public class Alumno {
 	public Alumno(int idAlumno, String nombre, String apellidos, String email, String password,
 			String foto) {
 		super();
-		this.idAlumnos = idAlumno;
+		this.idAlumno = idAlumno;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
@@ -41,10 +41,10 @@ public class Alumno {
 		this.foto = foto;
 	}
 	public int getIdAlumno() {
-		return idAlumnos;
+		return idAlumno;
 	}
 	public void setIdAlumno(int idAlumno) {
-		this.idAlumnos = idAlumno;
+		this.idAlumno = idAlumno;
 	}
 	public String getNombre() {
 		return nombre;
@@ -78,8 +78,7 @@ public class Alumno {
 	}
 	@Override
 	public String toString() {
-		return "Alumnos [idAlumno=" + idAlumnos + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
+		return "Alumnos [idAlumno=" + idAlumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
 				+ ", password=" + password + ", foto=" + foto + "]";
 	}
-	
 }

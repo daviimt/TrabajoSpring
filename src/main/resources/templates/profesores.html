@@ -10,9 +10,6 @@
 <br>
 </head>
 <body>
-	
-	<div class="panel panel-default">
-		<div class="panel-heading"></div>
 		<table class="table table-striped table-bordered">
 			<thead class="thead-light">
 				<tr>
@@ -26,28 +23,24 @@
 					<th th:text=${profesor.nombre}></th>
 					<th th:text=${profesor.apellidos}></th>
 					<th th:text=${profesor.email}></th>
-					<a th:href="@{/profesores/formProfesor/} + ${profesor.id}">
+					<th>
+					<a th:href="@{/profesores/formProfesor/} + ${profesor.idProfesor}">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
 					</a> 
-					<a th:href="@{/profesores/deleteProfesor/} + ${profesor.id}" >
+					<a th:href="@{/profesores/deleteProfesor/} + ${profesor.idProfesor}" >
 							<button type="button" class="btn btn-default"><i class="fa-solid fa-trash" aria-hidden=true></i></button>
 					</a>
-
+					</th>
 				</tr>
 			</tbody>
 		</table>
-</div>
-
-
+<br><br>
 	<a th:href="@{/profesores/formProfesor/}">
 		<button type="button" class="btn btn-primary">Nuevo Profesor</button>
 	</a>
 	<a th:href="@{/home}">
 		<button type="button" class="btn btn-primary">Regresar</button>
 	</a>
-
-	<div class="alert alert-success" th:if="${success != null}"
-		th:text="${success}"></div>
 
 </body>
 </html>

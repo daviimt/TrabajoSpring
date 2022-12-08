@@ -1,23 +1,23 @@
 package com.example.demo.models;
 
 public class AdministradorModel {
-	private int idAdministradores;
+	private int idAdministrador;
 	private String usuario;
 	private String password;
 	public AdministradorModel() {
 		super();
 	}
-	public AdministradorModel(int idAdministradores, String usuario, String password) {
+	public AdministradorModel(int idAdministrador, String usuario, String password) {
 		super();
-		this.idAdministradores = idAdministradores;
+		this.idAdministrador = idAdministrador;
 		this.usuario = usuario;
 		this.password = password;
 	}
-	public int getIdAdministradores() {
-		return idAdministradores;
+	public int getIdAdministrador() {
+		return idAdministrador;
 	}
-	public void setIdAdministradores(int idAdministradores) {
-		this.idAdministradores = idAdministradores;
+	public void setIdAdministrador(int idAdministrador) {
+		this.idAdministrador = idAdministrador;
 	}
 	public String getUsuario() {
 		return usuario;
@@ -33,7 +33,7 @@ public class AdministradorModel {
 	}
 	@Override
 	public String toString() {
-		return "Administradores [idAdministradores=" + idAdministradores + ", usuario=" + usuario + ", password="
+		return "Administradores [idAdministrador=" + idAdministrador + ", usuario=" + usuario + ", password="
 				+ password + "]";
 	}
 	

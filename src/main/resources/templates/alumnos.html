@@ -23,23 +23,23 @@
 				</tr>
 			</thead>
 
-			<tbody th:each="alumnos: ${alumno}">
+			<tbody th:each="alumno: ${alumnos}">
 				<tr>
 					<th th:text=${alumno.nombre}></th>
 					<th th:text=${alumno.apellidos}></th>
 					<th th:text=${alumno.email}></th>
 					<th th:text=${alumno.foto}></th>
-					<th><a th:href="@{/alumnos/formAlumno/} + ${alumno.id}">
+					<th><a th:href="@{/alumnos/formAlumno/} + ${alumno.idAlumno}">
                         <button type="button" class="btn btn-default">
                         <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                     </a>
-						<a th:href="@{/alumnos/deleteAlumno/} + ${alumno.id}" >
+						<a th:href="@{/alumnos/deleteAlumno/} + ${alumno.idAlumno}" >
                             <button type="button" class="btn btn-default">
                             	<i class="fa-solid fa-trash" aria-hidden=true></i>
                             </button>
 					</a> <a href="#"
-						th:onclick="'javascript:confirmDelete(\''+${alumno.id}+'\');'">
+						th:onclick="'javascript:confirmDelete(\''+${alumno.idAlumno}+'\');'">
 							<i class="fas fa-user-times"> </i>
 					</a></th>
 
@@ -52,8 +52,8 @@
 			</tbody>
 		</table>
 	</div>
-
-	<a th:href="@{/alumnos/listAlumnos/}">
+	<br><br>
+	<a th:href="@{/home}">
 		<button type="button" class="btn btn-primary">Regresar</button>
 	</a>
 

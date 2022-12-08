@@ -17,9 +17,9 @@
 				<form action="#" th:action="@{/alumnos/addAlumnos}"
 					th:object="${alumno}" method="post">
 					<h1
-						th:text="${alumno.id != 0} ? 'Editar alumno' : 'Nuevo alumno'">
+						th:text="${alumno.idAlumnos != 0} ? 'Editar alumno' : 'Nuevo alumno'">
 						Nuevo alumno</h1>
-					<input type="hidde" th:field="*{id}" id="id">
+					<input type="hidde" th:field="*{idAlumnos}" id="idAlumnos">
 					<div class="form-group">
 						<label for="nombre">Nombre</label> <input type="text"
 							th:field="*{nombre}" class="form-control" id="nombre"

@@ -2,7 +2,7 @@ package com.example.demo.models;
 
 public class AlumnoModel {
 	
-	private int idAlumnos;
+	private int idAlumno;
 	private String nombre;
 	private String apellidos;
 	private String email;
@@ -14,7 +14,7 @@ public class AlumnoModel {
 	public AlumnoModel(int idAlumno, String nombre, String apellidos, String email, String password,
 			String foto) {
 		super();
-		this.idAlumnos = idAlumno;
+		this.idAlumno = idAlumno;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
@@ -22,10 +22,10 @@ public class AlumnoModel {
 		this.foto = foto;
 	}
 	public int getIdAlumno() {
-		return idAlumnos;
+		return idAlumno;
 	}
 	public void setIdAlumno(int idAlumno) {
-		this.idAlumnos = idAlumno;
+		this.idAlumno = idAlumno;
 	}
 	public String getNombre() {
 		return nombre;
@@ -60,7 +60,7 @@ public class AlumnoModel {
 	}
 	@Override
 	public String toString() {
-		return "AlumnoModel [idAlumnos=" + idAlumnos + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
+		return "AlumnoModel [idAlumno=" + idAlumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
 				+ email + ", password=" + password + ", foto=" + foto + "]";
 	}
 	

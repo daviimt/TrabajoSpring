@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.models.AlumnoModel;
 import com.example.demo.service.AlumnoService;
@@ -39,25 +40,25 @@ public class AlumnoController {
 	@GetMapping("/listAlumnos")
 	public ModelAndView listAlumnos() {
 		ModelAndView mav = new ModelAndView(STUDENTS_VIEW);
-		mav.addObject("students", alumnoService.ListAllAlumnos());
+		mav.addObject("alumnos", alumnoService.ListAllAlumnos());
 		return mav;
 	}
 
 	// Metodo para borrar
-	@PostMapping("/deleteAlumno/{id}")
-	public String removeCurso(@PathVariable("id") int id, RedirectAttributes flash) {
+	@PostMapping("/deleteAlumno/{idAlumno}")
+	public String removeCurso(@PathVariable("idAlumno") int id, RedirectAttributes flash) {
 		if (alumnoService.removeAlumno(id) == 0) {
 			flash.addFlashAttribute("success", "Alumno eliminado con éxito");
 		} else
 			flash.addFlashAttribute("error", "No se ha podido eliminar el alumno");
-		return "redirect:/alumnos/listAtudent";
+		return "redirect:/alumnos/listAlumnos";
 	}
 	
 	@PostMapping("/addAlumno")
-	public String addAlumno(@Valid @ModelAttribute("student") AlumnoModel studentModel, BindingResult bindingResult,
+	public String addAlumno(@Valid @ModelAttribute("alumno") AlumnoModel studentModel, BindingResult bindingResult,
 			RedirectAttributes flash, Model model) {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("curso", courseService.ListAllCurso());
+			model.addAttribute("curso", courseService.ListAllCursos());
 			return FORM_VIEW;
 		} else {
 			alumnoService.updateAlumno(studentModel);
@@ -66,16 +67,21 @@ public class AlumnoController {
 		}
 	}
 	
-	@GetMapping("/formAlumno/{id}")
-	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
+	@GetMapping("/formAlumno/{idAlumnos}")
+	public String formCurso(@PathVariable(name = "idAlumnos", required = false) Integer id, Model model) {
 
-		model.addAttribute("curso", courseService.ListAllCurso());
+		model.addAttribute("curso", courseService.ListAllCursos());
 		if (id == null) {
 			model.addAttribute("alumno", new AlumnoModel());
 		} else {
 			model.addAttribute("alumno", alumnoService.findStudent(id));
 		}
 		return FORM_VIEW;
+	}
+	// Metodo redirect
+	@GetMapping("/")
+	public RedirectView redirect() {
+		return new RedirectView("/alumnos/listAlumnos");
 	}
 }
 

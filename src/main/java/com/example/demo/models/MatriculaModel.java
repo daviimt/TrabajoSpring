@@ -2,7 +2,7 @@ package com.example.demo.models;
 
 public class MatriculaModel {
 	
-	private int idMatriculas;
+	private int idMatricula;
 	private int idAlumno;
 	private int idCurso;
 	private int valoracion;
@@ -10,18 +10,18 @@ public class MatriculaModel {
 	public MatriculaModel() {
 		super();
 	}
-	public MatriculaModel(int idMatriculas, int idAlumno, int idCurso, int valoracion) {
+	public MatriculaModel(int idMatricula, int idAlumno, int idCurso, int valoracion) {
 		super();
-		this.idMatriculas = idMatriculas;
+		this.idMatricula = idMatricula;
 		this.idAlumno = idAlumno;
 		this.idCurso = idCurso;
 		this.valoracion = valoracion;
 	}
 	public int getIdMatriculas() {
-		return idMatriculas;
+		return idMatricula;
 	}
-	public void setIdMatriculas(int idMatriculas) {
-		this.idMatriculas = idMatriculas;
+	public void setIdMatriculas(int idMatricula) {
+		this.idMatricula = idMatricula;
 	}
 	public int getIdAlumno() {
 		return idAlumno;
@@ -43,7 +43,7 @@ public class MatriculaModel {
 	}
 	@Override
 	public String toString() {
-		return "Matriculas [idMatriculas=" + idMatriculas + ", idAlumno=" + idAlumno + ", idCurso=" + idCurso
+		return "Matriculas [idMatricula=" + idMatricula + ", idAlumno=" + idAlumno + ", idCurso=" + idCurso
 				+ ", valoracion=" + valoracion + "]";
 	}
 	

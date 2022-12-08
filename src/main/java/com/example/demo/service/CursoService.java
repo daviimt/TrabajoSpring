@@ -7,7 +7,7 @@ import com.example.demo.models.CursoModel;
 
 public interface CursoService {
 
-	public abstract List<CursoModel> ListAllCurso();
+	public abstract List<CursoModel> ListAllCursos();
 	public abstract Curso addCurso(CursoModel cursoModel);
 	public abstract int removeCurso(int id);
 	public abstract Curso updateCurso(CursoModel cursoModel);

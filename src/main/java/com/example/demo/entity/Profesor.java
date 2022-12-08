@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Profesor {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idProfesor;
@@ -33,12 +34,14 @@ public class Profesor {
 		this.email = email;
 		this.password = password;
 	}
-	public int getId() {
+
+	public int getIdProfesor() {
 		return idProfesor;
 	}
-	public void setId(int id) {
-		this.idProfesor = id;
+	public void setIdProfesor(int idProfesor) {
+		this.idProfesor = idProfesor;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -63,6 +66,12 @@ public class Profesor {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<Curso> getCursosList() {
+		return cursosList;
+	}
+	public void setCursosList(List<Curso> cursosList) {
+		this.cursosList = cursosList;
 	}
 	@Override
 	public String toString() {
