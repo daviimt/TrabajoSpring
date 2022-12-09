@@ -66,15 +66,12 @@ public class AlumnoController {
 		}
 	}
 	
-	@GetMapping("/formAlumno/{idAlumnos}")
-	public String formCurso(@PathVariable(name = "idAlumnos", required = false) Integer id, Model model) {
+	@GetMapping("/formAlumno/{email}")
+	public String formCurso(@PathVariable(name = "email", required = false) String email, Model model) {
 
-		model.addAttribute("curso", courseService.ListAllCursos());
-		if (id == null) {
-			model.addAttribute("alumno", new AlumnoModel());
-		} else {
-			model.addAttribute("alumno", alumnoService.findStudent(id));
-		}
+		
+			model.addAttribute("alumno", alumnoService.findStudent(email));
+		
 		return FORM_VIEW;
 	}
 	
