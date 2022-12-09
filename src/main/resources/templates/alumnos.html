@@ -42,12 +42,6 @@
 						th:onclick="'javascript:confirmDelete(\''+${alumno.idAlumno}+'\');'">
 							<i class="fas fa-user-times"> </i>
 					</a></th>
-
-					<th><a th:href="@{/alumno/addAlumno}">
-							<button type="button" class="btn btn-primary">Editar</button>
-					</a> <a th:href="@{/alumno/removeAlumno}">
-							<button type="button" class="btn btn-primary">Borrar</button>
-					</a></th>
 				</tr>
 			</tbody>
 		</table>
