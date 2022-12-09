@@ -63,7 +63,7 @@ public class LoginController {
 		Usuario user = new Usuario();
 		user.setUsername(alumno.getEmail());
 		user.setPassword(alumno.getPassword());
-		user.setRole("ROL_ALUMN");
+		user.setRole("ROL_ALUMNO");
 		usuarioService.registrar(user);
 		flash.addFlashAttribute("success","User registered successfully");
 		

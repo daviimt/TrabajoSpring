@@ -26,23 +26,25 @@
           <a class="nav-link" href="#">About</a>
         </li>
         <li class="nav-item">
-        <sec:authorize access="hasRole('ROLE_ADMIN') and hasRole('ROL_PROFESOR')">
+        <sec:authorize access="hasAnyAuthority('ROLE_ADMIN',ROL_PROFESOR')">
 	        <a class="nav-link" th:href="@{/profesores/}">
 				profesores
 			</a>
         </li>
         <li class="nav-item">
-        <sec:authorize access="hasRole('ROL_ADMIN') and hasRole('ROL_ALUMNO')">
+        <sec:authorize access="hasAnyAuthority('ROLE_ADMIN',ROL_ALUMNO')">
         <a class="nav-link" th:href="@{/cursos/}">
 			cursos
 		</a>
         </li>
         <li class="nav-item">
-        <sec:authorize access="hasRole('ROL_ADMIN') and hasRole('ROL_ALUMNO')">
+        <sec:authorize access="hasRole('ROL_ADMIN')">
         <a class="nav-link" th:href="@{/alumnos/}">
 			alumnos
 		</a>
         </li>
+
+
         </ul>
         <ul class="navbar-nav me auto">
         <li sec:authorize="!isAuthenticated()" class="nav-item">
