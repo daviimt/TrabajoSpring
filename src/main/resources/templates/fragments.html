@@ -40,6 +40,19 @@
 			alumnos
 		</a>
         </li>
+        
+        <li sec:authorize="hasAuthority('ROL_ALUMNO')" class="nav-item">
+        <a class="nav-link" th:href="@{/alumnos/formAlumno/}">
+			Modificar datos
+		</a>
+        </li>
+        
+        
+        <li sec:authorize="hasAuthority('ROL_PROFESOR')" class="nav-item">
+        <a class="nav-link" th:href="@{/profesores/formAProfesor/}">
+			Modificar datos
+		</a>
+        </li>
 
 
         </ul>
