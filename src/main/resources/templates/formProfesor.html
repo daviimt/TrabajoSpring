@@ -8,12 +8,12 @@
 
 <meta charset="ISO-8859-1">
 
-<div th:replace ="fragments :: header"></div>
 <title>Formulario Profesores</title>
-<br>
 </head>
 
 <body>
+	<div th:replace="fragments :: header"></div>
+	<br>
 <form th:action="@{/profesores/addProfesor/}" th:object="${profesor}" method="post" style="text-align:center;width: 500px;margin: auto;">
 		
 		<h1 th:text="${profesor.idProfesor != 0} ? 'Editar Profesor' : 'Nuevo Profesor'" >Nuevo Profesor</h1>
