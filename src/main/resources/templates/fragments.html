@@ -27,19 +27,19 @@
         </li>
         <li class="nav-item">
         <sec:authorize access="hasRole('ROLE_ADMIN') and hasRole('ROL_PROFESOR')">
-	        <a class="nav-link" th:href="@{/profesores/listprofesores}">
+	        <a class="nav-link" th:href="@{/profesores/}">
 				profesores
 			</a>
         </li>
         <li class="nav-item">
         <sec:authorize access="hasRole('ROL_ADMIN') and hasRole('ROL_ALUMNO')">
-        <a class="nav-link" th:href="@{/cursos/listcursos}">
+        <a class="nav-link" th:href="@{/cursos/}">
 			cursos
 		</a>
         </li>
         <li class="nav-item">
         <sec:authorize access="hasRole('ROL_ADMIN') and hasRole('ROL_ALUMNO')">
-        <a class="nav-link" th:href="@{/alumnos/listalumnos}">
+        <a class="nav-link" th:href="@{/alumnos/}">
 			alumnos
 		</a>
         </li>
