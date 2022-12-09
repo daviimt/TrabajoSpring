@@ -25,17 +25,20 @@
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
         </li>
-        <li sec:authorize="hasRole('ROL_ADMIN')" class="nav-item">
-        <a class="nav-link" th:href="@{/profesores/listprofesores}">
-			profesores
-		</a>
+        <li class="nav-item">
+        <sec:authorize access="hasRole('ROLE_ADMIN') and hasRole('ROL_PROFESOR')">
+	        <a class="nav-link" th:href="@{/profesores/listprofesores}">
+				profesores
+			</a>
         </li>
-        <li sec:authorize="hasRole('ROL_ADMIN')" class="nav-item">
+        <li class="nav-item">
+        <sec:authorize access="hasRole('ROL_ADMIN') and hasRole('ROL_ALUMNO')">
         <a class="nav-link" th:href="@{/cursos/listcursos}">
 			cursos
 		</a>
         </li>
-        <li sec:authorize="hasRole('ROL_ADMIN')" class="nav-item">
+        <li class="nav-item">
+        <sec:authorize access="hasRole('ROL_ADMIN') and hasRole('ROL_ALUMNO')">
         <a class="nav-link" th:href="@{/alumnos/listalumnos}">
 			alumnos
 		</a>
