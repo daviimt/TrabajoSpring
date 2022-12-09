@@ -4,6 +4,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,15 +68,14 @@ public class AlumnoController {
 			return "redirect:/alumnos/listAlumnos";
 		}
 	}
-	
-	@GetMapping("/formAlumno/{idAlumnos}")
-	public String formCurso(@PathVariable(name = "idAlumnos", required = false) Integer id, Model model) {
-
-		model.addAttribute("curso", courseService.ListAllCursos());
-		if (id == null) {
-			model.addAttribute("alumno", new AlumnoModel());
-		} else {
-			model.addAttribute("alumno", alumnoService.findStudent(id));
+	@PreAuthorize("hasAuthority('ROL_ALUMNO')") 
+	@GetMapping("/formAlumno/{idAlumno}")
+	public String formAlumno(@PathVariable(name = "idAlumno", required = false) Integer id, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName(); 
+		AlumnoModel a = alumnoService.findStudent(username);
+		if(id == a.getIdAlumno()) {
+			model.addAttribute("alumno",alumnoService.findStudent(id));
 		}
 		return FORM_VIEW;
 	}
