@@ -31,6 +31,12 @@
 		<div th:if="${error!=null}" class="alert alert-danger" role="alert">Usuario o contrase&ntilde;a incorrectas</div>
 		<div th:if="${logout!=null}" class="alert alert-danger" role="alert">Sesi&oacute;n cerrada correctamente</div>
 		<button type="submit" class="btn btn-primary">Iniciar sesi&oacute;n</button>
+		
 	</form>
+	<br>
+	<div style="text-align:center;width: 500px;margin: auto;">
+	&iquest;No tienes cuenta todav&iacute;a?
+	<a  th:href="@{/auth/registerForm/}">Reg&iacute;strate aqu&iacute;</a>
+	</div>
 <br>
 </html>
