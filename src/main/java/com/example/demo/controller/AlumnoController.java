@@ -77,6 +77,7 @@ public class AlumnoController {
 		}
 		return FORM_VIEW;
 	}
+	
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {

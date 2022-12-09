@@ -52,7 +52,7 @@ public class UsuarioService implements UserDetailsService {
 	public Usuario registrar(Usuario usuario) {
 		usuario.setPassword(passwordEncoder().encode(usuario.getPassword()));
 		usuario.setEnabled(false);
-		usuario.setRole("ROL_ALUMNO");
+		usuario.setRole(usuario.getRole());
 		return usuarioRepository.save(usuario);
 	}
 	

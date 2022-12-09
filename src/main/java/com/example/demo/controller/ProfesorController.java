@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.entity.Usuario;
 import com.example.demo.models.ProfesorModel;
 import com.example.demo.service.ProfesorService;
+import com.example.demo.serviceImpl.UsuarioService;
 
 @Controller
 @RequestMapping("/profesores")
@@ -27,6 +29,10 @@ public class ProfesorController {
 	@Autowired
 	@Qualifier("profesorService")
 	private ProfesorService profesorService;
+	
+	@Autowired
+	@Qualifier("usuarioService")
+	private UsuarioService usuarioService;
 	
 	//Mostrar profesores
 	@GetMapping("/listProfesores")
@@ -41,6 +47,13 @@ public class ProfesorController {
 			 RedirectAttributes flash) {
 			if(profesorModel.getIdProfesor()==0) {
 				profesorService.addProfesor(profesorModel);
+				
+				Usuario user = new Usuario();
+				user.setUsername(profesorModel.getEmail());
+				user.setPassword(profesorModel.getPassword());
+				user.setRole("ROL_PROFESOR");
+				usuarioService.registrar(user);				
+				
 				flash.addFlashAttribute("success", "Profesor insertado con éxito");
 			}else {
 				profesorService.updateProfesor(profesorModel);
