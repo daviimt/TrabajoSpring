@@ -62,15 +62,15 @@ public class CursoController {
 	
 	
 	// Metodo de borrar
-	@PostMapping("/deleteCurso/{idCursos}")
+	@GetMapping("/deleteCurso/{idCursos}")
 	public String deleteCurso(@PathVariable("idCursos") int id, RedirectAttributes flash) {
-
 		if (cursoService.removeCurso(id) == 0)
-			flash.addFlashAttribute("succes", "Curso eliminado con éxito");
+			flash.addFlashAttribute("success", "Curso eliminado con éxito");
 		else
 			flash.addFlashAttribute("error", "No se pudo eliminar el curso");
 		return "redirect:/courses/listCursos";
 	}
+	
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {

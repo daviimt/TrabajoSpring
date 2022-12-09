@@ -44,7 +44,7 @@ public class AlumnoController {
 	}
 
 	// Metodo para borrar
-	@PostMapping("/deleteAlumno/{idAlumno}")
+	@GetMapping("/deleteAlumno/{idAlumno}")
 	public String removeCurso(@PathVariable("idAlumno") int id, RedirectAttributes flash) {
 		if (alumnoService.removeAlumno(id) == 0) {
 			flash.addFlashAttribute("success", "Alumno eliminado con éxito");

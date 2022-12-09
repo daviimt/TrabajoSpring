@@ -72,17 +72,17 @@ public class ProfesorController {
 		return FORM_VIEW;
 	}
 
-
-	
 	//Metodo de borrar 
-	@PostMapping("/deleteProfesor/{idProfesor}")
-	public String removeProfesor(@PathVariable("idProfesor")int id, RedirectAttributes flash) {
-		if(profesorService.removeProfesor(id)==0) {
+	@GetMapping("/deleteProfesor/{idProfesor}")
+	public String deleteProfesor(@PathVariable("idProfesor")int id, RedirectAttributes flash) {
+		if(profesorService.removeProfesor(id)==0) 
 			flash.addFlashAttribute("success","Profesor eliminado con éxito");	
-		}else
+		else
 			flash.addFlashAttribute("error","No se ha podido eliminar el profesor");	
+		
 		return "redirect:/profesores/listProfesores";
 	}
+	
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {
