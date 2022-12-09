@@ -13,10 +13,6 @@ public interface AlumnoService {
 	public abstract Alumno updateAlumno(AlumnoModel alumnoModel);
 	public abstract Alumno transform(AlumnoModel alumnoModel);
 	public abstract AlumnoModel transform(Alumno alumno);
-<<<<<<< HEAD
 	public abstract AlumnoModel findStudent(String email);
-=======
-	public abstract AlumnoModel findStudent(int id);
-	public abstract AlumnoModel findStudent(String username);
->>>>>>> 17a420a2bf973b65fabd3a259ec30c8995de5aca
+
 }

@@ -68,7 +68,6 @@ public class AlumnoController {
 			return "redirect:/alumnos/listAlumnos";
 		}
 	}
-<<<<<<< HEAD
 	
 	@GetMapping("/formAlumno/{email}")
 	public String formCurso(@PathVariable(name = "email", required = false) String email, Model model) {
@@ -76,17 +75,6 @@ public class AlumnoController {
 		
 			model.addAttribute("alumno", alumnoService.findStudent(email));
 		
-=======
-	@PreAuthorize("hasAuthority('ROL_ALUMNO')") 
-	@GetMapping("/formAlumno/{idAlumno}")
-	public String formAlumno(@PathVariable(name = "idAlumno", required = false) Integer id, Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName(); 
-		AlumnoModel a = alumnoService.findStudent(username);
-		if(id == a.getIdAlumno()) {
-			model.addAttribute("alumno",alumnoService.findStudent(id));
-		}
->>>>>>> 17a420a2bf973b65fabd3a259ec30c8995de5aca
 		return FORM_VIEW;
 	}
 	
