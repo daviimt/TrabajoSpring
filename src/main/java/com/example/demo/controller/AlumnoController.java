@@ -65,7 +65,7 @@ public class AlumnoController {
 		} else {
 			alumnoService.updateAlumno(studentModel);
 			flash.addFlashAttribute("success", "Alumno actualizado satisfactoriamente");
-			return "redirect:/alumnos/listAlumnos";
+			return "redirect:/home";
 		}
 	}
 	
