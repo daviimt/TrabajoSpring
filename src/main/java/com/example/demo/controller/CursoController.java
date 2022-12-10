@@ -68,7 +68,7 @@ public class CursoController {
 			flash.addFlashAttribute("success", "Curso eliminado con éxito");
 		else
 			flash.addFlashAttribute("error", "No se pudo eliminar el curso");
-		return "redirect:/courses/listCursos";
+		return "redirect:/cursos/listCursos";
 	}
 	
 	// Metodo redirect
