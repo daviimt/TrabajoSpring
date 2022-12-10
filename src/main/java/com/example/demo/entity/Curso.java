@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,8 +23,8 @@ public class Curso {
 	private String fechaFin;
 	
 	@ManyToOne
-	@JoinColumn(name="profesorId")
-	private Profesor profesor;
+	@JoinColumn(name="idProfesor")
+	private Profesor idProfesor;
 	
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="curso")
 	private List<Comentario> comentarioList;
@@ -47,7 +46,7 @@ public class Curso {
 		this.nivel = nivel;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.profesor = profesor;
+		this.idProfesor = idProfesor;
 	}
 
 
@@ -112,19 +111,19 @@ public class Curso {
 
 
 	public Profesor getProfesor() {
-		return profesor;
+		return idProfesor;
 	}
 
 
 	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
+		this.idProfesor = profesor;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Curso [idCursos=" + idCursos + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel="
-				+ nivel + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", profesor=" + profesor + "]";
+				+ nivel + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", profesor=" + idProfesor + "]";
 	}
 	
 	

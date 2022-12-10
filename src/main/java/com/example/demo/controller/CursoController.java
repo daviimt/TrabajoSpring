@@ -45,9 +45,7 @@ public class CursoController {
 		if (cursoModel.getIdCurso() == 0) {
 			cursoService.addCurso(cursoModel);
 			flash.addFlashAttribute("success", "Curso insertado con éxito");
-
-		} else {
-			cursoService.updateCurso(cursoModel);
+		} else {cursoService.updateCurso(cursoModel);
 			flash.addFlashAttribute("success", "Curso modificado con éxito");
 		}
 		return "redirect:/cursos/listCursos";
@@ -56,10 +54,11 @@ public class CursoController {
 	@GetMapping(value = { "/formCurso", "/formCurso/{idCursos}" })
 	public String formCurso(@PathVariable(name = "idCursos", required = false) Integer id, Model model) {
 		model.addAttribute("profesores", profesorService.listAllProfesores());
-		if (id == null)
+		if (id == null) {
 			model.addAttribute("curso", new CursoModel());
-		else
+		}else {
 			model.addAttribute("curso", cursoService.findCurso(id));
+		}
 		return FORM_VIEW;
 	}
 	
