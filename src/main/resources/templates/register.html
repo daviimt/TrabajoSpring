@@ -27,7 +27,7 @@
 		<input type="text" class="form-control" th:field="*{email}" placeholder="Correo electr&oacute;nico" name="username" id="username" pattern='([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+' required />
 		<br>
 		<label>Clave: </label>
-		<input type="password" class="form-control" th:field="*{password}" placeholder="Clave" name="password" id="password" min=8 required/>
+		<input type="password" class="form-control" th:field="*{password}" placeholder="Clave" name="password" id="password" minlength="8" required/>
 		<br>
 		<label>Foto: </label>
 		<input type="file" class="form-control" th:field="*{foto}" placeholder="foto" name="foto" id="foto" required/>
