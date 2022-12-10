@@ -5,22 +5,17 @@
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.css}">
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-
 <meta charset="ISO-8859-1">
-
 <title>Registro de usuario</title>
 </head>
-
 <body>
 <div th:replace="fragments :: header"></div>
 <br>
 <div style="text-align:center;width: 500px;margin: auto;">
-<h1>Registro</h1>
-</div>
-<br>
-<br>
-<br>
-<form th:action="@{/auth/register}" th:object="${alumno}" method="post" style="text-align:center;width: 500px;margin: auto;">
+	<h1>Registro</h1>
+	</div>
+	<br><br><br>
+	<form th:action="@{/auth/register}" th:object="${alumno}" method="post" style="text-align:center;width: 500px;margin: auto;">
 		<input type="hidden" name="${csrf.parameterName}" value="${csrf.token}"/>
 		<label>Nombre: </label>
 		<input type="text" class="form-control" th:field="*{nombre}" placeholder="Nombre" name="nombre" id="nombre"/>
@@ -38,6 +33,6 @@
 		<input type="file" class="form-control" th:field="*{foto}" placeholder="foto" name="foto" id="foto"/>
 		<br>
 		<input class="btn btn-primary btn-block text-uppercase" id="boton" type="submit" value="Registrarse"/>
-</form>
+	</form>
 </body>
 </html>

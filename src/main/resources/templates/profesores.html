@@ -35,15 +35,15 @@
 			</tbody>
 		</table>
 <br><br>
-	<a th:href="@{/profesores/formProfesor/}">
-		<button type="button" class="btn btn-primary">Nuevo Profesor</button>
-	</a>
-	<a th:href="@{/home}">
-		<button type="button" class="btn btn-primary">Regresar</button>
-	</a>
-	
-	<div class="alert alert-success" th:if="${success != null}"
-		th:text="${success}"></div>
+	<div style="text-align:center;width: 500px;margin: auto;">
+		<a th:href="@{/profesores/formProfesor/}">
+			<button type="button" class="btn btn-primary">Nuevo Profesor</button>
+		</a>
+		<a th:href="@{/home}">
+			<button type="button" class="btn btn-primary">Regresar</button>
+		</a>
+	</div>
+	<div class="alert alert-success" th:if="${success != null}"th:text="${success}"/>
 
 </body>
 </html>

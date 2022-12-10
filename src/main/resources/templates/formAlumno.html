@@ -10,55 +10,39 @@
 <body>
 <div th:replace="fragments :: header"></div>
 <br>
-				<form th:action="@{/alumnos/addAlumno}"
-					th:object="${alumno}" method="post" style="text-align:center;width: 500px;margin: auto;">
-					
-					<input type="hidden" th:field="*{idAlumno}" id="idAlumno">
-<h1>Modificar datos</h1>
-<br>
-					<div class="form-group">
-						<label for="nombre">Nombre</label> <input type="text"
-							th:field="*{nombre}" class="form-control" id="nombre"
-							placeholder="Introduce tu nombre">
-					</div>
+	<form th:action="@{/alumnos/addAlumno}" th:object="${alumno}" method="post" style="text-align:center;width: 500px;margin: auto;">
+		<input type="hidden" th:field="*{idAlumno}" id="idAlumno">
+		<h1>Modificar datos</h1>
+		<br>
+			<div class="form-group">
+				<label for="nombre">Nombre:</label> 
+				<input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Introduce tu nombre">
+			</div>
+			<div class="form-group">
+				<label for="apellidos">Apellidos:</label> 
+				<input type="text" th:field="*{apellidos}" class="form-control" id="Apellidos" placeholder="Introduce tus apellidos">
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label> 
+				<input type="text" readonly="readonly" th:field="*{email}" class="form-control" id="email" placeholder="Introduce tu email">
+			</div>
+				<input type="hidden" th:field="*{password}" class="form-control" id="password" placeholder="Introduce tu clave">
+			<div class="form-group">
+				<label for="foto">Foto:</label> 
+				<input type="file" th:field="*{foto}" class="form-control" id="foto" placeholder="Introduce tu foto">
+			</div>
+			<br>
+			<input type="submit" class="btn btn-primary">
 
-					<div class="form-group">
-						<label for="apellidos">Apellidos</label> <input type="text"
-							th:field="*{apellidos}" class="form-control" id="Apellidos"
-							placeholder="Introduce tus apellidos">
-					</div>
-
-					<div class="form-group">
-						<label for="email">Email</label> <input type="text" readonly="readonly"
-							th:field="*{email}" class="form-control" id="email"
-							placeholder="Introduce tu email">
-					</div>
-
-					
-						<input type="hidden"
-							th:field="*{password}" class="form-control" id="password"
-							placeholder="Introduce tu clave">
-					
-					
-					<div class="form-group">
-						<label for="foto">Foto</label> <input type="file"
-							th:field="*{foto}" class="form-control" id="foto"
-							placeholder="Introduce tu foto">
-					</div>
-					<br>
-					<input type="submit" class="btn btn-primary">
-
-					<div class="alert alert-success" th:if="${success != null}"
-						th:text="${success}"></div>
-					<div class="alert alert-danger" th:if="${error != null}"
-						th:text="${error}"></div>
-					<div class="alert alert-warning" th:if="${warning != null}"
-						th:text="${warning}"></div>
-					<div class="alert alert-info" th:if="${info != null}"
-						th:text="${info}"></div>
-
-				</form>
-	
+			<div class="alert alert-success" th:if="${success != null}"
+				th:text="${success}"></div>
+			<div class="alert alert-danger" th:if="${error != null}"
+				th:text="${error}"></div>
+			<div class="alert alert-warning" th:if="${warning != null}"
+				th:text="${warning}"></div>
+			<div class="alert alert-info" th:if="${info != null}"
+				th:text="${info}"></div>
+	</form>
 	<br><br>
 </body>
 </html>

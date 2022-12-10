@@ -5,9 +5,7 @@
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
 <meta charset="UTF-8">
 <title>Formulario cursos</title>
-<br>
 </head>
-
 <body>
 	<div th:replace="fragments :: header"></div>
 	<br>
@@ -42,13 +40,13 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="fechaInicio">Fecha Inicio</label> <input type="text"
+			<label for="fechaInicio">Fecha Inicio</label> <input type="date"
 				th:field="*{fechaInicio}" class="form-control" id="fechaInicio"
 				placeholder="Introduce la fecha de inicio">
 		</div>
 		
 		<div class="form-group">
-			<label for="fechaFin">Fecha Fin</label> <input type="text"
+			<label for="fechaFin">Fecha Fin</label> <input type="date"
 				th:field="*{fechaFin}" class="form-control" id="fechaFin"
 				placeholder="Introduce la fecha de fin">
 		</div>
