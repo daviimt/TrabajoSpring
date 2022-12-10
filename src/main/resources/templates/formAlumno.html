@@ -10,11 +10,12 @@
 <body>
 <div th:replace="fragments :: header"></div>
 <br>
-
 				<form th:action="@{/alumnos/addAlumno}"
-					th:object="${alumno}" method="post">
+					th:object="${alumno}" method="post" style="text-align:center;width: 500px;margin: auto;">
 					
 					<input type="hidden" th:field="*{idAlumno}" id="idAlumno">
+<h1>Modificar datos</h1>
+<br>
 					<div class="form-group">
 						<label for="nombre">Nombre</label> <input type="text"
 							th:field="*{nombre}" class="form-control" id="nombre"
@@ -44,7 +45,7 @@
 							th:field="*{foto}" class="form-control" id="foto"
 							placeholder="Introduce tu foto">
 					</div>
-					
+					<br>
 					<input type="submit" class="btn btn-primary">
 
 					<div class="alert alert-success" th:if="${success != null}"

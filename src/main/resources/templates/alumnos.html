@@ -28,11 +28,7 @@
 					<th th:text=${alumno.apellidos}></th>
 					<th th:text=${alumno.email}></th>
 					<th th:text=${alumno.foto}></th>
-					<th><a th:href="@{/alumnos/formAlumno/} + ${alumno.idAlumno}">
-                        <button type="button" class="btn btn-default">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                    </a>
+					<th>
 						<a th:href="@{/alumnos/deleteAlumno/} + ${alumno.idAlumno}" >
                             <button type="button" class="btn btn-default">
                             	<i class="fa-solid fa-trash" aria-hidden=true></i>
