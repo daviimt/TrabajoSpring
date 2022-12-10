@@ -28,15 +28,19 @@
 		</div>
 
 		<div class="form-group">
-			<label for="nivel">Nivel</label> <input type="text"
+			<label for="nivel">Nivel</label> <input type="number" step="any"
 				th:field="*{nivel}" class="form-control" id="nivel"
 				placeholder="Introduce el nivel">
 		</div>
 		
 		<div class="form-group">
-			<label for="idProfesor">Id profesor</label> <input type="text"
-				th:field="*{idProfesor}" class="form-control" id="idProfesor"
-				placeholder="Introduce el profe">
+			<label for= "idProfesor">Id profesor</label>
+			<select class="form-control selectpicker" th:field="*{idProfesor}" id="idProfesor">
+				<option th:each="profesor : ${profesores}"
+						th:value="${profesor.idProfesor}"
+						th:text="${profesor.email}">
+				</option>
+			</select>
 		</div>
 		
 		<div class="form-group">

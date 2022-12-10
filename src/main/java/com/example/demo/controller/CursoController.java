@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.models.CursoModel;
 import com.example.demo.service.CursoService;
+import com.example.demo.service.ProfesorService;
 
 @Controller
 @RequestMapping("/cursos")
@@ -26,7 +27,9 @@ public class CursoController {
 	@Qualifier("cursoService")
 	private CursoService cursoService;
 
-	
+	@Autowired
+	@Qualifier("profesorService")
+	private ProfesorService profesorService;
 
 //	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/listCursos")
@@ -52,7 +55,7 @@ public class CursoController {
 
 	@GetMapping(value = { "/formCurso", "/formCurso/{idCursos}" })
 	public String formCurso(@PathVariable(name = "idCursos", required = false) Integer id, Model model) {
-
+		model.addAttribute("profesores", profesorService.listAllProfesores());
 		if (id == null)
 			model.addAttribute("curso", new CursoModel());
 		else
