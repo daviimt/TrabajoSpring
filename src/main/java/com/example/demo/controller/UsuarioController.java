@@ -30,15 +30,16 @@ public class UsuarioController {
 	}
 	
 	//Metodo de activar/descativar 
-	@PostMapping("/activarUsuario/{username}")
+	@GetMapping("/activarUsuario/{username}")
 	public String activate(@PathVariable("username")String username, RedirectAttributes flash) {
-		if(usuarioService.activar(username)==1) {
+		int i=usuarioService.activar(username);
+		if(i==1) {
 			flash.addFlashAttribute("success","Usuario activado con éxito");
-		}else if(usuarioService.activar(username)==0) {
+		}else if(i==0) {
 			flash.addFlashAttribute("success","Usuario desactivado con éxito");
 		}else
 			flash.addFlashAttribute("error","No se ha podido activar/desactivar el usuario");	
-		return "redirect:/usuarios/listUsuarios";
+		return "redirect:/alumnos/listAlumnos";
 	}
 	
 }

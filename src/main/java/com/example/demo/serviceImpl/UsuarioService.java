@@ -61,6 +61,9 @@ public class UsuarioService implements UserDetailsService {
 		Usuario u=usuarioRepository.findByUsername(username);
 		Usuario user=new Usuario();
 		user.setPassword(passwordEncoder().encode(u.getPassword()));
+		user.setUsername(u.getUsername());
+		user.setId(u.getId());
+		
 		if(u.isEnabled()==false) {
 			user.setEnabled(true);
 			a=1;

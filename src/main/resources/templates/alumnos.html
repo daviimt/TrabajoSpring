@@ -33,17 +33,23 @@
                             <button type="button" class="btn btn-default">
                             	<i class="fa-solid fa-trash" aria-hidden=true></i>
                             </button>
-					</a> <a href="@{/usuarios/activarUsuario/} + ${alumno.email}">
+						</a> 
+						<a th:href="@{/usuarios/activarUsuario/} + ${alumno.email}">
+							<button type="button" class="btn btn-default">
 							<i class="fas fa-user-times"> </i>
-					</a></th>
+							</button>
+						</a>
+					</th>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<br><br>
-	<a th:href="@{/home}">
-		<button type="button" class="btn btn-primary">Regresar</button>
+	<div style="text-align:center;width: 500px;margin: auto;">
+	<a th:href="@{/home}" >
+		<button type="button" class="btn btn-primary" >Regresar</button>
 	</a>
+	</div>
 
 	<div class="alert alert-success" th:if="${success != null}"
 		th:text="${success}"></div>
