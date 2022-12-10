@@ -14,5 +14,6 @@ public interface AlumnoService {
 	public abstract Alumno transform(AlumnoModel alumnoModel);
 	public abstract AlumnoModel transform(Alumno alumno);
 	public abstract AlumnoModel findStudent(String email);
+	public abstract AlumnoModel findStudent(int id);
 
 }

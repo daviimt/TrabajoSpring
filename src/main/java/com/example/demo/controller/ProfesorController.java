@@ -75,9 +75,16 @@ public class ProfesorController {
 	//Metodo de borrar 
 	@GetMapping("/deleteProfesor/{idProfesor}")
 	public String deleteProfesor(@PathVariable("idProfesor")int id, RedirectAttributes flash) {
-		if(profesorService.removeProfesor(id)==0) 
+		ProfesorModel p = profesorService.findProfesor(id);
+		if(profesorService.removeProfesor(id)==0) {
+			try {
+				usuarioService.deleteUser(p.getEmail());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			flash.addFlashAttribute("success","Profesor eliminado con éxito");	
-		else
+		}else
 			flash.addFlashAttribute("error","No se ha podido eliminar el profesor");	
 		
 		return "redirect:/profesores/listProfesores";

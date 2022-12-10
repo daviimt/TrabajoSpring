@@ -74,6 +74,11 @@ public class UsuarioService implements UserDetailsService {
 		return a;
 	}
 	
+	public void deleteUser(String username) throws Exception {
+		Usuario u = usuarioRepository.findByUsername(username);
+		usuarioRepository.delete(u);
+	}
+	
 	public List<Usuario> listAllUsuarios() {
 		return usuarioRepository.findAll().stream().collect(Collectors.toList());
 	}

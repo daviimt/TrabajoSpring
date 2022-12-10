@@ -57,4 +57,8 @@ public class AlumnoServiceImpl implements AlumnoService{
 		return transform(alumnoRepository.findByEmail(email));
 	}
 	
+	@Override
+	public AlumnoModel findStudent(int id) {
+		return transform(alumnoRepository.findById(id).orElse(null));
+	}
 }

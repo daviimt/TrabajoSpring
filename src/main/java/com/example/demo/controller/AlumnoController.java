@@ -4,9 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.example.demo.models.AlumnoModel;
 import com.example.demo.service.AlumnoService;
 import com.example.demo.service.CursoService;
+import com.example.demo.serviceImpl.UsuarioService;
 
 @Controller
 @RequestMapping("/alumnos")
@@ -37,6 +35,10 @@ public class AlumnoController {
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService courseService;
+	
+	@Autowired
+	@Qualifier("usuarioService")
+	private UsuarioService usuarioService;
 
 	// Metodo para listar alumnos
 	@GetMapping("/listAlumnos")
@@ -49,7 +51,14 @@ public class AlumnoController {
 	// Metodo para borrar
 	@GetMapping("/deleteAlumno/{idAlumno}")
 	public String removeCurso(@PathVariable("idAlumno") int id, RedirectAttributes flash) {
+		AlumnoModel a = alumnoService.findStudent(id);
 		if (alumnoService.removeAlumno(id) == 0) {
+			try {
+				usuarioService.deleteUser(a.getEmail());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			flash.addFlashAttribute("success", "Alumno eliminado con éxito");
 		} else
 			flash.addFlashAttribute("error", "No se ha podido eliminar el alumno");
