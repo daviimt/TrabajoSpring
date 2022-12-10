@@ -50,8 +50,8 @@
         </li>
         
         <li sec:authorize="hasAuthority('ROL_PROFESOR')" class="nav-item">
-        <a class="nav-link" th:href="@{/profesores/}" >
-			profesor
+        <a class="nav-link" th:href="@{/profesores/formProfesor/}+ ${#authentication.name}">
+			Modificar datos
 		</a>
         </li>
 

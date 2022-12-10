@@ -62,12 +62,12 @@ public class ProfesorController {
 			return "redirect:/profesores/listProfesores";
 	}
 	//Formulario
-	@GetMapping(value={"/formProfesor","/formProfesor/{idProfesor}"})
-	public String formProfesor(@PathVariable(name="idProfesor",required=false) Integer id,Model model){
-		if(id==null) {
+	@GetMapping(value={"/formProfesor","/formProfesor/{email}"})
+	public String formProfesor(@PathVariable(name="email",required=false) String email,Model model){
+		if(email==null) {
 			model.addAttribute("profesor",new ProfesorModel());
 		}else {
-			model.addAttribute("profesor", profesorService.findProfesor(id));
+			model.addAttribute("profesor", profesorService.findProfesor(email));
 		}
 		return FORM_VIEW;
 	}
