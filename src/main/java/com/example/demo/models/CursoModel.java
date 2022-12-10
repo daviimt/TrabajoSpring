@@ -9,14 +9,14 @@ public class CursoModel {
 	private String descripcion;
 	private int nivel;
 	private int idProfesor;
-	private Date fechaInicio;
-	private Date fechaFin;
+	private String fechaInicio;
+	private String fechaFin;
 	
 	public CursoModel() {
 		super();
 	}
-	public CursoModel(int idCurso, String nombre, String descripcion, int nivel, int idProfesor, Date fechaInicio,
-			Date fechaFin) {
+	public CursoModel(int idCurso, String nombre, String descripcion, int nivel, int idProfesor, String fechaInicio,
+			String fechaFin) {
 		super();
 		this.idCursos = idCurso;
 		this.nombre = nombre;
@@ -56,16 +56,16 @@ public class CursoModel {
 	public void setIdProfesor(int idProfesor) {
 		this.idProfesor = idProfesor;
 	}
-	public Date getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
-	public Date getFechaFin() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 	@Override

@@ -20,8 +20,8 @@ public class Curso {
 	private String nombre;
 	private String descripcion;
 	private int nivel;
-	private Date fechaInicio;
-	private Date fechaFin;
+	private String fechaInicio;
+	private String fechaFin;
 	
 	@ManyToOne
 	@JoinColumn(name="profesorId")
@@ -38,7 +38,7 @@ public class Curso {
 	}
 
 
-	public Curso(int idCursos, String nombre, String descripcion, int nivel, Date fechaInicio, Date fechaFin,
+	public Curso(int idCursos, String nombre, String descripcion, int nivel, String fechaInicio, String fechaFin,
 			Profesor profesor) {
 		super();
 		this.idCursos = idCursos;
@@ -91,22 +91,22 @@ public class Curso {
 	}
 
 
-	public Date getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
 
-	public Date getFechaFin() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
 
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
