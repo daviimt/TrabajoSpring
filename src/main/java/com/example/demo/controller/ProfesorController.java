@@ -46,15 +46,18 @@ public class ProfesorController {
 	public String addProfesor(@ModelAttribute("profesor") ProfesorModel profesorModel,
 			 RedirectAttributes flash) {
 			if(profesorModel.getIdProfesor()==0) {
-				profesorService.addProfesor(profesorModel);
-				
 				Usuario user = new Usuario();
 				user.setUsername(profesorModel.getEmail());
 				user.setPassword(profesorModel.getPassword());
 				user.setRole("ROL_PROFESOR");
-				usuarioService.registrar(user);				
-				
-				flash.addFlashAttribute("success", "Profesor insertado con éxito");
+				Usuario userExist=usuarioService.registrar(user);
+				if(userExist != null) {
+					profesorService.addProfesor(profesorModel);
+					flash.addFlashAttribute("success","User registered successfully");
+				}else {
+					return "redirect:/profesores/formProfesor?error";
+				}
+					
 			}else {
 				profesorService.updateProfesor(profesorModel);
 				flash.addFlashAttribute("success", "Profesor modificado con éxito");

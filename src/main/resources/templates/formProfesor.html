@@ -34,6 +34,7 @@
 		<div class="form-group" th:if="*{idProfesor==0}" >
 			<label>Email: </label>
 			<input type="email" class="form-control" th:field="*{email}" placeholder="Correo electr&oacute;nico"  id="email" pattern="([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+" required/>
+			<div th:if="${error!=null}" class="alert alert-danger">Correo existente</div>
 		</div>
 		<br>
 		<div class="form-group" th:if="*{idProfesor==0}" >
@@ -48,6 +49,7 @@
 		<a th:href="@{/profesores/}">
 		<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
+		
 </form>
 <br><br>
 </body>

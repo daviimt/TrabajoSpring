@@ -52,22 +52,26 @@ public class LoginController {
 	}
 	
 	@GetMapping("/auth/registerForm")
-	public String registerForm(Model model) {
+	public String registerForm(Model model, @RequestParam(name="error",required=false)String error) {
 		model.addAttribute("alumno", new Alumno());
+		model.addAttribute("error",error);
 		return REGISTER_VIEW;
 	}
 	
 	@PostMapping("/auth/register")
 	public String register(@ModelAttribute Alumno alumno,RedirectAttributes flash) {
-		alumnoService.addAlumno(alumnoService.transform(alumno));
 		Usuario user = new Usuario();
 		user.setUsername(alumno.getEmail());
 		user.setPassword(alumno.getPassword());
 		user.setRole("ROL_ALUMNO");
-		usuarioService.registrar(user);
-		flash.addFlashAttribute("success","User registered successfully");
-		
-		return "redirect:/auth/login";
+		Usuario userExist=usuarioService.registrar(user);
+		if(userExist != null) {
+			alumnoService.addAlumno(alumnoService.transform(alumno));
+			flash.addFlashAttribute("success","User registered successfully");
+			return "redirect:/auth/login";
+		}else {
+			return "redirect:/auth/registerForm?error";
+		}
 	}
 	
 }

@@ -25,6 +25,7 @@
 		<br>
 		<label>Email: </label>
 		<input type="text" class="form-control" th:field="*{email}" placeholder="Correo electr&oacute;nico" name="username" id="username" pattern='([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+' required />
+		<div th:if="${error!=null}" class="alert alert-danger">Correo existente</div>
 		<br>
 		<label>Contrase&ntilde;a: </label>
 		<input type="password" class="form-control" th:field="*{password}" placeholder="Contrase&ntilde;a" name="password" id="password" minlength="8" required/>
@@ -37,8 +38,6 @@
 	<br><br>
 	<div class="alert alert-success" th:if="${success != null}"
 		th:text="${success}"></div>
-	<div class="alert alert-danger" th:if="${error != null}"
-		th:text="${error}"></div>
 	<div class="alert alert-warning" th:if="${warning != null}"
 		th:text="${warning}"></div>
 	<div class="alert alert-info" th:if="${info != null}"

@@ -50,6 +50,12 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public Usuario registrar(Usuario usuario) {
+		List<Usuario>usuarios=usuarioRepository.findAll();
+		for(Usuario u: usuarios) {
+			if(u.getUsername().equals(usuario.getUsername())) {
+				return null;
+			}
+		}
 		usuario.setPassword(passwordEncoder().encode(usuario.getPassword()));
 		usuario.setEnabled(false);
 		usuario.setRole(usuario.getRole());
