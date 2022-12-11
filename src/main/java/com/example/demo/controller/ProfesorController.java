@@ -61,6 +61,7 @@ public class ProfesorController {
 			}else {
 				profesorService.updateProfesor(profesorModel);
 				flash.addFlashAttribute("success", "Profesor modificado con éxito");
+				return "redirect:/home";
 			}
 			return "redirect:/profesores/listProfesores";
 	}
