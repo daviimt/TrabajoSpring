@@ -45,7 +45,8 @@ public class CursoController {
 		if (cursoModel.getIdCurso() == 0) {
 			cursoService.addCurso(cursoModel);
 			flash.addFlashAttribute("success", "Curso insertado con éxito");
-		} else {cursoService.updateCurso(cursoModel);
+		} else {
+			cursoService.updateCurso(cursoModel);
 			flash.addFlashAttribute("success", "Curso modificado con éxito");
 		}
 		return "redirect:/cursos/listCursos";
