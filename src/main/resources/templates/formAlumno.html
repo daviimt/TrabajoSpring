@@ -29,7 +29,9 @@
 				<input type="hidden" th:field="*{password}" class="form-control" id="password" placeholder="Introduce tu clave" minlength="8" required>
 			<div class="form-group">
 				<label for="foto">Foto:</label> 
-				<input type="file" th:field="*{foto}" class="form-control" id="foto" placeholder="Introduce tu foto" required>
+				<a th:text="*{foto}"></a>
+				<br><br>
+				<input type="file" th:field="*{foto}" value="*{foto}"class="form-control" id="foto" placeholder="Introduce tu foto">
 			</div>
 			<br>
 			<input type="submit" class="btn btn-primary">

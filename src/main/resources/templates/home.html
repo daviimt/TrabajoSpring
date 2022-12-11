@@ -7,14 +7,14 @@
 
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-<title>Inicio</title>
+<title>Gesti&oacute;n cursos</title>
 </head>
 <body>
 	<div th:replace="fragments :: header"></div>
 	<br>
 	<div style="text-align:center;width: 500px;margin: auto;">
     <header>
-        <h1>Gestion de Cursos Grupo 1</h1>
+        <h1>Gesti&oacute;n de Cursos Grupo 1</h1>
     </header>
     <section layout:fragment="custom-content">
     	<p>Marta Rond&aacute;n Rodr&iacute;guez</p>
@@ -23,14 +23,14 @@
     </section>
 
     
-   <div class="alert alert-success" th:if="${success != null}"
-						th:text="${success}"></div>
-					<div class="alert alert-danger" th:if="${error != null}"
-						th:text="${error}"></div>
-					<div class="alert alert-warning" th:if="${warning != null}"
-						th:text="${warning}"></div>
-					<div class="alert alert-info" th:if="${info != null}"
-						th:text="${info}"></div>
+    <div class="alert alert-success" th:if="${success != null}"
+		th:text="${success}"></div>
+	<div class="alert alert-danger" th:if="${error != null}"
+		th:text="${error}"></div>
+	<div class="alert alert-warning" th:if="${warning != null}"
+		th:text="${warning}"></div>
+	<div class="alert alert-info" th:if="${info != null}"
+		th:text="${info}"></div>
 	</div>
 </body>
 </html>

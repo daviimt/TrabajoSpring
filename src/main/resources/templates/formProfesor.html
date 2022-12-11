@@ -43,10 +43,9 @@
 		<div class="form-group" th:if="*{idProfesor!=0}" >
 			<input type="hidden" class="form-control" th:field="*{password}" placeholder="Contrase&ntilde;a" id="password" minlength="8" required/>
 		</div>
-	
-		<br><br>
+		<br>
 		<input type="submit" class="btn btn-primary">
-		<a th:href="@{/home}">
+		<a th:href="@{/profesores/}">
 		<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
 </form>
