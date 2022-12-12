@@ -53,7 +53,7 @@ public class ProfesorController {
 				Usuario userExist=usuarioService.registrar(user);
 				if(userExist != null) {
 					profesorService.addProfesor(profesorModel);
-					flash.addFlashAttribute("success","User registered successfully");
+					flash.addFlashAttribute("success","Profesor creado con éxito");
 				}else {
 					return "redirect:/profesores/formProfesor?error";
 				}

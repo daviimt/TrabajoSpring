@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.Profesor;
 import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.ProfesorRepository;
+import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.ProfesorService;
 
 @Service("profesorService")
@@ -19,6 +20,10 @@ public class ProfesorServiceImpl implements ProfesorService{
 	@Autowired
 	@Qualifier("profesorRepository")
 	private ProfesorRepository profesorRepository;
+	
+	@Autowired
+	@Qualifier("usuarioService")
+	private UsuarioService usuarioService;
 
 	@Override
 	public List<ProfesorModel> listAllProfesores() {
@@ -27,6 +32,7 @@ public class ProfesorServiceImpl implements ProfesorService{
 
 	@Override
 	public Profesor addProfesor(ProfesorModel profesorModel) {
+		profesorModel.setPassword(usuarioService.passwordEncoder().encode(profesorModel.getPassword()));
 		return profesorRepository.save(transform(profesorModel));
 	}
 
