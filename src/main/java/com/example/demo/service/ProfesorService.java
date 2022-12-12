@@ -14,5 +14,5 @@ public interface ProfesorService {
 	public abstract Profesor transform(ProfesorModel profModel);
 	public abstract ProfesorModel transform(Profesor profesor);
 	public abstract ProfesorModel findProfesor(String email); 
-	public abstract ProfesorModel findProfesor(int id); 
+	public abstract ProfesorModel findProfesor(Integer id); 
 }

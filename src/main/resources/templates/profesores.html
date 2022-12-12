@@ -24,7 +24,7 @@
 					<th th:text=${profesor.apellidos}></th>
 					<th th:text=${profesor.email}></th>
 					<th>
-					<a th:href="@{/profesores/formProfesor/} + ${profesor.email}">
+					<a th:href="@{/profesores/formProfesor/} + ${profesor.id}">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
 					</a> 
 					<a th:href="@{/profesores/deleteProfesor/} + ${profesor.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');" >

@@ -78,9 +78,9 @@ public class AlumnoController {
 		}
 	}
 	
-	@GetMapping("/formAlumno/{email}")
-	public String formCurso(@PathVariable(name = "email", required = false) String email, Model model) {
-			model.addAttribute("alumno", alumnoService.findStudent(email));
+	@GetMapping("/formAlumno/{id}")
+	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
+			model.addAttribute("alumno", alumnoService.findStudent(id));
 		return FORM_VIEW;
 	}
 	
