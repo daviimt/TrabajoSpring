@@ -18,6 +18,10 @@ public class AlumnoServiceImpl implements AlumnoService{
 	@Qualifier("alumnoRepository")
 	private AlumnoRepository alumnoRepository;
 	
+	@Autowired
+	@Qualifier("usuarioService")
+	private UsuarioService usuarioService;
+	
 	@Override
 	public List<AlumnoModel> ListAllAlumnos() {
 		return alumnoRepository.findAll().stream()
@@ -26,6 +30,7 @@ public class AlumnoServiceImpl implements AlumnoService{
 
 	@Override
 	public Alumno addAlumno(AlumnoModel alumnoModel) {
+		alumnoModel.setPassword(usuarioService.passwordEncoder().encode(alumnoModel.getPassword()));
 		return alumnoRepository.save(transform(alumnoModel));
 	}
 
