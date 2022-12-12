@@ -28,12 +28,6 @@
 				<input type="text" readonly="readonly" th:field="*{email}" class="form-control" id="email" placeholder="Introduce tu email" pattern="([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+" required>
 			</div>
 				<input type="hidden" th:field="*{password}" class="form-control" id="password" placeholder="Introduce tu clave" minlength="8" required>
-			<div class="form-group">
-				<label for="foto">Foto:</label> 
-				<a th:text="*{foto}"></a>
-				<br><br>
-				<input type="file" th:field="*{foto}" value="*{foto}"class="form-control" id="foto" placeholder="Introduce tu foto">
-			</div>
 			<br>
 			<input type="submit" class="btn btn-primary">
 

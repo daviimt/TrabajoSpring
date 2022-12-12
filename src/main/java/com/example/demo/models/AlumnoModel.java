@@ -7,19 +7,16 @@ public class AlumnoModel {
 	private String apellidos;
 	private String email;
 	private String password;
-	private String foto;
 	public AlumnoModel() {
 		super();
 	}
-	public AlumnoModel(int idAlumno, String nombre, String apellidos, String email, String password,
-			String foto) {
+	public AlumnoModel(int idAlumno, String nombre, String apellidos, String email, String password) {
 		super();
 		this.idAlumno = idAlumno;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
-		this.foto = foto;
 	}
 	public int getIdAlumno() {
 		return idAlumno;
@@ -52,16 +49,10 @@ public class AlumnoModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFoto() {
-		return foto;
-	}
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
 	@Override
 	public String toString() {
 		return "AlumnoModel [idAlumno=" + idAlumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", password=" + password + ", foto=" + foto + "]";
+				+ email + ", password=" + password + "]";
 	}
 	
 	

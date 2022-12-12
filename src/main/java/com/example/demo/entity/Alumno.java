@@ -18,7 +18,6 @@ public class Alumno {
 	private String apellidos;
 	private String email;
 	private String password;
-	private String foto;
 	
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="alumno")
 	private List<Matricula> matriculaList;
@@ -29,15 +28,13 @@ public class Alumno {
 	public Alumno() {
 		super();
 	}
-	public Alumno(int idAlumno, String nombre, String apellidos, String email, String password,
-			String foto) {
+	public Alumno(int idAlumno, String nombre, String apellidos, String email, String password) {
 		super();
 		this.idAlumno = idAlumno;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
-		this.foto = foto;
 	}
 	public int getIdAlumno() {
 		return idAlumno;
@@ -69,15 +66,10 @@ public class Alumno {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFoto() {
-		return foto;
-	}
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
+
 	@Override
 	public String toString() {
 		return "Alumnos [idAlumno=" + idAlumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", password=" + password + ", foto=" + foto + "]";
+				+ ", password=" + password + "]";
 	}
 }
