@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Matricula {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idMatricula;
+	private int id;
 	private int valoracion;
 
 	@ManyToOne
@@ -26,20 +26,20 @@ public class Matricula {
 		super();
 	}
 
-	public Matricula(int idMatricula, int valoracion, Curso curso, Alumno alumno) {
+	public Matricula(int id, int valoracion, Curso curso, Alumno alumno) {
 		super();
-		this.idMatricula = idMatricula;
+		this.id = id;
 		this.valoracion = valoracion;
 		this.curso = curso;
 		this.alumno = alumno;
 	}
 
-	public int getIdMatricula() {
-		return idMatricula;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdMatricula(int idMatricula) {
-		this.idMatricula = idMatricula;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getValoracion() {
@@ -68,8 +68,8 @@ public class Matricula {
 
 	@Override
 	public String toString() {
-		return "Matricula [idMatricula=" + idMatricula + ", valoracion=" + valoracion + ", curso=" + curso + ", alumno="
-				+ alumno + "]";
+		return "Matricula [id=" + id + ", valoracion=" + valoracion + ", curso=" + curso + ", alumno=" + alumno + "]";
 	}
-
+	
+	
 }

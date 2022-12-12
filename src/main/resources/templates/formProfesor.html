@@ -14,9 +14,9 @@
 	<br>
 <form th:action="@{/profesores/addProfesor/}" th:object="${profesor}" method="post" style="text-align:center;width: 500px;margin: auto;">
 		
-		<h1 th:text="${profesor.idProfesor != 0} ? 'Editar Profesor' : 'Nuevo Profesor'" >Nuevo Profesor</h1>
+		<h1 th:text="${profesor.id != 0} ? 'Editar Profesor' : 'Nuevo Profesor'" >Nuevo Profesor</h1>
 		
-		<input type="hidden" th:field="*{idProfesor}" id="idProfesor">
+		<input type="hidden" th:field="*{id}" id="id">
 		<div class="form-group">
 		<label>Nombre: </label>
 		<input type="text" class="form-control" th:field="*{nombre}" placeholder="Nombre" id="nombre" required/>
@@ -27,21 +27,21 @@
 		<input type="text" class="form-control" th:field="*{apellidos}" placeholder="Apellidos" id="apellidos" required/>
 		</div>
 		<br>
-		<div class="form-group" th:if="*{idProfesor!=0}" >
+		<div class="form-group" th:if="*{id!=0}" >
 			<label>Email: </label>
 			<input type="email" readonly="readonly" class="form-control" th:field="*{email}" placeholder="Correo electr&oacute;nico"  id="email" pattern="([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+" required/>
 		</div>
-		<div class="form-group" th:if="*{idProfesor==0}" >
+		<div class="form-group" th:if="*{id==0}" >
 			<label>Email: </label>
 			<input type="email" class="form-control" th:field="*{email}" placeholder="Correo electr&oacute;nico"  id="email" pattern="([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+" required/>
 			<div th:if="${error!=null}" class="alert alert-danger">Correo existente</div>
 		</div>
 		<br>
-		<div class="form-group" th:if="*{idProfesor==0}" >
+		<div class="form-group" th:if="*{id==0}" >
 			<label>Contrase&ntilde;a: </label>
 			<input type="password" class="form-control" th:field="*{password}" placeholder="Contrase&ntilde;a"  id="password" minlength="8" required/>
 		</div>
-		<div class="form-group" th:if="*{idProfesor!=0}" >
+		<div class="form-group" th:if="*{id!=0}" >
 			<input type="hidden" class="form-control" th:field="*{password}" placeholder="Contrase&ntilde;a" id="password" minlength="8" required/>
 		</div>
 		<br>

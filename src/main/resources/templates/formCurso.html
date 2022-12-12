@@ -11,9 +11,9 @@
 	<br>
 	<form th:action="@{/cursos/addCurso/}" th:object="${curso}" method="post" style="text-align:center;width: 500px;margin: auto;">
 		
-		<h1 th:text="${curso.idCurso != 0} ? 'Editar Curso' : 'Nuevo Curso'" >Nuevo Curso</h1>
+		<h1 th:text="${curso.id != 0} ? 'Editar Curso' : 'Nuevo Curso'" >Nuevo Curso</h1>
 		
-		<input type="hidden" th:field="*{idCurso}" id="idCurso">
+		<input type="hidden" th:field="*{id}" id="id">
 		<div class="form-group">
 		<label for="nombre">Nombre</label> 
 		<input type="text" th:field="*{nombre}"
@@ -33,9 +33,9 @@
 		
 		<div class="form-group">
 			<label for= "idProfesor">Id profesor</label>
-			<select class="form-control selectpicker" th:field="*{idProfesor}" id="idProfesor">
+			<select class="form-control selectpicker" th:field="*{idProfesor}" id="id">
 				<option th:each="profesor : ${profesores}"
-						th:value="${profesor.idProfesor}"
+						th:value="${profesor.id}"
 						th:text="${profesor.email}">
 				</option>
 			</select>
@@ -57,8 +57,6 @@
 		<a th:href="@{/cursos/listCursos}">
 		<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
-
-
 	</form>
 	<br><br>
 </body>

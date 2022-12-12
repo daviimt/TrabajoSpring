@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Noticia {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idNoticias;
+	private int id;
 	private String titulo;
 	private String descripcion;
 	private String imagen;
@@ -24,21 +24,21 @@ public class Noticia {
 		super();
 	}
 
-	public Noticia(int idNoticias, String titulo, String descripcion, String imagen, Administrador administrador) {
+	public Noticia(int id, String titulo, String descripcion, String imagen, Administrador administrador) {
 		super();
-		this.idNoticias = idNoticias;
+		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
 		this.administrador = administrador;
 	}
 
-	public int getIdNoticias() {
-		return idNoticias;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdNoticias(int idNoticias) {
-		this.idNoticias = idNoticias;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitulo() {
@@ -75,13 +75,8 @@ public class Noticia {
 
 	@Override
 	public String toString() {
-		return "Noticia [idNoticias=" + idNoticias + ", titulo=" + titulo + ", descripcion=" + descripcion + ", imagen="
-				+ imagen + ", administrador=" + administrador + "]";
+		return "Noticia [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", imagen=" + imagen
+				+ ", administrador=" + administrador + "]";
 	}
-
-	
-	
-	
-	
 	
 }

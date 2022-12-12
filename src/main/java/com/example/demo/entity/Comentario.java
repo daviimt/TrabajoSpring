@@ -9,9 +9,10 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Comentario {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idComentarios;
+	private int id;
 	private String comentario;
 	
 	@ManyToOne
@@ -22,66 +23,53 @@ public class Comentario {
 	@JoinColumn(name="alumnoId")
 	private Alumno alumno;
 
-	
 	public Comentario() {
 		super();
 	}
 
-
-	public Comentario(int idComentarios, String comentario, Curso curso, Alumno alumno) {
+	public Comentario(int id, String comentario, Curso curso, Alumno alumno) {
 		super();
-		this.idComentarios = idComentarios;
+		this.id = id;
 		this.comentario = comentario;
 		this.curso = curso;
 		this.alumno = alumno;
 	}
-
-
-	public int getIdComentarios() {
-		return idComentarios;
+	public int getId() {
+		return id;
 	}
 
-
-	public void setIdComentarios(int idComentarios) {
-		this.idComentarios = idComentarios;
+	public void setId(int id) {
+		this.id = id;
 	}
-
 
 	public String getComentario() {
 		return comentario;
 	}
 
-
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-
 
 	public Curso getCurso() {
 		return curso;
 	}
 
-
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
-
 
 	public Alumno getAlumno() {
 		return alumno;
 	}
 
-
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Comentario [idComentarios=" + idComentarios + ", comentario=" + comentario + ", curso=" + curso
-				+ ", alumno=" + alumno + "]";
+		return "Comentario [id=" + id + ", comentario=" + comentario + ", curso=" + curso + ", alumno=" + alumno + "]";
 	}
-	
-	
+
+
 }

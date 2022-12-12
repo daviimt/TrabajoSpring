@@ -42,7 +42,7 @@ public class CursoController {
 	@PostMapping("/addCurso")
 	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, 
 			RedirectAttributes flash) {
-		if (cursoModel.getIdCurso() == 0) {
+		if (cursoModel.getId() == 0) {
 			cursoService.addCurso(cursoModel);
 			flash.addFlashAttribute("success", "Curso insertado con éxito");
 		} else {
@@ -52,8 +52,8 @@ public class CursoController {
 		return "redirect:/cursos/listCursos";
 	}
 
-	@GetMapping(value = { "/formCurso", "/formCurso/{idCursos}" })
-	public String formCurso(@PathVariable(name = "idCursos", required = false) Integer id, Model model) {
+	@GetMapping(value = { "/formCurso", "/formCurso/{id}" })
+	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
 		model.addAttribute("profesores", profesorService.listAllProfesores());
 		if (id == null) {
 			model.addAttribute("curso", new CursoModel());
@@ -65,8 +65,8 @@ public class CursoController {
 	
 	
 	// Metodo de borrar
-	@GetMapping("/deleteCurso/{idCursos}")
-	public String deleteCurso(@PathVariable("idCursos") int id, RedirectAttributes flash) {
+	@GetMapping("/deleteCurso/{id}")
+	public String deleteCurso(@PathVariable("id") int id, RedirectAttributes flash) {
 		if (cursoService.removeCurso(id) == 0)
 			flash.addFlashAttribute("success", "Curso eliminado con éxito");
 		else

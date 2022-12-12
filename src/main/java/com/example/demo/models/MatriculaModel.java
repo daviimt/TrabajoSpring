@@ -2,7 +2,7 @@ package com.example.demo.models;
 
 public class MatriculaModel {
 	
-	private int idMatricula;
+	private int id;
 	private int idAlumno;
 	private int idCurso;
 	private int valoracion;
@@ -10,41 +10,51 @@ public class MatriculaModel {
 	public MatriculaModel() {
 		super();
 	}
-	public MatriculaModel(int idMatricula, int idAlumno, int idCurso, int valoracion) {
+
+	public MatriculaModel(int id, int idAlumno, int idCurso, int valoracion) {
 		super();
-		this.idMatricula = idMatricula;
+		this.id = id;
 		this.idAlumno = idAlumno;
 		this.idCurso = idCurso;
 		this.valoracion = valoracion;
 	}
-	public int getIdMatriculas() {
-		return idMatricula;
+
+	public int getId() {
+		return id;
 	}
-	public void setIdMatriculas(int idMatricula) {
-		this.idMatricula = idMatricula;
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
 	public int getIdAlumno() {
 		return idAlumno;
 	}
+
 	public void setIdAlumno(int idAlumno) {
 		this.idAlumno = idAlumno;
 	}
+
 	public int getIdCurso() {
 		return idCurso;
 	}
+
 	public void setIdCurso(int idCurso) {
 		this.idCurso = idCurso;
 	}
+
 	public int getValoracion() {
 		return valoracion;
 	}
+
 	public void setValoracion(int valoracion) {
 		this.valoracion = valoracion;
 	}
+
 	@Override
 	public String toString() {
-		return "Matriculas [idMatricula=" + idMatricula + ", idAlumno=" + idAlumno + ", idCurso=" + idCurso
-				+ ", valoracion=" + valoracion + "]";
+		return "MatriculaModel [id=" + id + ", idAlumno=" + idAlumno + ", idCurso=" + idCurso + ", valoracion="
+				+ valoracion + "]";
 	}
 	
 }

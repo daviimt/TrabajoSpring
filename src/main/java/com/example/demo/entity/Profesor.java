@@ -14,7 +14,7 @@ public class Profesor {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idProfesor;
+	private int id;
 	private String nombre;
 	private String apellidos;
 	private String email;
@@ -26,37 +26,45 @@ public class Profesor {
 	public Profesor() {
 		super();
 	}
-	public Profesor(int id, String nombre, String apellidos, String email, String password) {
+
+	public Profesor(int id, String nombre, String apellidos, String email, String password, List<Curso> cursosList) {
 		super();
-		this.idProfesor = id;
+		this.id = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
+		this.cursosList = cursosList;
 	}
 
-	public int getIdProfesor() {
-		return idProfesor;
+	public int getId() {
+		return id;
 	}
-	public void setIdProfesor(int idProfesor) {
-		this.idProfesor = idProfesor;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellidos() {
 		return apellidos;
 	}
+
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -64,21 +72,23 @@ public class Profesor {
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public List<Curso> getCursosList() {
 		return cursosList;
 	}
+
 	public void setCursosList(List<Curso> cursosList) {
 		this.cursosList = cursosList;
 	}
+
 	@Override
 	public String toString() {
-		return "Profesor [idProfesor=" + idProfesor + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", password=" + password + ", cursosList=" + cursosList + "]";
+		return "Profesor [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
+				+ ", password=" + password + ", cursosList=" + cursosList + "]";
 	}
-
-	
 	
 }

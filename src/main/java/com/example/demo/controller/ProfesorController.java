@@ -45,7 +45,7 @@ public class ProfesorController {
 	@PostMapping("/addProfesor")
 	public String addProfesor(@ModelAttribute("profesor") ProfesorModel profesorModel,
 			 RedirectAttributes flash) {
-			if(profesorModel.getIdProfesor()==0) {
+			if(profesorModel.getId()==0) {
 				Usuario user = new Usuario();
 				user.setUsername(profesorModel.getEmail());
 				user.setPassword(profesorModel.getPassword());
@@ -77,8 +77,8 @@ public class ProfesorController {
 	}
 
 	//Metodo de borrar 
-	@GetMapping("/deleteProfesor/{idProfesor}")
-	public String deleteProfesor(@PathVariable("idProfesor")int id, RedirectAttributes flash) {
+	@GetMapping("/deleteProfesor/{id}")
+	public String deleteProfesor(@PathVariable("id")int id, RedirectAttributes flash) {
 		ProfesorModel p = profesorService.findProfesor(id);
 		if(profesorService.removeProfesor(id)==0) {
 			try {

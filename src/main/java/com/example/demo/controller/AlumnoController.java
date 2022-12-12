@@ -49,8 +49,8 @@ public class AlumnoController {
 	}
 
 	// Metodo para borrar
-	@GetMapping("/deleteAlumno/{idAlumno}")
-	public String removeCurso(@PathVariable("idAlumno") int id, RedirectAttributes flash) {
+	@GetMapping("/deleteAlumno/{id}")
+	public String removeCurso(@PathVariable("id") int id, RedirectAttributes flash) {
 		AlumnoModel a = alumnoService.findStudent(id);
 		if (alumnoService.removeAlumno(id) == 0) {
 			try {
