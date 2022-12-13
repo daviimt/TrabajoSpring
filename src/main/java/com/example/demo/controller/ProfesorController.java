@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.ProfesorModel;
+import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.ProfesorService;
 import com.example.demo.serviceImpl.UsuarioService;
 
@@ -33,6 +34,11 @@ public class ProfesorController {
 	@Autowired
 	@Qualifier("usuarioService")
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	@Qualifier("usuarioRepository")
+	private UsuarioRepository usuarioRepository;
+
 	
 	//Mostrar profesores
 	@GetMapping("/listProfesores")
@@ -75,6 +81,15 @@ public class ProfesorController {
 			model.addAttribute("profesor", profesorService.findProfesor(id));
 		}
 		return FORM_VIEW;
+	}
+	
+	
+	@GetMapping("/formProfesorEmail/{email}")
+	public String formProfesorEmail(@PathVariable(name = "email", required = false) String email, Model model) {
+			Usuario u=usuarioRepository.findByUsername(email);
+			int i=u.getId();
+			int id=i+1;
+		return "redirect:/profesores/formProfesor/"+id;
 	}
 
 	//Metodo de borrar 
