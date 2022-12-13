@@ -8,5 +8,5 @@ import com.example.demo.entity.Profesor;
 @Repository("profesorRepository")
 public interface ProfesorRepository extends JpaRepository<Profesor, Serializable>{
 	public abstract Profesor findByEmail(String email);
-	public abstract Profesor findByIdUsuario(int id);
+	public abstract Profesor findById(int id);
 }

@@ -64,6 +64,6 @@ public class ProfesorServiceImpl implements ProfesorService{
 	}
 	@Override
 	public ProfesorModel findProfesor(int id) {
-		return transform(profesorRepository.findByIdUsuario(id));
+		return transform(profesorRepository.findById(id));
 	}
 }
