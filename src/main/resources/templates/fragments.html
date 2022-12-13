@@ -41,7 +41,7 @@
         
         <li sec:authorize="hasAuthority('ROL_ALUMNO')" class="nav-item">
 
-        <a class="nav-link" th:href="@{/alumnos/formAlumno/}">
+        <a class="nav-link" th:href="@{/alumnos/formAlumn/}+${#authentication.name}">
 			Modificar datos
 
 		</a>

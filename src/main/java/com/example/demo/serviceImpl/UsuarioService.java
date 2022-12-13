@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.Usuario;
 import com.example.demo.repository.UsuarioRepository;
 
+import ch.qos.logback.core.helpers.Transform;
+
 @Service("usuarioService")
 public class UsuarioService implements UserDetailsService {
 
@@ -89,5 +91,9 @@ public class UsuarioService implements UserDetailsService {
 	
 	public List<Usuario> listAllUsuarios() {
 		return usuarioRepository.findAll().stream().collect(Collectors.toList());
+	}
+	public Usuario findUsuario(String email) {
+		
+		return usuarioRepository.findByUsername(email);
 	}
 }
