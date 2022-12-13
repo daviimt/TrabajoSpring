@@ -25,7 +25,7 @@ public class Profesor {
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="idProfesor")
 	private List<Curso> cursosList;
 	@OneToOne
-	@JoinColumn(name="idUser", referencedColumnName="id")
+	@JoinColumn(name="idUsuario", referencedColumnName="id")
 	private Usuario usuario;
 	
 	
@@ -33,7 +33,8 @@ public class Profesor {
 		super();
 	}
 
-	public Profesor(int id, String nombre, String apellidos, String email, String password, List<Curso> cursosList) {
+	public Profesor(int id, String nombre, String apellidos, String email, String password, List<Curso> cursosList,
+			Usuario usuario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -41,7 +42,10 @@ public class Profesor {
 		this.email = email;
 		this.password = password;
 		this.cursosList = cursosList;
+		this.usuario = usuario;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -90,8 +94,6 @@ public class Profesor {
 	public void setCursosList(List<Curso> cursosList) {
 		this.cursosList = cursosList;
 	}
-
-	
 
 	public Usuario getUsuario() {
 		return usuario;

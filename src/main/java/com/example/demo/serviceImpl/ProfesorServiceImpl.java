@@ -63,7 +63,7 @@ public class ProfesorServiceImpl implements ProfesorService{
 		return transform(profesorRepository.findByEmail(email));
 	}
 	@Override
-	public ProfesorModel findProfesor(Integer id) {
-		return transform(profesorRepository.findById(id).orElse(null));
+	public ProfesorModel findProfesor(int id) {
+		return transform(profesorRepository.findByIdUsuario(id));
 	}
 }

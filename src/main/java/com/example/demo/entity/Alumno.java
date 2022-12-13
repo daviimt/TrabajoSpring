@@ -30,15 +30,16 @@ public class Alumno {
 	private List<Comentario> comentarioList;
 	
 	@OneToOne
-	@JoinColumn(name="idUser", referencedColumnName="id")
+	@JoinColumn(name="idUsuario", referencedColumnName="id")
 	private Usuario usuario;
 	
 	public Alumno() {
 		super();
 	}
+	
 
 	public Alumno(int id, String nombre, String apellidos, String email, String password, List<Matricula> matriculaList,
-			List<Comentario> comentarioList) {
+			List<Comentario> comentarioList, Usuario usuario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -47,8 +48,9 @@ public class Alumno {
 		this.password = password;
 		this.matriculaList = matriculaList;
 		this.comentarioList = comentarioList;
+		this.usuario = usuario;
 	}
-	
+
 
 	public int getId() {
 		return id;

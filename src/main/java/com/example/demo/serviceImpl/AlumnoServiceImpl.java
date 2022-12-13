@@ -63,7 +63,7 @@ public class AlumnoServiceImpl implements AlumnoService{
 	}
 	
 	@Override
-	public AlumnoModel findStudent(Integer id) {
-		return transform(alumnoRepository.findById(id).orElse(null));
+	public AlumnoModel findStudent(int id) {
+		return transform(alumnoRepository.findByIdUsuario(id));
 	}
 }

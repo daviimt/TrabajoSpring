@@ -14,7 +14,7 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private int id;
 
 	@Column(name = "username", unique = true, nullable = false)
 	private String username;
@@ -31,7 +31,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(long id, String username, @Size(max = 100) String password, boolean enabled, String role) {
+	public Usuario(int id, String username, @Size(max = 100) String password, boolean enabled, String role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -40,11 +40,11 @@ public class Usuario {
 		this.role = role;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.entity.Usuario;
 import com.example.demo.models.AlumnoModel;
+import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.AlumnoService;
 import com.example.demo.service.CursoService;
 import com.example.demo.serviceImpl.UsuarioService;
@@ -39,6 +41,10 @@ public class AlumnoController {
 	@Autowired
 	@Qualifier("usuarioService")
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	@Qualifier("usuarioRepository")
+	private UsuarioRepository usuarioRepository;
 
 	// Metodo para listar alumnos
 	@GetMapping("/listAlumnos")
@@ -79,11 +85,18 @@ public class AlumnoController {
 	}
 	
 	@GetMapping("/formAlumno/{id}")
-	public String formAlumno(@PathVariable(name = "id", required = false) Integer id, Model model) {
+	public String formAlumno(@PathVariable(name = "id", required = false) int id, Model model) {
 			model.addAttribute("alumno", alumnoService.findStudent(id));
 		return FORM_VIEW;
 	}
 	
+	@GetMapping("/formAlumnoEmail/{email}")
+	public String formAlumnoEmail(@PathVariable(name = "email", required = false) String email, Model model) {
+			Usuario u=usuarioRepository.findByUsername(email);
+			int i=u.getId();
+			int id=i+1;
+		return "redirect:/alumnos/formAlumno/"+id;
+	}
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {
