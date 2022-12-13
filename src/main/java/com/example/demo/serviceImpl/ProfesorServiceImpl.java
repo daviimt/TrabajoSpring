@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.Profesor;
 import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.ProfesorRepository;
-import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.ProfesorService;
 
 @Service("profesorService")

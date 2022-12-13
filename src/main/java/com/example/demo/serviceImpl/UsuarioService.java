@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Usuario;
-import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.UsuarioRepository;
 
 @Service("usuarioService")
