@@ -52,7 +52,11 @@
 			Modificar datos
 		</a>
         </li>
-
+ 		<li sec:authorize="hasAuthority('ROL_PROFESOR')" class="nav-item">
+        <a class="nav-link" th:href="@{/cursos/listCursos/}">
+			Modificar cursos
+		</a>
+        </li>
         </ul>
         <ul class="navbar-nav me auto">
         <li sec:authorize="!isAuthenticated()" class="nav-item">

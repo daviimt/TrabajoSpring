@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Profesor {
@@ -22,6 +24,10 @@ public class Profesor {
 	
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="idProfesor")
 	private List<Curso> cursosList;
+	@OneToOne
+	@JoinColumn(name="idUser", referencedColumnName="id")
+	private Usuario usuario;
+	
 	
 	public Profesor() {
 		super();
@@ -85,10 +91,18 @@ public class Profesor {
 		this.cursosList = cursosList;
 	}
 
+	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	@Override
 	public String toString() {
 		return "Profesor [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
 				+ ", password=" + password + ", cursosList=" + cursosList + "]";
 	}
-	
 }

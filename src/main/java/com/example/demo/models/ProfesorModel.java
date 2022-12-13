@@ -1,23 +1,27 @@
 package com.example.demo.models;
 
+import com.example.demo.entity.Usuario;
+
 public class ProfesorModel {
 	private int id;
 	private String nombre;
 	private String apellidos;
 	private String email;
 	private String password;
+	private Usuario usuario;
 	
 	public ProfesorModel() {
 		super();
 	}
 
-	public ProfesorModel(int id, String nombre, String apellidos, String email, String password) {
+	public ProfesorModel(int id, String nombre, String apellidos, String email, String password, Usuario usuario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
+		this.usuario = usuario;
 	}
 
 	public int getId() {
@@ -60,10 +64,19 @@ public class ProfesorModel {
 		this.password = password;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public String toString() {
 		return "ProfesorModel [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", usuario=" + usuario + "]";
 	}
+
 	
 }

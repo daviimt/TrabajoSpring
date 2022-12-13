@@ -58,4 +58,8 @@ public class CursoServiceImpl implements CursoService{
 		return modelMapper.map(curso, CursoModel.class);
 	}
 
+	public List<Curso> findByIdProfesor(int id) {
+		List<Curso> c = cursoRepository.findByIdProfesor(id);
+		return c;
+	}
 }

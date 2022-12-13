@@ -7,13 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Alumno {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	private int id;
 	private String nombre;
 	private String apellidos;
@@ -25,7 +28,11 @@ public class Alumno {
 	
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="alumno")
 	private List<Comentario> comentarioList;
-
+	
+	@OneToOne
+	@JoinColumn(name="idUser", referencedColumnName="id")
+	private Usuario usuario;
+	
 	public Alumno() {
 		super();
 	}
@@ -42,12 +49,6 @@ public class Alumno {
 		this.comentarioList = comentarioList;
 	}
 	
-	@Override
-	public String toString() {
-		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", password=" + password + ", matriculaList=" + matriculaList + ", comentarioList=" + comentarioList
-				+ "]";
-	}
 
 	public int getId() {
 		return id;
@@ -105,7 +106,20 @@ public class Alumno {
 		this.comentarioList = comentarioList;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	@Override
+	public String toString() {
+		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
+				+ ", password=" + password + ", matriculaList=" + matriculaList + ", comentarioList=" + comentarioList
+				+ "]";
+	}
+
 	
 }

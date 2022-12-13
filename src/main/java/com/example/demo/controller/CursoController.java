@@ -32,10 +32,13 @@ public class CursoController {
 	private ProfesorService profesorService;
 
 //	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/listCursos")
-	public ModelAndView listCursos() {
+	@GetMapping(value={"/listCursos", "/listCursos/{id}"})
+	public ModelAndView listCursos(@PathVariable(name = "id", required = false) Integer id) {
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
-		mav.addObject("cursos", cursoService.ListAllCursos());
+		if(id==null)
+			mav.addObject("cursos", cursoService.ListAllCursos());
+		else
+			mav.addObject("cursos", cursoService.findByIdProfesor(id.intValue()));
 		return mav;
 	}
 

@@ -66,6 +66,7 @@ public class LoginController {
 		user.setRole("ROL_ALUMNO");
 		Usuario userExist=usuarioService.registrar(user);
 		if(userExist != null) {
+			alumno.setUsuario(user);
 			alumnoService.addAlumno(alumnoService.transform(alumno));
 			flash.addFlashAttribute("success","User registered successfully");
 			return "redirect:/auth/login";

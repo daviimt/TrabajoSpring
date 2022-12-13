@@ -52,6 +52,7 @@ public class ProfesorController {
 				user.setRole("ROL_PROFESOR");
 				Usuario userExist=usuarioService.registrar(user);
 				if(userExist != null) {
+					profesorModel.setUsuario(user);
 					profesorService.addProfesor(profesorModel);
 					flash.addFlashAttribute("success","Profesor creado con éxito");
 				}else {
