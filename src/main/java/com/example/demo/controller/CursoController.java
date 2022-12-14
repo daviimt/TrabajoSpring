@@ -59,6 +59,7 @@ public class CursoController {
 	@GetMapping(value={"/listCursosProfesor", "/listCursosProfesor/{id}"})
 	public ModelAndView listCursosProfesor(@PathVariable(name = "id", required = false) Integer id) {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+	
 		if(id==null)
 			mav.addObject("cursos", cursoService.ListAllCursos());
 		else {
@@ -146,11 +147,14 @@ public class CursoController {
 	
 	@GetMapping("/deleteCursoProfesor/{id}")
 	public String deleteCursoProfesor(@PathVariable("id") int id, RedirectAttributes flash) {
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
+		
 		if (cursoService.removeCurso(id) == 0)
 			flash.addFlashAttribute("success", "Curso eliminado con éxito");
 		else
 			flash.addFlashAttribute("error", "No se pudo eliminar el curso");
-		return "redirect:/cursos/listCursosProfesor";
+		return "redirect:/cursos/listCursosProfesor/"+(u.getId()+1);
 	}
 	
 	// Metodo redirect
