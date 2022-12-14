@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Curso;
 import com.example.demo.models.CursoModel;
+import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.CursoRepository;
+import com.example.demo.repository.ProfesorRepository;
 import com.example.demo.service.CursoService;
 @Service("cursoService")
 public class CursoServiceImpl implements CursoService{
@@ -58,8 +60,4 @@ public class CursoServiceImpl implements CursoService{
 		return modelMapper.map(curso, CursoModel.class);
 	}
 
-	public List<Curso> findCursoByIdProfesor(int id) {
-		List<Curso> c = cursoRepository.findByIdProfesor(id);
-		return c;
-	}
 }

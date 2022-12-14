@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Profesor;
+import com.example.demo.models.CursoModel;
 import com.example.demo.models.ProfesorModel;
+import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.ProfesorRepository;
 import com.example.demo.service.ProfesorService;
 
@@ -19,6 +21,10 @@ public class ProfesorServiceImpl implements ProfesorService{
 	@Autowired
 	@Qualifier("profesorRepository")
 	private ProfesorRepository profesorRepository;
+	
+	@Autowired
+	@Qualifier("cursoRepository")
+	private CursoRepository cursoRepository;
 	
 	@Autowired
 	@Qualifier("usuarioService")
@@ -65,5 +71,13 @@ public class ProfesorServiceImpl implements ProfesorService{
 	@Override
 	public ProfesorModel findProfesor(int id) {
 		return transform(profesorRepository.findById(id));
+	}
+	
+	public List<CursoModel> findCursosByIdProfesor(ProfesorModel profesor) {
+		ModelMapper modelMapper = new ModelMapper();
+		System.out.println(cursoRepository.findByIdProfesor(transform(profesor)).stream()
+				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList()));
+		return cursoRepository.findByIdProfesor(transform(profesor)).stream()
+				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 	}
 }

@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.entity.Profesor;
+import com.example.demo.models.CursoModel;
 import com.example.demo.models.ProfesorModel;
 
 public interface ProfesorService {
@@ -14,5 +15,7 @@ public interface ProfesorService {
 	public abstract Profesor transform(ProfesorModel profModel);
 	public abstract ProfesorModel transform(Profesor profesor);
 	public abstract ProfesorModel findProfesor(String email); 
-	public abstract ProfesorModel findProfesor(int id); 
+	public abstract ProfesorModel findProfesor(int id);
+	public abstract List<CursoModel> findCursosByIdProfesor(ProfesorModel profesor);
+	
 }

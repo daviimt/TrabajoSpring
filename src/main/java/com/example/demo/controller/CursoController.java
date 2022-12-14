@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.CursoModel;
+import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.CursoService;
 import com.example.demo.service.ProfesorService;
@@ -44,8 +45,11 @@ public class CursoController {
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
 		if(id==null)
 			mav.addObject("cursos", cursoService.ListAllCursos());
-		else
-			mav.addObject("cursos", cursoService.findCursoByIdProfesor((int)id));
+		else {
+			ProfesorModel profesor=profesorService.findProfesor(id);
+			System.out.println(profesor);
+			mav.addObject("cursos", profesorService.findCursosByIdProfesor(profesor));
+		}
 		return mav;
 	}
 
