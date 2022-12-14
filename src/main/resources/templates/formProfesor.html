@@ -46,7 +46,10 @@
 		</div>
 		<br>
 		<input type="submit" class="btn btn-primary">
-		<a th:href="@{/profesores/}">
+		<a sec:authorize="hasAuthority('ROL_ADMIN')" th:href="@{/profesores/}">
+		<button type="button" class="btn btn-primary">Regresar</button>
+		</a>
+		<a sec:authorize="hasAuthority('ROL_PROFESOR')" th:href="@{/home/}">
 		<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
 </form>

@@ -17,13 +17,12 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests((requests) -> requests
 				.antMatchers("/", "/home", "/auth/**", "/about/**", "/noticias", "/error/**", "/webjars/**", "/css/**", "/files/**", "/imgs/**", "/photos/**").permitAll()
-				.antMatchers("/cursos/listCursos", "/matricula/**").hasAnyAuthority("ROL_ADMIN")
+				.antMatchers("/cursos/**", "/matricula/**").hasAnyAuthority("ROL_ADMIN", "ROL_PROFESOR")
 				.antMatchers("/profesores/addProfesor","/profesores/formProfesor/**").hasAnyAuthority("ROL_ADMIN", "ROL_PROFESOR")
 				.antMatchers("/profesores/listProfesores","/profesores/deleteProfesor/**","/profesores/formProfesor/").hasAuthority("ROL_ADMIN")
 				.antMatchers("/alumnos/addAlumno","/alumnos/formAlumno/**").hasAnyAuthority("ROL_ADMIN", "ROL_ALUMNO")
 				.antMatchers("/alumnos/listAlumnos","/alumnos/deleteAlumno/**","/alumnos/formAlumno/").hasAuthority("ROL_ADMIN")
 				.antMatchers("/adminPage/**", "/noticias/**").hasAuthority("ROL_ADMIN")
-				.antMatchers("/cursos/listCursos/**").hasAuthority("ROL_PROFESOR")
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form

@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.entity.Usuario;
 import com.example.demo.models.CursoModel;
+import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.CursoService;
 import com.example.demo.service.ProfesorService;
 
@@ -30,6 +32,11 @@ public class CursoController {
 	@Autowired
 	@Qualifier("profesorService")
 	private ProfesorService profesorService;
+	
+	@Autowired
+	@Qualifier("usuarioRepository")
+	private UsuarioRepository usuarioRepository;
+
 
 //	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value={"/listCursos", "/listCursos/{id}"})
@@ -38,7 +45,7 @@ public class CursoController {
 		if(id==null)
 			mav.addObject("cursos", cursoService.ListAllCursos());
 		else
-			mav.addObject("cursos", cursoService.findByIdProfesor(id.intValue()));
+			mav.addObject("cursos", cursoService.findCursoByIdProfesor((int)id));
 		return mav;
 	}
 
@@ -57,6 +64,7 @@ public class CursoController {
 
 	@GetMapping(value = { "/formCurso", "/formCurso/{id}" })
 	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
+		
 		model.addAttribute("profesores", profesorService.listAllProfesores());
 		if (id == null) {
 			model.addAttribute("curso", new CursoModel());
@@ -66,6 +74,13 @@ public class CursoController {
 		return FORM_VIEW;
 	}
 	
+	@GetMapping("/listCursosEmail/{email}")
+	public String listCursoEmail(@PathVariable(name = "email", required = false) String email, Model model) {
+			Usuario u=usuarioRepository.findByUsername(email);
+			int i=u.getId();
+			int id=i+1;
+		return "redirect:/cursos/listCursos/"+id;
+	}
 	
 	// Metodo de borrar
 	@GetMapping("/deleteCurso/{id}")
