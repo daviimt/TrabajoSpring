@@ -1,19 +1,19 @@
-package com.example.demo;
+package com.example.demo.upload;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import com.example.demo.upload.StorageService;
-
 @SpringBootApplication
-public class TrabajoSpringApplication {
+@EnableConfigurationProperties(StorageProperties.class)
+public class UploadingFilesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TrabajoSpringApplication.class, args);
+		SpringApplication.run(UploadingFilesApplication.class, args);
 	}
-	
+
 	@Bean
 	CommandLineRunner init(StorageService storageService) {
 		return (args) -> {
