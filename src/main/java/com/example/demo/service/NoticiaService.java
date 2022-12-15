@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.entity.Noticia;
 import com.example.demo.models.NoticiaModel;
+import com.example.demo.models.ProfesorModel;
 
 public interface NoticiaService {
 
@@ -13,4 +14,5 @@ public interface NoticiaService {
 	public abstract Noticia updateNoticia(NoticiaModel noticiaModel);
 	public abstract Noticia transform(NoticiaModel noticiaModel);
 	public abstract NoticiaModel transform(Noticia noticia);
+	public abstract NoticiaModel findNoticia(int id);
 }
