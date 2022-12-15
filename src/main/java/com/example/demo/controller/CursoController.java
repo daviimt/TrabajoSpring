@@ -202,10 +202,33 @@ public class CursoController {
 			return "redirect:/cursos/listCursosProfesor";
 
 		} else if (option == 1) {
+			List<CursoModel> cursoSinEmpezar=new ArrayList();
+			for(CursoModel cur: curso) {
+				System.out.println(cur.getFechaFin());
+				String[]fechafin=cur.getFechaFin().split("-");
+				LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
+				if(fechaCurso.isAfter(fechaActual)) {
+					cursoSinEmpezar.add(cur);
+				}
+			}
+			
+			System.out.println(cursoSinEmpezar);
 			return "redirect:/cursos/listCursosProfesor";
 
 		} else {
-
+			List<CursoModel> cursosImpartiendose=new ArrayList();
+			for(CursoModel cur: curso) {
+				System.out.println(cur.getFechaFin());
+				String[]fechafin=cur.getFechaFin().split("-");
+				String[]fechainic=cur.getFechaInicio().split("-");
+				LocalDate fechaCursofin=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
+				LocalDate fechaCursoinic=LocalDate.of(Integer.parseInt(fechainic[0]), Integer.parseInt(fechainic[1]), Integer.parseInt(fechainic[2]));
+				if(fechaCursoinic.isBefore(fechaActual)&&fechaCursofin.isAfter(fechaActual)) {
+					cursosImpartiendose.add(cur);
+				}
+			}
+			
+			System.out.println(cursosImpartiendose);
 			return "redirect:/cursos/listCursosProfesor";
 		}
 
