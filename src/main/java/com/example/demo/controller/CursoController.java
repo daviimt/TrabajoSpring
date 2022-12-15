@@ -169,8 +169,8 @@ public class CursoController {
 		return new RedirectView("/cursos/listCursos");
 	}
 	
-	@GetMapping("/filtroCurso/{option}")
-	public String filtroCurso(@PathVariable("option") int option, RedirectAttributes flash) {
+	@GetMapping(value={"/filtroCurso/{option}"})
+	public ModelAndView filtroCurso(@PathVariable("option") int option, RedirectAttributes flash) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		ProfesorModel profesor = profesorService.findProfesor(u.getId()+1);
@@ -188,6 +188,7 @@ public class CursoController {
 		LocalDate fechaActual=LocalDate.of(annio, mes, dia);
 		
 		if (option == 0) {
+			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 			List<CursoModel> cursoAcabado=new ArrayList();
 			for(CursoModel cur: curso) {
 				System.out.println(cur.getFechaFin());
@@ -199,23 +200,27 @@ public class CursoController {
 			}
 			
 			System.out.println(cursoAcabado);
-			return "redirect:/cursos/listCursosProfesor";
+			mav.addObject("cursos", cursoAcabado);
+			return mav; 
 
 		} else if (option == 1) {
+			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 			List<CursoModel> cursoSinEmpezar=new ArrayList();
 			for(CursoModel cur: curso) {
 				System.out.println(cur.getFechaFin());
-				String[]fechafin=cur.getFechaFin().split("-");
-				LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
+				String[]fechaIni=cur.getFechaInicio().split("-");
+				LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechaIni[0]), Integer.parseInt(fechaIni[1]), Integer.parseInt(fechaIni[2]));
 				if(fechaCurso.isAfter(fechaActual)) {
 					cursoSinEmpezar.add(cur);
 				}
 			}
 			
 			System.out.println(cursoSinEmpezar);
-			return "redirect:/cursos/listCursosProfesor";
+			mav.addObject("cursos", cursoSinEmpezar);
+			return mav; 
 
 		} else {
+			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 			List<CursoModel> cursosImpartiendose=new ArrayList();
 			for(CursoModel cur: curso) {
 				System.out.println(cur.getFechaFin());
@@ -229,7 +234,8 @@ public class CursoController {
 			}
 			
 			System.out.println(cursosImpartiendose);
-			return "redirect:/cursos/listCursosProfesor";
+			mav.addObject("cursos", cursosImpartiendose);
+			return mav; 
 		}
 
 	}
