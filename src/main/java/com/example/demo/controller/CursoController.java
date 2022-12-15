@@ -1,5 +1,11 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -161,5 +167,47 @@ public class CursoController {
 	@GetMapping("/")
 	public RedirectView redirect() {
 		return new RedirectView("/cursos/listCursos");
+	}
+	
+	@GetMapping("/filtroCurso/{option}")
+	public String filtroCurso(@PathVariable("option") int option, RedirectAttributes flash) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		ProfesorModel profesor = profesorService.findProfesor(u.getId()+1);
+		List<CursoModel> curso = profesorService.findCursosByIdProfesor(profesor);
+		System.out.println("controller filtro curso");
+		System.out.println(curso);
+		Calendar c1 = Calendar.getInstance();
+		Calendar c = new GregorianCalendar();
+
+		int dia = c.get(Calendar.DATE);
+		int mes = (c.get(Calendar.MONTH)+1);
+		int annio = c.get(Calendar.YEAR);
+		System.out.println(dia+"/"+mes+"/"+annio);
+		
+		LocalDate fechaActual=LocalDate.of(annio, mes, dia);
+		
+		if (option == 0) {
+			List<CursoModel> cursoAcabado=new ArrayList();
+			for(CursoModel cur: curso) {
+				System.out.println(cur.getFechaFin());
+				String[]fechafin=cur.getFechaFin().split("-");
+				LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
+				if(fechaCurso.isBefore(fechaActual)) {
+					cursoAcabado.add(cur);
+				}
+			}
+			
+			System.out.println(cursoAcabado);
+			return "redirect:/cursos/listCursosProfesor";
+
+		} else if (option == 1) {
+			return "redirect:/cursos/listCursosProfesor";
+
+		} else {
+
+			return "redirect:/cursos/listCursosProfesor";
+		}
+
 	}
 }

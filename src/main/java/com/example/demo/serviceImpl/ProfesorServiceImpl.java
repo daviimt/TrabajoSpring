@@ -59,9 +59,9 @@ public class ProfesorServiceImpl implements ProfesorService{
 	}
 
 	@Override
-	public ProfesorModel transform(Profesor course) {
+	public ProfesorModel transform(Profesor profesor) {
 		ModelMapper modelMapper = new ModelMapper();
-		return modelMapper.map(course, ProfesorModel.class);
+		return modelMapper.map(profesor, ProfesorModel.class);
 	}
 
 	@Override
