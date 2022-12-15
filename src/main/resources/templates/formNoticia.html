@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<meta charset="UTF-8">
+<title>Formulario noticias</title>
+</head>
+<body>
+	<div th:replace="fragments :: header"></div>
+	<br>
+	<form th:action="@{/noticias/addNoticia/}" th:object="${noticia}" method="post" style="text-align:center;width: 500px;margin: auto;">
+		
+		<h1 th:text="${noticia.id != 0} ? 'Editar noticia' : 'Nueva noticia'" >Nueva noticia</h1>
+		
+		<input type="hidden" th:field="*{id}" id="id">
+		<div class="form-group">
+		<label for="titulo">Titulo</label> 
+		<input type="text" th:field="*{titulo}"
+				class="form-control" id="titulo" placeholder="Introduce el titulo" required>
+		</div>
+		<div class="form-group">
+			<label for="descripcion">Descripcion</label> <input type="text"
+				th:field="*{descripcion}" class="form-control" id="descripcion"
+				placeholder="Introduce la descripcion" required>
+		</div>
+
+		<div class="form-group">
+			<label for="imagen">Imagen</label> <input type="text" 
+				th:field="*{imagen}" class="form-control" id="imagen"
+				placeholder="Introduce la imagen" >
+		</div>
+		
+		<input type="hidden" th:field="*{usuarioId}" id="usuarioId">
+		
+		<br><br>
+		<input type="submit" class="btn btn-primary">
+		<a th:href="@{/noticias/listNoticias}">
+		<button type="button" class="btn btn-primary">Regresar</button>
+		</a>
+	</form>
+	<br><br>
+</body>
+</html>
