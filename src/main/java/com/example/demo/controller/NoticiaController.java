@@ -42,7 +42,7 @@ public class NoticiaController {
 	}
 	
 	//Metodo add / update noticias
-	@PostMapping("/addNoticias")
+	@PostMapping("/addNoticia")
 	public String addNoticias(@ModelAttribute("noticia") NoticiaModel noticiaModel,
 			 RedirectAttributes flash) {
 			if(noticiaModel.getId()==0) {
@@ -80,6 +80,6 @@ public class NoticiaController {
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {
-		return new RedirectView("/noticias");
+		return new RedirectView("/noticias/listNoticias");
 	}
 }
