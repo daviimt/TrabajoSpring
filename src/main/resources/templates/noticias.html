@@ -27,7 +27,7 @@
 				<a th:href="@{/noticias/formNoticia/} + ${noticia.id}">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
 				</a> 
-				<a th:href="@{/noticia/deleteNoticia/}+ ${noticia.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
+				<a th:href="@{/noticias/deleteNoticia/}+ ${noticia.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
 				</a>
 				

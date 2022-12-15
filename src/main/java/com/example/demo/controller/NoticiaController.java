@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,10 @@ public class NoticiaController {
 	@Qualifier("noticiaService")
 	private NoticiaService noticiaService;
 	
+	@Autowired
+	@Qualifier("usuarioRepository")
+	private UsuarioRepository usuarioRepository;
+	
 	//Mostrar noticias
 	@GetMapping("/listNoticias")
 	public ModelAndView listNoticias() {
@@ -45,14 +51,18 @@ public class NoticiaController {
 	@PostMapping("/addNoticia")
 	public String addNoticias(@ModelAttribute("noticia") NoticiaModel noticiaModel,
 			 RedirectAttributes flash) {
-			if(noticiaModel.getId()==0) {
-					noticiaService.addNoticia(noticiaModel);
-					flash.addFlashAttribute("success","Noticia creada con éxito");	
-			}else {
-				noticiaService.updateNoticia(noticiaModel);
-				flash.addFlashAttribute("success", "Noticia modificada con éxito");
-			}
-			return "redirect:/noticias/listNoticias";
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
+	
+		if(noticiaModel.getId()==0) {
+				noticiaModel.setUsuarioId(u.getId());
+				noticiaService.addNoticia(noticiaModel);
+				flash.addFlashAttribute("success","Noticia creada con éxito");	
+		}else {
+			noticiaService.updateNoticia(noticiaModel);
+			flash.addFlashAttribute("success", "Noticia modificada con éxito");
+		}
+		return "redirect:/noticias/listNoticias";
 	}
 	
 	//Formulario
@@ -67,7 +77,7 @@ public class NoticiaController {
 	}
 
 	//Metodo de borrar 
-	@GetMapping("/deleteNoticias/{id}")
+	@GetMapping("/deleteNoticia/{id}")
 	public String deleteNoticias(@PathVariable("id")int id, RedirectAttributes flash) {
 		if(noticiaService.removeNoticia(id)==0) {
 			flash.addFlashAttribute("success","Noticia eliminada con éxito");	
