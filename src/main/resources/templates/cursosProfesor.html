@@ -3,12 +3,28 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
 <meta charset="ISO-8859-1">
 <title>Lista de cursos</title>
 </head>
 <body>
 	<div th:replace="fragments :: header"></div>
+	<br>
+	<div style="text-align: center; width: 500px; margin: auto;">
+		<a th:href="@{/cursos/filtroCurso/0}">
+			<input type="checkbox" >Cursos acabados</button>
+		</a>
+	
+		<a th:href="@{/cursos/filtroCurso/1}">
+			<input type="radio" >Proximos cursos</button>
+		</a>
+		<a th:href="@{/cursos/filtroCurso/2}">
+			<input type="radio" >Cursos activos</button>
+		</a>
+		
+	</div>
+	<br>
 	<br>
 	<table class="table table-striped table-bordered">
 		<thead class="thead-light">
@@ -27,33 +43,32 @@
 				<th th:text=${curso.nivel}></th>
 				<th th:text=${curso.fechaInicio}></th>
 				<th th:text=${curso.fechaFin}></th>
-				<th>
-				<a th:href="@{/cursos/formCursoProfesor/} + ${curso.id}">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
-				</a> 
-				<a th:href="@{/cursos/deleteCursoProfesor/}+ ${curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
-				</a>
-				
-				</th>
+				<th><a th:href="@{/cursos/formCursoProfesor/} + ${curso.id}">
+						<button type="button" class="btn btn-default">
+							<i class="fa-solid fa-pen-to-square"></i>
+						</button>
+				</a> <a th:href="@{/cursos/deleteCursoProfesor/}+ ${curso.id}"
+					th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
+						<button type="button" class="btn btn-default">
+							<i class="fa-solid fa-trash" aria-hidden="true"></i>
+						</button>
+				</a></th>
 			</tr>
 		</tbody>
 	</table>
-<br>
+	<br>
 	<div class="alert alert-success" th:if="${success != null}"
-						th:text="${success}"></div>
-					<div class="alert alert-danger" th:if="${error != null}"
-						th:text="${error}"></div>
-					<div class="alert alert-warning" th:if="${warning != null}"
-						th:text="${warning}"></div>
-					<div class="alert alert-info" th:if="${info != null}"
-						th:text="${info}"></div>
+		th:text="${success}"></div>
+	<div class="alert alert-danger" th:if="${error != null}"
+		th:text="${error}"></div>
+	<div class="alert alert-warning" th:if="${warning != null}"
+		th:text="${warning}"></div>
+	<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
 
-	<div style="text-align:center;width: 500px;margin: auto;">
+	<div style="text-align: center; width: 500px; margin: auto;">
 		<a th:href="@{/cursos/formCursoProfesor/}">
 			<button type="button" class="btn btn-primary">Nuevo Curso</button>
-		</a>
-		<a th:href="@{/home}">
+		</a> <a th:href="@{/home}">
 			<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
 	</div>
