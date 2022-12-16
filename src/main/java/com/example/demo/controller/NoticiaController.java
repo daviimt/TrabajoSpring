@@ -1,28 +1,34 @@
 package com.example.demo.controller;
 
+
+
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.NoticiaModel;
-import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.NoticiaService;
-import com.example.demo.service.ProfesorService;
-import com.example.demo.serviceImpl.UsuarioService;
+import com.example.demo.upload.StorageService;
 
 @Controller
 @RequestMapping("/noticias")
@@ -39,6 +45,9 @@ public class NoticiaController {
 	@Qualifier("usuarioRepository")
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	@Qualifier("storageService")
+	private StorageService storageService;
 	//Mostrar noticias
 	@GetMapping("/listNoticias")
 	public ModelAndView listNoticias() {
@@ -49,20 +58,31 @@ public class NoticiaController {
 	
 	//Metodo add / update noticias
 	@PostMapping("/addNoticia")
-	public String addNoticias(@ModelAttribute("noticia") NoticiaModel noticiaModel,
-			 RedirectAttributes flash) {
+	public String addNoticias(@Valid @ModelAttribute("noticia") NoticiaModel noticiaModel,Model model,
+			 RedirectAttributes flash,BindingResult bindingResult,@RequestParam("file")MultipartFile file) {
+		
 		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
-	
-		if(noticiaModel.getId()==0) {
+		if(bindingResult.hasErrors()) {
+			
+			model.addAttribute("noticias",noticiaService.ListAllNoticias());
+			return FORM_VIEW;
+		}else {
+			String imagen=storageService.store(file,noticiaModel.getId());
+			noticiaModel.setImagen(MvcUriComponentsBuilder.fromMethodName(FileController.class, "serveFile", imagen).build().toUriString());
+			
+			if(noticiaModel.getId()==0) {
 				noticiaModel.setUsuarioId(u.getId());
 				noticiaService.addNoticia(noticiaModel);
 				flash.addFlashAttribute("success","Noticia creada con éxito");	
-		}else {
-			noticiaService.updateNoticia(noticiaModel);
-			flash.addFlashAttribute("success", "Noticia modificada con éxito");
+			}else {
+				noticiaService.updateNoticia(noticiaModel);
+				flash.addFlashAttribute("success", "Noticia modificada con éxito");
+			}
+			return "redirect:/noticias/listNoticias";
+		
 		}
-		return "redirect:/noticias/listNoticias";
+	
 	}
 	
 	//Formulario
@@ -92,4 +112,11 @@ public class NoticiaController {
 	public RedirectView redirect() {
 		return new RedirectView("/noticias/listNoticias");
 	}
+	
+//	@GetMapping("/files/{filename:.+}")
+//	@ResponseBody
+//	public ResponseEntity<Resource>serveFile(@PathVariable String filename){
+//		Resource file=storageService.loadAsResource(filename);
+//		return ResponseEntity.ok().body(file);
+//	}
 }

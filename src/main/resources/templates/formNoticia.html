@@ -9,7 +9,7 @@
 <body>
 	<div th:replace="fragments :: header"></div>
 	<br>
-	<form th:action="@{/noticias/addNoticia/}" th:object="${noticia}" method="post" style="text-align:center;width: 500px;margin: auto;">
+	<form th:action="@{/noticias/addNoticia/}" th:object="${noticia}" method="post" style="text-align:center;width: 500px;margin: auto;" enctype="multipart/form-data">
 		
 		<h1 th:text="${noticia.id != 0} ? 'Editar noticia' : 'Nueva noticia'" >Nueva noticia</h1>
 		
@@ -26,9 +26,9 @@
 		</div>
 
 		<div class="form-group">
-			<label for="imagen">Imagen</label> <input type="text" 
-				th:field="*{imagen}" class="form-control" id="imagen"
-				placeholder="Introduce la imagen" >
+			<label for="file">Imagen</label> <input type="file" 
+				class="form-control input-file" id="file" name="file">
+				
 		</div>
 		
 		<input type="hidden" th:field="*{usuarioId}" id="usuarioId">
