@@ -95,6 +95,8 @@ public class NoticiaController {
 		if(id==null) {
 			model.addAttribute("noticia",new NoticiaModel());
 		}else {
+			File foto=new File("http://localhost:8080/images/"+noticiaService.findNoticia(id).getImagen());
+			System.out.println(noticiaService.findNoticia(id).getImagen());
 			model.addAttribute("noticia", noticiaService.findNoticia(id));
 		}
 		return FORM_VIEW;
