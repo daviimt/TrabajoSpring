@@ -70,6 +70,7 @@ public class NoticiaController {
 			
 			model.addAttribute("noticias",noticiaService.ListAllNoticias());
 			return FORM_VIEW;
+			
 		}else {
 			String imagen=storageService.store(file,noticiaModel.getId());
 			noticiaModel.setImagen(imagen);
