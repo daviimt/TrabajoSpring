@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Timestamp;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,14 @@ public class FileSystemStorageService implements StorageService {
 			if (file.isEmpty()) {
 				throw new StorageException("Failed to store empty file.");
 			}
+
+			String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+			Timestamp f=fecha();
+			System.out.println(String.valueOf(f));
 			Path destinationFile = this.rootLocation.resolve(
-					Paths.get(file.getOriginalFilename()))
+					Paths.get(String.valueOf(f)+"."+extension))
 					.normalize().toAbsolutePath();
-			String fileName = StringUtils.getFilename(file.getOriginalFilename());
+			String fileName = StringUtils.getFilename(String.valueOf(f)+"."+extension);
 			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
 				// This is a security check
 				throw new StorageException(
@@ -52,6 +57,13 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageException("Failed to store file.", e);
 		}
 	}
+	
+	public Timestamp fecha() {
+        Long datetime = System.currentTimeMillis();
+        Timestamp timestamp = new Timestamp(datetime);
+        System.out.println("Current Time Stamp: "+timestamp);
+        return timestamp;
+    }
 
 	@Override
 	public Stream<Path> loadAll() {
