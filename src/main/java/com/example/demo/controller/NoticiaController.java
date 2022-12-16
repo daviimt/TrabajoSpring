@@ -3,6 +3,8 @@ package com.example.demo.controller;
 
 
 
+import java.io.File;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ import com.example.demo.entity.Usuario;
 import com.example.demo.models.NoticiaModel;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.NoticiaService;
+import com.example.demo.upload.FileSystemStorageService;
 import com.example.demo.upload.StorageService;
 
 @Controller
@@ -69,7 +72,7 @@ public class NoticiaController {
 			return FORM_VIEW;
 		}else {
 			String imagen=storageService.store(file,noticiaModel.getId());
-			noticiaModel.setImagen(MvcUriComponentsBuilder.fromMethodName(FileController.class, "serveFile", imagen).build().toUriString());
+			noticiaModel.setImagen(imagen);
 			
 			if(noticiaModel.getId()==0) {
 				noticiaModel.setUsuarioId(u.getId());
@@ -99,6 +102,12 @@ public class NoticiaController {
 	//Metodo de borrar 
 	@GetMapping("/deleteNoticia/{id}")
 	public String deleteNoticias(@PathVariable("id")int id, RedirectAttributes flash) {
+		File foto=new File("http://localhost:8080/images/"+noticiaService.findNoticia(id).getImagen());
+		System.out.println(noticiaService.findNoticia(id).getImagen());
+		if(foto.exists()) {
+			System.out.println(foto.getAbsolutePath());
+			foto.delete();
+		}
 		if(noticiaService.removeNoticia(id)==0) {
 			flash.addFlashAttribute("success","Noticia eliminada con éxito");	
 		}else

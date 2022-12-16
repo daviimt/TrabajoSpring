@@ -42,6 +42,9 @@ public class FileSystemStorageService implements StorageService {
 					Paths.get(String.valueOf(f)+"."+extension))
 					.normalize().toAbsolutePath();
 			String fileName = StringUtils.getFilename(String.valueOf(f)+"."+extension);
+			System.out.println("ESTO ES EL MENSAJE ");
+			System.out.println(fileName);
+			
 			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
 				// This is a security check
 				throw new StorageException(
