@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Alumno;
 import com.example.demo.entity.Usuario;
 import com.example.demo.service.AlumnoService;
+import com.example.demo.service.NoticiaService;
 import com.example.demo.serviceImpl.UsuarioService;
 
 @Controller
@@ -32,14 +34,20 @@ public class LoginController {
 	@Qualifier("alumnoService")
 	private AlumnoService alumnoService;
 	
+	@Autowired
+	@Qualifier("noticiaService")
+	private NoticiaService noticiaService;
+	
 	@GetMapping("/")
 	public RedirectView redirect() {
 		return new RedirectView("/home");
 	}
 	
 	@GetMapping("/home")
-	public String inicio(Model model) {
-		return HOME_VIEW;
+	public ModelAndView inicio(Model model) {
+		ModelAndView mav = new ModelAndView(HOME_VIEW);
+		mav.addObject("noticias", noticiaService.ListAllNoticias());
+		return mav;
 	}
 	
 	@GetMapping("/auth/login")
