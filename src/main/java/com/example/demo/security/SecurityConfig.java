@@ -16,7 +16,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests((requests) -> requests
-				.antMatchers("/", "/home", "/auth/**", "/about/**", "/noticias/**", "/error/**", "/webjars/**", "/css/**", "/files/**", "/imgs/**", "/photos/**").permitAll()
+				.antMatchers("/", "/home", "/auth/**", "/about/**", "/noticias/**", "/error/**", "/webjars/**", "/css/**", "/files/**", "/images/**", "/photos/**").permitAll()
 				.antMatchers("/cursos/**", "/matricula/**").hasAnyAuthority("ROL_ADMIN", "ROL_PROFESOR")
 				.antMatchers("/profesores/addProfesor","/profesores/formProfesor/**").hasAnyAuthority("ROL_ADMIN", "ROL_PROFESOR")
 				.antMatchers("/profesores/listProfesores","/profesores/deleteProfesor/**","/profesores/formProfesor/").hasAuthority("ROL_ADMIN")
