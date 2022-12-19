@@ -34,21 +34,15 @@ public class FileSystemStorageService implements StorageService {
 			if (file.isEmpty()) {
 				throw new StorageException("Failed to store empty file.");
 			}
-
 			String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
-			Timestamp f=fecha();
-			System.out.println(String.valueOf(f));
 			Path destinationFile = this.rootLocation.resolve(
-					Paths.get(String.valueOf(f)+"."+extension))
+					Paths.get(String.valueOf(id)+"."+extension))
 					.normalize().toAbsolutePath();
-			String fileName = StringUtils.getFilename(String.valueOf(f)+"."+extension);
-			System.out.println("ESTO ES EL MENSAJE ");
-			System.out.println(fileName);
+			String fileName = StringUtils.getFilename(String.valueOf(id)+"."+extension);
 			
 			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
 				// This is a security check
-				throw new StorageException(
-						"Cannot store file outside current directory.");
+				throw new StorageException("Cannot store file outside current directory.");
 			}
 			try (InputStream inputStream = file.getInputStream()) {
 				Files.copy(inputStream, destinationFile,
@@ -60,13 +54,6 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageException("Failed to store file.", e);
 		}
 	}
-	
-	public Timestamp fecha() {
-        Long datetime = System.currentTimeMillis();
-        Timestamp timestamp = new Timestamp(datetime);
-        System.out.println("Current Time Stamp: "+timestamp);
-        return timestamp;
-    }
 
 	@Override
 	public Stream<Path> loadAll() {

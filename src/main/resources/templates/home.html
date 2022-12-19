@@ -47,14 +47,11 @@
       </div>
 
       <div class="col-sm-5">
-        <img class="d-block w-100" th:src="@{/images/${noticia.imagen}}" alt="card image">
+        <img class="d-block w-100" th:src="@{../static/imagenes/}+${noticia.imagen}" ></img>
       </div>
     </div>
   </div>
  </div>
- 
- 
-
     <div class="alert alert-success" th:if="${success != null}"
 		th:text="${success}"></div>
 	<div class="alert alert-danger" th:if="${error != null}"
