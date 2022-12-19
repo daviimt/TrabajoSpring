@@ -38,6 +38,7 @@ import com.example.demo.upload.StorageService;
 public class NoticiaController {
 	private static final String NOTICIAS_VIEW = "noticias";
 	private static final String FORM_VIEW = "formNoticia";
+	private static final String NOTICIAS_ALUM_VIEW = "noticiasAlumnos";
 	
 	//Inyectamos el servicio
 	@Autowired
@@ -55,6 +56,13 @@ public class NoticiaController {
 	@GetMapping("/listNoticias")
 	public ModelAndView listNoticias() {
 		ModelAndView mav = new ModelAndView(NOTICIAS_VIEW);
+		mav.addObject("noticias", noticiaService.ListAllNoticias());
+		return mav;
+	}
+	
+	@GetMapping("/listNoticiasAlumnos")
+	public ModelAndView listNoticiasAlumnos() {
+		ModelAndView mav = new ModelAndView(NOTICIAS_ALUM_VIEW);
 		mav.addObject("noticias", noticiaService.ListAllNoticias());
 		return mav;
 	}
