@@ -23,8 +23,10 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.entity.Noticia;
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.NoticiaModel;
+import com.example.demo.repository.NoticiaRepository;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.NoticiaService;
 import com.example.demo.upload.FileSystemStorageService;
@@ -46,6 +48,11 @@ public class NoticiaController {
 	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
+	@Qualifier("noticiaRepository")
+	private NoticiaRepository noticiaRepository;
+	
+	
+	@Autowired
 	@Qualifier("storageService")
 	private StorageService storageService;
 	//Mostrar noticias
@@ -63,16 +70,19 @@ public class NoticiaController {
 		
 		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
-		if(bindingResult.hasErrors()) {
-			
-			model.addAttribute("noticias",noticiaService.ListAllNoticias());
-			return FORM_VIEW;
-			
-		}else {
-			String imagen=storageService.store(file,noticiaModel.getId());
+		
+		
+			String imagen=storageService.store(file,noticiaModel.getTitulo());
 			noticiaModel.setImagen(imagen);
 			
 			if(noticiaModel.getId()==0) {
+				
+				Noticia n =noticiaRepository.findByTitulo(noticiaModel.getTitulo());
+				if(n.getTitulo()!=null) {
+					return "redirect:/noticias/formNoticia?error";
+					
+				}
+					
 				noticiaModel.setUsuarioId(u.getId());
 				noticiaService.addNoticia(noticiaModel);
 				flash.addFlashAttribute("success","Noticia creada con éxito");	
@@ -82,19 +92,21 @@ public class NoticiaController {
 			}
 			return "redirect:/noticias/listNoticias";
 		
-		}
+		
 	
 	}
 	
 	//Formulario
 	@GetMapping(value={"/formNoticia","/formNoticia/{id}"})
-	public String formNoticias(@PathVariable(name="id",required=false) Integer id,Model model){
+	public String formNoticias(@PathVariable(name="id",required=false) Integer id,Model model,@RequestParam(name="error",required=false)String error){
 		if(id==null) {
 			model.addAttribute("noticia",new NoticiaModel());
+			model.addAttribute("error",error);
 		}else {
 			File foto=new File("http://localhost:8080/images/"+noticiaService.findNoticia(id).getImagen());
 			System.out.println(noticiaService.findNoticia(id).getImagen());
 			model.addAttribute("noticia", noticiaService.findNoticia(id));
+			model.addAttribute("error",error);
 		}
 		return FORM_VIEW;
 	}

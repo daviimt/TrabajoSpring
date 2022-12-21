@@ -9,5 +9,5 @@ import com.example.demo.entity.Profesor;
 
 @Repository("noticiaRepository")
 public interface NoticiaRepository extends JpaRepository<Noticia, Serializable>{
-
+	public abstract Noticia findByTitulo(String titulo);
 }
