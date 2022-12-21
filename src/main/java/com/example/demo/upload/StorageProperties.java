@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix="storage")
 public class StorageProperties {
 	//Localizacion de los ficheros
-	private String location = "src/main/resources/static/images";
+	private String location = "images";
 
 	public String getLocation() {
 		return location;
