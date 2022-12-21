@@ -78,14 +78,16 @@ public class NoticiaController {
 			if(noticiaModel.getId()==0) {
 				
 				Noticia n =noticiaRepository.findByTitulo(noticiaModel.getTitulo());
-				if(n.getTitulo()!=null) {
+				if(n!=null) {
 					return "redirect:/noticias/formNoticia?error";
 					
+				}else {
+					
+					noticiaModel.setUsuarioId(u.getId());
+					noticiaService.addNoticia(noticiaModel);
+					flash.addFlashAttribute("success","Noticia creada con éxito");	
 				}
 					
-				noticiaModel.setUsuarioId(u.getId());
-				noticiaService.addNoticia(noticiaModel);
-				flash.addFlashAttribute("success","Noticia creada con éxito");	
 			}else {
 				noticiaService.updateNoticia(noticiaModel);
 				flash.addFlashAttribute("success", "Noticia modificada con éxito");
