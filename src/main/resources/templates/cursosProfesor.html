@@ -12,14 +12,14 @@
 	<div th:replace="fragments :: header"></div>
 	<br>
 	<div style="text-align: center; width: 500px; margin: auto;">
-		<a th:href="@{/cursos/filtroCurso/0}">
+		<a th:href="@{/cursos/filtroCursosAcabados}">
 			<input type="checkbox" >Cursos acabados</button>
 		</a>
 	
-		<a th:href="@{/cursos/filtroCurso/1}">
+		<a th:href="@{/cursos/filtroCursosSinEmpezar}">
 			<input type="radio" >Proximos cursos</button>
 		</a>
-		<a th:href="@{/cursos/filtroCurso/2}">
+		<a th:href="@{/cursos/filtroCursosImpartiendose}">
 			<input type="radio" >Cursos activos</button>
 		</a>
 		

@@ -17,5 +17,8 @@ public interface ProfesorService {
 	public abstract ProfesorModel findProfesor(String email); 
 	public abstract ProfesorModel findProfesor(int id);
 	public abstract List<CursoModel> findCursosByIdProfesor(ProfesorModel profesor);
+	public abstract List<CursoModel> findCursosAcabados();
+	public abstract List<CursoModel> findCursosSinEmpezar();
+	public abstract List<CursoModel> findCursosImpartiendose();
 	
 }

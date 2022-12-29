@@ -169,74 +169,102 @@ public class CursoController {
 		return new RedirectView("/cursos/listCursos");
 	}
 	
-	@GetMapping(value={"/filtroCurso/{option}"})
-	public ModelAndView filtroCurso(@PathVariable("option") int option, RedirectAttributes flash) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
-		ProfesorModel profesor = profesorService.findProfesor(u.getId()+1);
-		List<CursoModel> curso = profesorService.findCursosByIdProfesor(profesor);
-		System.out.println("controller filtro curso");
-		System.out.println(curso);
-		Calendar c1 = Calendar.getInstance();
-		Calendar c = new GregorianCalendar();
-
-		int dia = c.get(Calendar.DATE);
-		int mes = (c.get(Calendar.MONTH)+1);
-		int annio = c.get(Calendar.YEAR);
-		System.out.println(dia+"/"+mes+"/"+annio);
-		
-		LocalDate fechaActual=LocalDate.of(annio, mes, dia);
-		
-		if (option == 0) {
-			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
-			List<CursoModel> cursoAcabado=new ArrayList();
-			for(CursoModel cur: curso) {
-				System.out.println(cur.getFechaFin());
-				String[]fechafin=cur.getFechaFin().split("-");
-				LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
-				if(fechaCurso.isBefore(fechaActual)) {
-					cursoAcabado.add(cur);
-				}
-			}
-			
-			System.out.println(cursoAcabado);
-			mav.addObject("cursos", cursoAcabado);
-			return mav; 
-
-		} else if (option == 1) {
-			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
-			List<CursoModel> cursoSinEmpezar=new ArrayList();
-			for(CursoModel cur: curso) {
-				System.out.println(cur.getFechaFin());
-				String[]fechaIni=cur.getFechaInicio().split("-");
-				LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechaIni[0]), Integer.parseInt(fechaIni[1]), Integer.parseInt(fechaIni[2]));
-				if(fechaCurso.isAfter(fechaActual)) {
-					cursoSinEmpezar.add(cur);
-				}
-			}
-			
-			System.out.println(cursoSinEmpezar);
-			mav.addObject("cursos", cursoSinEmpezar);
-			return mav; 
-
-		} else {
-			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
-			List<CursoModel> cursosImpartiendose=new ArrayList();
-			for(CursoModel cur: curso) {
-				System.out.println(cur.getFechaFin());
-				String[]fechafin=cur.getFechaFin().split("-");
-				String[]fechainic=cur.getFechaInicio().split("-");
-				LocalDate fechaCursofin=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
-				LocalDate fechaCursoinic=LocalDate.of(Integer.parseInt(fechainic[0]), Integer.parseInt(fechainic[1]), Integer.parseInt(fechainic[2]));
-				if(fechaCursoinic.isBefore(fechaActual)&&fechaCursofin.isAfter(fechaActual)) {
-					cursosImpartiendose.add(cur);
-				}
-			}
-			
-			System.out.println(cursosImpartiendose);
-			mav.addObject("cursos", cursosImpartiendose);
-			return mav; 
-		}
-
+	@GetMapping("/filtroCursosAcabados")
+	public ModelAndView filtroCursosAcabadors() {
+		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+		List<CursoModel> cus=profesorService.findCursosAcabados();
+		System.out.println(cus);
+		mav.addObject("cursos", cus);
+		return mav; 
 	}
+	
+	@GetMapping("/filtroCursosSinEmpezar")
+	public ModelAndView filtroCursosSinEmpezar() {
+		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+		List<CursoModel> cus=profesorService.findCursosSinEmpezar();
+		System.out.println(cus);
+		mav.addObject("cursos", cus);
+		return mav; 
+	}
+	
+	@GetMapping("/filtroCursosImpartiendose")
+	public ModelAndView filtroCursosImpartiendose() {
+		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+		List<CursoModel> cus=profesorService.findCursosImpartiendose();
+		System.out.println(cus);
+		mav.addObject("cursos", cus);
+		return mav; 
+	}
+	
+	//Sobra pero por si hace falta
+//	@GetMapping(value={"/filtroCurso/{option}"})
+//	public ModelAndView filtroCurso(@PathVariable("option") int option, RedirectAttributes flash) {
+//		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+//		ProfesorModel profesor = profesorService.findProfesor(u.getId()+1);
+//		List<CursoModel> curso = profesorService.findCursosByIdProfesor(profesor);
+//		System.out.println("controller filtro curso");
+//		System.out.println(curso);
+//		Calendar c1 = Calendar.getInstance();
+//		Calendar c = new GregorianCalendar();
+//
+//		int dia = c.get(Calendar.DATE);
+//		int mes = (c.get(Calendar.MONTH)+1);
+//		int annio = c.get(Calendar.YEAR);
+//		System.out.println(dia+"/"+mes+"/"+annio);
+//		
+//		LocalDate fechaActual=LocalDate.of(annio, mes, dia);
+//		
+//		if (option == 0) {
+//			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+//			List<CursoModel> cursoAcabado=new ArrayList();
+//			for(CursoModel cur: curso) {
+//				System.out.println(cur.getFechaFin());
+//				String[]fechafin=cur.getFechaFin().split("-");
+//				LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
+//				if(fechaCurso.isBefore(fechaActual)) {
+//					cursoAcabado.add(cur);
+//				}
+//			}
+//			
+//			System.out.println(cursoAcabado);
+//			mav.addObject("cursos", cursoAcabado);
+//			return mav; 
+//
+//		} else if (option == 1) {
+//			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+//			List<CursoModel> cursoSinEmpezar=new ArrayList();
+//			for(CursoModel cur: curso) {
+//				System.out.println(cur.getFechaFin());
+//				String[]fechaIni=cur.getFechaInicio().split("-");
+//				LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechaIni[0]), Integer.parseInt(fechaIni[1]), Integer.parseInt(fechaIni[2]));
+//				if(fechaCurso.isAfter(fechaActual)) {
+//					cursoSinEmpezar.add(cur);
+//				}
+//			}
+//			
+//			System.out.println(cursoSinEmpezar);
+//			mav.addObject("cursos", cursoSinEmpezar);
+//			return mav; 
+//
+//		} else {
+//			ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+//			List<CursoModel> cursosImpartiendose=new ArrayList();
+//			for(CursoModel cur: curso) {
+//				System.out.println(cur.getFechaFin());
+//				String[]fechafin=cur.getFechaFin().split("-");
+//				String[]fechainic=cur.getFechaInicio().split("-");
+//				LocalDate fechaCursofin=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
+//				LocalDate fechaCursoinic=LocalDate.of(Integer.parseInt(fechainic[0]), Integer.parseInt(fechainic[1]), Integer.parseInt(fechainic[2]));
+//				if(fechaCursoinic.isBefore(fechaActual)&&fechaCursofin.isAfter(fechaActual)) {
+//					cursosImpartiendose.add(cur);
+//				}
+//			}
+//			
+//			System.out.println(cursosImpartiendose);
+//			mav.addObject("cursos", cursosImpartiendose);
+//			return mav; 
+//		}
+//
+//	}
 }
