@@ -20,5 +20,6 @@ public interface ProfesorService {
 	public abstract List<CursoModel> findCursosAcabados();
 	public abstract List<CursoModel> findCursosSinEmpezar();
 	public abstract List<CursoModel> findCursosImpartiendose();
+	public abstract List<CursoModel> findCursosFechas(String fechaInic, String fechaFin);
 	
 }

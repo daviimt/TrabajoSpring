@@ -25,22 +25,22 @@ import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.ProfesorService;
 
 @Service("profesorService")
-public class ProfesorServiceImpl implements ProfesorService{
+public class ProfesorServiceImpl implements ProfesorService {
 
 	private static final String COURSES_PROFESOR_VIEW = "cursosProfesor";
-	
+
 	@Autowired
 	@Qualifier("profesorRepository")
 	private ProfesorRepository profesorRepository;
-	
+
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	@Qualifier("cursoRepository")
 	private CursoRepository cursoRepository;
-	
+
 	@Autowired
 	@Qualifier("usuarioService")
 	private UsuarioService usuarioService;
@@ -66,7 +66,7 @@ public class ProfesorServiceImpl implements ProfesorService{
 	public Profesor updateProfesor(ProfesorModel profesorModel) {
 		return profesorRepository.save(transform(profesorModel));
 	}
-	
+
 	@Override
 	public Profesor transform(ProfesorModel profesorModel) {
 		ModelMapper modelMapper = new ModelMapper();
@@ -83,125 +83,151 @@ public class ProfesorServiceImpl implements ProfesorService{
 	public ProfesorModel findProfesor(String email) {
 		return transform(profesorRepository.findByEmail(email));
 	}
+
 	@Override
 	public ProfesorModel findProfesor(int id) {
 		return transform(profesorRepository.findById(id));
 	}
-	
+
 	@Override
 	public List<CursoModel> findCursosByIdProfesor(ProfesorModel profesor) {
 		ModelMapper modelMapper = new ModelMapper();
-		System.out.println("cursos profesor");
-		System.out.println(cursoRepository.findByIdProfesor(transform(profesor)).stream()
-				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList()));
 		return cursoRepository.findByIdProfesor(transform(profesor)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public List<CursoModel> findCursosAcabados() {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
-		ProfesorModel profe = findProfesor(u.getId()+1);
-		System.out.println("profe");
-		System.out.println(profe);
+		ProfesorModel profe = findProfesor(u.getId() + 1);
+		
 		List<CursoModel> curso = findCursosByIdProfesor(profe);
-		System.out.println("controller filtro curso");
-		System.out.println(curso);
+		
 		Calendar c1 = Calendar.getInstance();
 		Calendar c = new GregorianCalendar();
 
 		int dia = c.get(Calendar.DATE);
-		int mes = (c.get(Calendar.MONTH)+1);
+		int mes = (c.get(Calendar.MONTH) + 1);
 		int annio = c.get(Calendar.YEAR);
-		System.out.println(dia+"/"+mes+"/"+annio);
-		
-		LocalDate fechaActual=LocalDate.of(annio, mes, dia);
-		
-		
-		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
-		List<CursoModel> cursoAcabado=new ArrayList();
-		for(CursoModel cur: curso) {
-			System.out.println(cur.getFechaFin());
-			String[]fechafin=cur.getFechaFin().split("-");
-			LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
-			if(fechaCurso.isBefore(fechaActual)) {
+
+		LocalDate fechaActual = LocalDate.of(annio, mes, dia);
+
+		List<CursoModel> cursoAcabado = new ArrayList();
+		for (CursoModel cur : curso) {
+			String[] fechafin = cur.getFechaFin().split("-");
+			LocalDate fechaCurso = LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]),
+					Integer.parseInt(fechafin[2]));
+			if (fechaCurso.isBefore(fechaActual)) {
 				cursoAcabado.add(cur);
 			}
 		}
-		
+
 		return cursoAcabado;
 	}
-	
+
 	@Override
 	public List<CursoModel> findCursosImpartiendose() {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
-		ProfesorModel profe = findProfesor(u.getId()+1);
-		System.out.println("profe");
-		System.out.println(profe);
+		ProfesorModel profe = findProfesor(u.getId() + 1);
+		
 		List<CursoModel> curso = findCursosByIdProfesor(profe);
-		System.out.println("controller filtro curso");
-		System.out.println(curso);
+		
 		Calendar c1 = Calendar.getInstance();
 		Calendar c = new GregorianCalendar();
 
 		int dia = c.get(Calendar.DATE);
-		int mes = (c.get(Calendar.MONTH)+1);
+		int mes = (c.get(Calendar.MONTH) + 1);
 		int annio = c.get(Calendar.YEAR);
-		System.out.println(dia+"/"+mes+"/"+annio);
-		
-		LocalDate fechaActual=LocalDate.of(annio, mes, dia);
-		
-		
-		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
-		List<CursoModel> cursosImpartiendose=new ArrayList();
-		for(CursoModel cur: curso) {
-			System.out.println(cur.getFechaFin());
-			String[]fechafin=cur.getFechaFin().split("-");
-			String[]fechainic=cur.getFechaInicio().split("-");
-			LocalDate fechaCursofin=LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]), Integer.parseInt(fechafin[2]));
-			LocalDate fechaCursoinic=LocalDate.of(Integer.parseInt(fechainic[0]), Integer.parseInt(fechainic[1]), Integer.parseInt(fechainic[2]));
-			if(fechaCursoinic.isBefore(fechaActual)&&fechaCursofin.isAfter(fechaActual)) {
+
+		LocalDate fechaActual = LocalDate.of(annio, mes, dia);
+
+		List<CursoModel> cursosImpartiendose = new ArrayList();
+		for (CursoModel cur : curso) {
+			String[] fechafin = cur.getFechaFin().split("-");
+			String[] fechainic = cur.getFechaInicio().split("-");
+			LocalDate fechaCursofin = LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]),
+					Integer.parseInt(fechafin[2]));
+			LocalDate fechaCursoinic = LocalDate.of(Integer.parseInt(fechainic[0]), Integer.parseInt(fechainic[1]),
+					Integer.parseInt(fechainic[2]));
+			if (fechaCursoinic.isBefore(fechaActual) && fechaCursofin.isAfter(fechaActual)) {
 				cursosImpartiendose.add(cur);
 			}
 		}
-		
+
 		return cursosImpartiendose;
 	}
-	
+
 	@Override
 	public List<CursoModel> findCursosSinEmpezar() {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
-		ProfesorModel profe = findProfesor(u.getId()+1);
-		System.out.println("profe");
-		System.out.println(profe);
+		ProfesorModel profe = findProfesor(u.getId() + 1);
+		
 		List<CursoModel> curso = findCursosByIdProfesor(profe);
-		System.out.println("controller filtro curso");
-		System.out.println(curso);
+		
 		Calendar c1 = Calendar.getInstance();
 		Calendar c = new GregorianCalendar();
 
 		int dia = c.get(Calendar.DATE);
-		int mes = (c.get(Calendar.MONTH)+1);
+		int mes = (c.get(Calendar.MONTH) + 1);
 		int annio = c.get(Calendar.YEAR);
-		System.out.println(dia+"/"+mes+"/"+annio);
-		
-		LocalDate fechaActual=LocalDate.of(annio, mes, dia);
-		
-		
-		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
-		List<CursoModel> cursoSinEmpezar=new ArrayList();
-		for(CursoModel cur: curso) {
-			System.out.println(cur.getFechaFin());
-			String[]fechaIni=cur.getFechaInicio().split("-");
-			LocalDate fechaCurso=LocalDate.of(Integer.parseInt(fechaIni[0]), Integer.parseInt(fechaIni[1]), Integer.parseInt(fechaIni[2]));
-			if(fechaCurso.isAfter(fechaActual)) {
+
+		LocalDate fechaActual = LocalDate.of(annio, mes, dia);
+
+		List<CursoModel> cursoSinEmpezar = new ArrayList();
+		for (CursoModel cur : curso) {
+			String[] fechaIni = cur.getFechaInicio().split("-");
+			LocalDate fechaCurso = LocalDate.of(Integer.parseInt(fechaIni[0]), Integer.parseInt(fechaIni[1]),
+					Integer.parseInt(fechaIni[2]));
+			if (fechaCurso.isAfter(fechaActual)) {
 				cursoSinEmpezar.add(cur);
 			}
 		}
+
+		return cursoSinEmpezar;
+	}
+
+	@Override
+	public List<CursoModel> findCursosFechas(String fechaInic, String fechaFin) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		ProfesorModel profe = findProfesor(u.getId() + 1);
 		
+		List<CursoModel> curso = findCursosByIdProfesor(profe);
+		
+		Calendar c1 = Calendar.getInstance();
+		Calendar c = new GregorianCalendar();
+
+		int dia = c.get(Calendar.DATE);
+		int mes = (c.get(Calendar.MONTH) + 1);
+		int annio = c.get(Calendar.YEAR);
+		
+
+		LocalDate fechaActual = LocalDate.of(annio, mes, dia);
+
+		List<CursoModel> cursoSinEmpezar = new ArrayList();
+		for (CursoModel cur : curso) {
+			String[] fechaIni = cur.getFechaInicio().split("-");
+			String[] fechaInicCurso = fechaInic.split("-");
+			String[] fechaFinCurso = fechaFin.split("-");
+			
+			LocalDate fechaCurso = LocalDate.of(Integer.parseInt(fechaIni[0]), Integer.parseInt(fechaIni[1]),
+					Integer.parseInt(fechaIni[2]));
+			LocalDate fechaInicCur = LocalDate.of(Integer.parseInt(fechaInicCurso[0]),
+					Integer.parseInt(fechaInicCurso[1]), Integer.parseInt(fechaInicCurso[2]));
+			LocalDate fechaFinCur = LocalDate.of(Integer.parseInt(fechaFinCurso[0]), Integer.parseInt(fechaFinCurso[1]),
+					Integer.parseInt(fechaFinCurso[2]));
+			
+			System.out.println(fechaInicCur);
+			System.out.println(fechaFinCur);
+			
+			if (fechaCurso.isBefore(fechaFinCur) && fechaCurso.isAfter(fechaInicCur)) {
+				cursoSinEmpezar.add(cur);
+			}
+		}
+
 		return cursoSinEmpezar;
 	}
 }

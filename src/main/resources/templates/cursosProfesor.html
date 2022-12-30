@@ -22,9 +22,19 @@
 		<a th:href="@{/cursos/filtroCursosImpartiendose}">
 			<button >Cursos activos</button>
 		</a>
+		<form th:action="@{/cursos/filtroCursosFechas}">
+		
+			<label for="fechaInicio">Fecha Inicio</label> <input type="date"
+				 id="fechaInicio" th:value="${fechaInicio}" name="fechaInicio" required>
+				 <br>
+			<label for="fechaFin">Fecha Fin</label> <input type="date"
+				 id="fechaFin" th:value="${fechaFin}" name="fechaFin" required>
+
+		<br>
+		 <input type="submit" class="btn btn-primary">
+		</form>
 		
 	</div>
-	<br>
 	<br>
 	<table class="table table-striped table-bordered">
 		<thead class="thead-light">

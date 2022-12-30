@@ -173,7 +173,6 @@ public class CursoController {
 	public ModelAndView filtroCursosAcabadors() {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 		List<CursoModel> cus=profesorService.findCursosAcabados();
-		System.out.println(cus);
 		mav.addObject("cursos", cus);
 		return mav; 
 	}
@@ -182,7 +181,6 @@ public class CursoController {
 	public ModelAndView filtroCursosSinEmpezar() {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 		List<CursoModel> cus=profesorService.findCursosSinEmpezar();
-		System.out.println(cus);
 		mav.addObject("cursos", cus);
 		return mav; 
 	}
@@ -191,7 +189,18 @@ public class CursoController {
 	public ModelAndView filtroCursosImpartiendose() {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 		List<CursoModel> cus=profesorService.findCursosImpartiendose();
-		System.out.println(cus);
+		mav.addObject("cursos", cus);
+		return mav; 
+	}
+	
+	@GetMapping("/filtroCursosFechas")
+	public ModelAndView filtroCursosFechas(@ModelAttribute("fechaInicio") String fechaInicio,@ModelAttribute("fechaFin") String fechaFin, RedirectAttributes flash) {
+		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+		System.out.println("entra bien");
+		System.out.println(fechaInicio+"  "+fechaFin);
+		System.out.println("---------------");
+		List<CursoModel> cus=profesorService.findCursosFechas(fechaInicio, fechaFin);
+	
 		mav.addObject("cursos", cus);
 		return mav; 
 	}
