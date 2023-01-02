@@ -23,10 +23,12 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.CursoModel;
+import com.example.demo.models.MatriculaModel;
 import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.AlumnoService;
 import com.example.demo.service.CursoService;
+import com.example.demo.service.MatriculaService;
 import com.example.demo.service.ProfesorService;
 
 @Controller
@@ -41,6 +43,10 @@ public class CursoController {
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
+	
+	@Autowired
+	@Qualifier("matriculaService")
+	private MatriculaService matriculaService;
 
 	@Autowired
 	@Qualifier("profesorService")
@@ -84,9 +90,10 @@ public class CursoController {
 	@GetMapping("/listCursosAlumno")
 	public ModelAndView listCursosAlumno() {
 		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
-
+		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
+		System.out.println(matr);
 		mav.addObject("cursos", cursoService.ListAllCursos());
-
+		mav.addObject("matriculas", matr);
 		return mav;
 	}
 
@@ -221,7 +228,9 @@ public class CursoController {
 	public ModelAndView filtroCursosBasicos() {
 		ModelAndView mav = new ModelAndView( COURSES_ALUMNO_VIEW);
 		List<CursoModel> cus = alumnoService.findCursosBasicos();
+		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
 		mav.addObject("cursos", cus);
+		mav.addObject("matriculas", matr);
 		return mav;
 	}
 

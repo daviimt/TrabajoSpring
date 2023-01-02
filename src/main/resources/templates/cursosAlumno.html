@@ -42,12 +42,13 @@
 				<th th:text=${curso.nivel}></th>
 				<th th:text=${curso.fechaInicio}></th>
 				<th th:text=${curso.fechaFin}></th>
-				<th>
-				<a th:href="@{/cursos/formCurso/} + ${curso.id}">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
+				
+				<th th:each="matricula: ${matriculas}">
+				<a th:if="matricula.curso == curso">
+						<i> Ya estas Incrito</i>
 				</a> 
-				<a th:href="@{/cursos/deleteCurso/}+ ${curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+				<a th:if="matricula.curso != curso" th:href="@{/matriculas/addMatricula/} + ${curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
+						<button type="button" class="btn btn-default"><i >Inscribirse</i></button>
 				</a>
 				
 				</th>
