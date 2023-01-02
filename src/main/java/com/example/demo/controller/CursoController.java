@@ -91,9 +91,13 @@ public class CursoController {
 	public ModelAndView listCursosAlumno() {
 		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
-		System.out.println(matr);
+		
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
+
 		mav.addObject("cursos", cursoService.ListAllCursos());
 		mav.addObject("matriculas", matr);
+		mav.addObject("usuarioId",u.getId()+1);
 		return mav;
 	}
 
@@ -229,6 +233,10 @@ public class CursoController {
 		ModelAndView mav = new ModelAndView( COURSES_ALUMNO_VIEW);
 		List<CursoModel> cus = alumnoService.findCursosBasicos();
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
+
+		mav.addObject("usuarioId",u.getId()+1);
 		mav.addObject("cursos", cus);
 		mav.addObject("matriculas", matr);
 		return mav;
@@ -238,7 +246,13 @@ public class CursoController {
 	public ModelAndView filtroCursosMedios() {
 		ModelAndView mav = new ModelAndView( COURSES_ALUMNO_VIEW);
 		List<CursoModel> cus = alumnoService.findCursosMedios();
+		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
+
+		mav.addObject("usuarioId",u.getId()+1);
 		mav.addObject("cursos", cus);
+		mav.addObject("matriculas", matr);
 		return mav;
 	}
 
@@ -246,7 +260,13 @@ public class CursoController {
 	public ModelAndView filtroCursosAvanzados() {
 		ModelAndView mav = new ModelAndView( COURSES_ALUMNO_VIEW);
 		List<CursoModel> cus = alumnoService.findCursosAvanzados();;
+		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
+
+		mav.addObject("usuarioId",u.getId()+1);
 		mav.addObject("cursos", cus);
+		mav.addObject("matriculas", matr);
 		return mav;
 	}
 	
