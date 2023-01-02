@@ -48,7 +48,7 @@
 				<a th:if="${matricula.idCurso == curso.id and matricula.idAlumno == usuarioId}">
 					<button type="button" class="btn btn-default">	<i class="fa-solid fa-check"></i></button>
 				</a> 
-				<a th:unless="${matricula.idCurso == curso.id and matricula.idAlumno == usuarioId}" th:href="@{/matriculas/addMatricula/} + ${curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
+				<a th:unless="${matricula.idCurso != curso.id and matricula.idAlumno != usuarioId}" th:href="@{/matriculas/addMatricula/} + ${curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-plus"></i></button>
 				</a>
 				
