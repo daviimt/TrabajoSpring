@@ -41,8 +41,13 @@
 			</select>
 		</div>
 		<div class="form-group" th:if="*{idProfesor!=0}">
-			<label >Id Profesor</label> 
-			<input type="text" th:field="${profesor.nombre}+' '+${profesor.apellidos}" class="form-control" id="idProfesor" readonly="readonly">
+			<label >Profesor</label> 
+			<select class="form-control selectpicker" th:field="*{idProfesor}" id="id">
+				<option th:each="profesor : ${profesores}"
+						th:value="${profesor.id}"
+						th:text="${profesor.nombre}+' '+${profesor.apellidos}">
+				</option>
+			</select>
 		</div>
 		
 		<div class="form-group">

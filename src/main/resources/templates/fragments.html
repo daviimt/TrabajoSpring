@@ -54,6 +54,12 @@
 		</a>
         </li>
         
+        <li sec:authorize="hasAuthority('ROL_ALUMNO')" class="nav-item">
+        <a class="nav-link" th:href="@{/cursos/listCursosAlumno}">
+			Cursos
+		</a>
+        </li>
+        
         <li sec:authorize="hasAuthority('ROL_PROFESOR')" class="nav-item">
         <a class="nav-link" th:href="@{/profesores/formProfesorEmail/}+${#authentication.name}">
 			Modificar datos

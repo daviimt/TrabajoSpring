@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.entity.Alumno;
 import com.example.demo.models.AlumnoModel;
+import com.example.demo.models.CursoModel;
 
 public interface AlumnoService {
 
@@ -15,5 +16,8 @@ public interface AlumnoService {
 	public abstract AlumnoModel transform(Alumno alumno);
 	public abstract AlumnoModel findStudent(String email);
 	public abstract AlumnoModel findStudent(int id);
+	public abstract List<CursoModel> findCursosBasicos();
+	public abstract List<CursoModel> findCursosMedios();
+	public abstract List<CursoModel> findCursosAvanzados();
 
 }
