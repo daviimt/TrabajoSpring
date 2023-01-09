@@ -35,25 +35,23 @@
 				<th>Fecha Fin</th>
 			</tr>
 		</thead>
-		<tbody th:each="curso: ${cursos}">
+		<tbody th:each="inscripcion: ${inscripciones}">
 			<tr>
-				<th th:text=${curso.nombre}></th>
-				<th th:text=${curso.descripcion}></th>
-				<th th:text=${curso.nivel}></th>
-				<th th:text=${curso.fechaInicio}></th>
-				<th th:text=${curso.fechaFin}></th>
+				<th th:text=${inscripcion.curso.nombre}></th>
+				<th th:text=${inscripcion.curso.descripcion}></th>
+				<th th:text=${inscripcion.curso.nivel}></th>
+				<th th:text=${inscripcion.curso.fechaInicio}></th>
+				<th th:text=${inscripcion.curso.fechaFin}></th>
 				
-				<th th:each="matricula: ${matriculas}">
+				<th>
 				
-				<a th:if="${matricula.idCurso == curso.id and matricula.idAlumno == usuarioId}">
+				<a th:if="${inscripcion.inscrito == true}">
 					<button type="button" class="btn btn-default">	<i class="fa-solid fa-check"></i></button>
 				</a> 
-				<a th:unless="${matricula.idCurso != curso.id and matricula.idAlumno != usuarioId}" th:href="@{/matriculas/addMatricula/} + ${curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
+				<a th:if="${inscripcion.inscrito == false}" th:href="@{/matriculas/addMatricula/} + ${inscripcion.curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-plus"></i></button>
 				</a>
-				<a th:unless="${matricula==null}" th:href="@{/matriculas/addMatricula/} + ${curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-plus"></i></button>
-				</a>
+				
 				</th>
 			</tr>
 		</tbody>

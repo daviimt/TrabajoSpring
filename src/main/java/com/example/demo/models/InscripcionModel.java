@@ -2,42 +2,51 @@ package com.example.demo.models;
 
 public class InscripcionModel {
 	
-	private int idCurso;
-	private int idAlumno;
+	private CursoModel curso;
+	private AlumnoModel alumno;
 	private boolean inscrito;
 	
-	public InscripcionModel(int idCurso, int idAlumno, boolean inscrito) {
-		super();
-		this.idCurso = idCurso;
-		this.idAlumno = idAlumno;
-		this.inscrito = inscrito;
-	}
 	public InscripcionModel() {
 		super();
 	}
-	public int getIdCurso() {
-		return idCurso;
+
+	public InscripcionModel(CursoModel curso, AlumnoModel alumno, boolean inscrito) {
+		super();
+		this.curso = curso;
+		this.alumno = alumno;
+		this.inscrito = inscrito;
 	}
-	public void setIdCurso(int idCurso) {
-		this.idCurso = idCurso;
+
+	public CursoModel getCurso() {
+		return curso;
 	}
-	public int getIdAlumno() {
-		return idAlumno;
+
+	public void setCurso(CursoModel curso) {
+		this.curso = curso;
 	}
-	public void setIdAlumno(int idAlumno) {
-		this.idAlumno = idAlumno;
+
+	public AlumnoModel getAlumno() {
+		return alumno;
 	}
+
+	public void setAlumno(AlumnoModel alumno) {
+		this.alumno = alumno;
+	}
+
 	public boolean isInscrito() {
 		return inscrito;
 	}
+
 	public void setInscrito(boolean inscrito) {
 		this.inscrito = inscrito;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "InscripcionModel [idCurso=" + idCurso + ", idAlumno=" + idAlumno + ", inscrito=" + inscrito + "]";
+		return "InscripcionModel [curso=" + curso + ", alumno=" + alumno + ", inscrito=" + inscrito + "]";
 	}
+	
+	
 	
 	
 }

@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.entity.Alumno;
 import com.example.demo.entity.Usuario;
+import com.example.demo.models.AlumnoModel;
 import com.example.demo.models.CursoModel;
+import com.example.demo.models.InscripcionModel;
 import com.example.demo.models.MatriculaModel;
 import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.UsuarioRepository;
@@ -43,7 +43,7 @@ public class CursoController {
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
-	
+
 	@Autowired
 	@Qualifier("matriculaService")
 	private MatriculaService matriculaService;
@@ -51,7 +51,7 @@ public class CursoController {
 	@Autowired
 	@Qualifier("profesorService")
 	private ProfesorService profesorService;
-	
+
 	@Autowired
 	@Qualifier("alumnoService")
 	private AlumnoService alumnoService;
@@ -90,16 +90,19 @@ public class CursoController {
 	@GetMapping("/listCursosAlumno")
 	public ModelAndView listCursosAlumno() {
 		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
+		List<CursoModel> cursos = cursoService.ListAllCursos();
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
 		MatriculaModel m = new MatriculaModel();
 		matr.add(m);
-		
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
-		
+
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);
+		List<InscripcionModel> listInscrip = cursoService.listInscripcion(alumno,cursos);
+
 		mav.addObject("cursos", cursoService.ListAllCursos());
-		mav.addObject("matriculas", matr);
-		mav.addObject("usuarioId",u.getId()+1);
+		mav.addObject("inscripciones", listInscrip);
+		mav.addObject("usuarioId", u.getId() + 1);
 		return mav;
 	}
 
@@ -232,44 +235,55 @@ public class CursoController {
 
 	@GetMapping("/filtroCursosBasicos")
 	public ModelAndView filtroCursosBasicos() {
-		ModelAndView mav = new ModelAndView( COURSES_ALUMNO_VIEW);
-		List<CursoModel> cus = alumnoService.findCursosBasicos();
+		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
+		List<CursoModel> cursos = alumnoService.findCursosBasicos();
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
 
-		mav.addObject("usuarioId",u.getId()+1);
-		mav.addObject("cursos", cus);
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);
+
+		List<InscripcionModel> listInscrip = cursoService.listInscripcion(alumno,cursos);
+
+		mav.addObject("usuarioId", u.getId() + 1);
+		mav.addObject("inscripciones", listInscrip);
 		mav.addObject("matriculas", matr);
 		return mav;
 	}
 
 	@GetMapping("/filtroCursosMedios")
 	public ModelAndView filtroCursosMedios() {
-		ModelAndView mav = new ModelAndView( COURSES_ALUMNO_VIEW);
-		List<CursoModel> cus = alumnoService.findCursosMedios();
+		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
+		List<CursoModel> cursos = alumnoService.findCursosMedios();
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
+		System.out.println(cursos);
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);
 
-		mav.addObject("usuarioId",u.getId()+1);
-		mav.addObject("cursos", cus);
+		List<InscripcionModel> listInscrip = cursoService.listInscripcion(alumno,cursos);
+
+		mav.addObject("usuarioId", u.getId() + 1);
+		mav.addObject("inscripciones", listInscrip);
 		mav.addObject("matriculas", matr);
 		return mav;
 	}
 
 	@GetMapping("/filtroCursosAvanzados")
 	public ModelAndView filtroCursosAvanzados() {
-		ModelAndView mav = new ModelAndView( COURSES_ALUMNO_VIEW);
-		List<CursoModel> cus = alumnoService.findCursosAvanzados();;
+		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
+		List<CursoModel> cursos = alumnoService.findCursosAvanzados();
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);
 
-		mav.addObject("usuarioId",u.getId()+1);
-		mav.addObject("cursos", cus);
+		List<InscripcionModel> listInscrip = cursoService.listInscripcion(alumno,cursos);
+
+		mav.addObject("usuarioId", u.getId() + 1);
+		mav.addObject("inscripciones", listInscrip);
 		mav.addObject("matriculas", matr);
 		return mav;
 	}
-	
+
 }

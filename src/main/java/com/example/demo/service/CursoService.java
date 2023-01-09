@@ -3,9 +3,9 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.entity.Curso;
-import com.example.demo.entity.Profesor;
+import com.example.demo.models.AlumnoModel;
 import com.example.demo.models.CursoModel;
-import com.example.demo.models.ProfesorModel;
+import com.example.demo.models.InscripcionModel;
 
 public interface CursoService {
 
@@ -16,4 +16,5 @@ public interface CursoService {
 	public abstract CursoModel findCurso(int id);
 	public abstract Curso transform(CursoModel cursoModel);
 	public abstract CursoModel transform(Curso curso);
+	public abstract List<InscripcionModel> listInscripcion(AlumnoModel alumno, List<CursoModel>listCurso);
 }
