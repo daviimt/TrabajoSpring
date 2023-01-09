@@ -71,7 +71,7 @@ public class MatriculaController {
 		matricula.setValoracion(0);
 		
 		matriculaService.addMatricula(matricula);
-		flash.addFlashAttribute("success", "Matricula creada con éxito");
+		flash.addFlashAttribute("success", "Matrícula creada con éxito");
 		
 		return "redirect:/cursos/listCursosAlumno";
 

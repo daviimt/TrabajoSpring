@@ -22,7 +22,7 @@
 			<tr>
 				<th th:text=${noticia.titulo}></th>
 				<th th:text=${noticia.descripcion}></th>
-				<th th:text=${noticia.imagen}></th>
+				<th><img th:src="@{images/}+${noticia.imagen}" ></img></th>
 				<th>
 				<a th:href="@{/noticias/formNoticia/} + ${noticia.id}">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
