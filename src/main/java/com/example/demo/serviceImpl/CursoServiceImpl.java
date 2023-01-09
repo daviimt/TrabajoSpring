@@ -18,6 +18,7 @@ import com.example.demo.models.CursoModel;
 import com.example.demo.models.InscripcionModel;
 import com.example.demo.models.MatriculaModel;
 import com.example.demo.repository.CursoRepository;
+import com.example.demo.repository.MatriculaRepository;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.AlumnoService;
 import com.example.demo.service.CursoService;
@@ -100,5 +101,6 @@ public class CursoServiceImpl implements CursoService{
 		}
 		return listInscrip;
 	}
+
 
 }

@@ -19,12 +19,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Alumno;
+import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.AlumnoModel;
 import com.example.demo.models.CursoModel;
 import com.example.demo.models.InscripcionModel;
 import com.example.demo.models.MatriculaModel;
 import com.example.demo.models.ProfesorModel;
+import com.example.demo.repository.MatriculaRepository;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.AlumnoService;
 import com.example.demo.service.CursoService;
@@ -39,7 +41,7 @@ public class CursoController {
 	private static final String COURSES_ALUMNO_VIEW = "cursosAlumno";
 	private static final String FORM_VIEW = "formCurso";
 	private static final String FORM_PROFESOR_VIEW = "formCursoProfesor";
-
+	private static final String INSCRITOS_CURSO = "inscritos";
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
@@ -59,6 +61,10 @@ public class CursoController {
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	@Qualifier("matriculaRepository")
+	private MatriculaRepository matriculaRepository;
 
 //	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = { "/listCursos", "/listCursos/{id}" })
@@ -190,6 +196,22 @@ public class CursoController {
 		return "redirect:/cursos/listCursosProfesor/" + (u.getId() + 1);
 	}
 
+	@GetMapping("/inscritos/{id}")
+	public ModelAndView inscritosCurso(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView(INSCRITOS_CURSO);
+		
+		List<Matricula> listMatriculas = matriculaRepository.findBycursoId(id);
+		List<AlumnoModel> listAlumnos = new ArrayList();
+		for(Matricula m : listMatriculas) {
+			AlumnoModel a = alumnoService.findStudent(matriculaService.transform(m).getIdAlumno());
+			listAlumnos.add(a);
+		}
+		
+		mav.addObject("alumnos", listAlumnos);
+		
+		return mav;
+	}
+	
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {
@@ -256,7 +278,6 @@ public class CursoController {
 		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
 		List<CursoModel> cursos = alumnoService.findCursosMedios();
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
-		System.out.println(cursos);
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);

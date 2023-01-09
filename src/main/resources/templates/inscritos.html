@@ -5,7 +5,7 @@
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
 <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
 <meta charset="ISO-8859-1">
-<title>Lista de cursos</title>
+<title>Lista de alumnos</title>
 </head>
 <body>
 	<div th:replace="fragments :: header"></div>
@@ -14,30 +14,16 @@
 		<thead class="thead-light">
 			<tr>
 				<th>Nombre</th>
-				<th>Descripci&oacute;n</th>
-				<th>Nivel</th>
-				<th>Fecha Inicio</th>
-				<th>Fecha Fin</th>
+				<th>Apellidos</th>
+				
+	
 			</tr>
 		</thead>
-		<tbody th:each="curso: ${cursos}">
+		<tbody th:each="alumno: ${alumnos}">
 			<tr>
-				<th th:text=${curso.nombre}></th>
-				<th th:text=${curso.descripcion}></th>
-				<th th:text=${curso.nivel}></th>
-				<th th:text=${curso.fechaInicio}></th>
-				<th th:text=${curso.fechaFin}></th>
-				<th>
-				<a th:href="@{/cursos/formCurso/} + ${curso.id}">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
-				</a> 
-				<a th:href="@{/cursos/deleteCurso/}+ ${curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
-				</a>
-				<a th:href="@{/cursos/inscritos/}+ ${curso.id}" >
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
-				</a>
-				</th>
+				<th th:text=${alumno.nombre}></th>
+				<th th:text=${alumno.apellidos}></th>
+				
 			</tr>
 		</tbody>
 	</table>
@@ -52,9 +38,7 @@
 						th:text="${info}"></div>
 
 	<div style="text-align:center;width: 500px;margin: auto;">
-		<a th:href="@{/cursos/formCurso/}">
-			<button type="button" class="btn btn-primary">Nuevo Curso</button>
-		</a>
+	
 		<a th:href="@{/home}">
 			<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
