@@ -97,16 +97,12 @@ public class CursoController {
 	public ModelAndView listCursosAlumno() {
 		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
 		List<CursoModel> cursos = cursoService.ListAllCursos();
-		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
-		MatriculaModel m = new MatriculaModel();
-		matr.add(m);
 
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);
 		List<InscripcionModel> listInscrip = cursoService.listInscripcion(alumno,cursos);
 
-		mav.addObject("cursos", cursoService.ListAllCursos());
 		mav.addObject("inscripciones", listInscrip);
 		mav.addObject("usuarioId", u.getId() + 1);
 		return mav;

@@ -82,6 +82,9 @@ public class CursoServiceImpl implements CursoService{
 		
 		List<InscripcionModel> listInscrip=new ArrayList();
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
+
+		MatriculaModel m = new MatriculaModel();
+		matr.add(m);
 		
 		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u=usuarioRepository.findByUsername(userDetails.getUsername());
