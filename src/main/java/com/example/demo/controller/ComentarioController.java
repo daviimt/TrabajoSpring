@@ -35,7 +35,7 @@ public class ComentarioController {
 	public String addComentario(@ModelAttribute("comentario") ComentarioModel comentarioModel, RedirectAttributes flash) {
 			comentarioService.addComentario(comentarioModel);
 			flash.addFlashAttribute("success", "Comentario insertado con éxito");
-		return "redirect:/cursos/listCursosAlumnos";
+		return "redirect:/cursos/listCursosAlumno";
 	}
 	
 	@GetMapping("/formComentario/{idCurso}")

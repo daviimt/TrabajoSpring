@@ -17,8 +17,8 @@
 		<input type="text" th:field="*{Comentario}"
 				class="form-control" id="titulo" placeholder="Introduce el comentario" required>
 		</div>
-		<input type="hidden" th:field="*{id_curso}" id="id_curso">
-		<input type="hidden" th:field="*{id_alumno}" id="id_alumno">
+		<input type="hidden" th:field="*{idCurso}" id="idCurso">
+		<input type="hidden" th:field="*{idAlumno}" id="idAlumno">
 		<br><br>
 		<input type="submit" class="btn btn-primary">
 		<a th:href="@{/cursos/listCursosAlumno}">
