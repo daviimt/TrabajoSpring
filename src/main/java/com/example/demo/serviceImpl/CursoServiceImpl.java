@@ -1,6 +1,9 @@
 package com.example.demo.serviceImpl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,12 +20,12 @@ import com.example.demo.models.AlumnoModel;
 import com.example.demo.models.CursoModel;
 import com.example.demo.models.InscripcionModel;
 import com.example.demo.models.MatriculaModel;
+import com.example.demo.models.ProfesorModel;
 import com.example.demo.repository.CursoRepository;
-import com.example.demo.repository.MatriculaRepository;
 import com.example.demo.repository.UsuarioRepository;
-import com.example.demo.service.AlumnoService;
 import com.example.demo.service.CursoService;
 import com.example.demo.service.MatriculaService;
+import com.example.demo.service.ProfesorService;
 @Service("cursoService")
 public class CursoServiceImpl implements CursoService{
 
@@ -37,6 +40,10 @@ public class CursoServiceImpl implements CursoService{
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	@Qualifier("profesorService")
+	private ProfesorService profesorService;
 	
 	@Override
 	public List<CursoModel> ListAllCursos() {
@@ -82,7 +89,10 @@ public class CursoServiceImpl implements CursoService{
 		
 		List<InscripcionModel> listInscrip=new ArrayList();
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
-
+		List<CursoModel> listCursosAcabados=findCursosAcabados();
+		
+		
+		
 		MatriculaModel m = new MatriculaModel();
 		matr.add(m);
 		
@@ -91,18 +101,49 @@ public class CursoServiceImpl implements CursoService{
 		
 		for(CursoModel c :listCursos) {
 			InscripcionModel insc=new InscripcionModel();
+			boolean comentario= listCursosAcabados.contains(c);
+			
 			for(MatriculaModel matricula :matr) {
+				
 				if(matricula.getIdCurso()==c.getId() && matricula.getIdAlumno()==(u.getId()+1)) {
-					insc=new InscripcionModel(c,alumno,true);
+					insc=new InscripcionModel(c,alumno,true,comentario);
 					break;
 				}else {
-					insc=new InscripcionModel(c,alumno,false);
+					insc=new InscripcionModel(c,alumno,false,comentario);
 				}
 			}
 			
 			listInscrip.add(insc);
 		}
 		return listInscrip;
+	}
+	
+	public List<CursoModel> findCursosAcabados() {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		
+		List<CursoModel> curso = ListAllCursos();
+		
+		Calendar c1 = Calendar.getInstance();
+		Calendar c = new GregorianCalendar();
+
+		int dia = c.get(Calendar.DATE);
+		int mes = (c.get(Calendar.MONTH) + 1);
+		int annio = c.get(Calendar.YEAR);
+
+		LocalDate fechaActual = LocalDate.of(annio, mes, dia);
+
+		List<CursoModel> cursoAcabado = new ArrayList();
+		for (CursoModel cur : curso) {
+			String[] fechafin = cur.getFechaFin().split("-");
+			LocalDate fechaCurso = LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]),
+					Integer.parseInt(fechafin[2]));
+			if (fechaCurso.isBefore(fechaActual)) {
+				cursoAcabado.add(cur);
+			}
+		}
+
+		return cursoAcabado;
 	}
 
 

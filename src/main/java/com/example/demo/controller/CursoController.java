@@ -87,7 +87,6 @@ public class CursoController {
 			mav.addObject("cursos", cursoService.ListAllCursos());
 		else {
 			ProfesorModel profesor = profesorService.findProfesor(id);
-			System.out.println(profesor);
 			mav.addObject("cursos", profesorService.findCursosByIdProfesor(profesor));
 		}
 		return mav;
@@ -102,7 +101,7 @@ public class CursoController {
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);
 		List<InscripcionModel> listInscrip = cursoService.listInscripcion(alumno,cursos);
-
+		
 		mav.addObject("inscripciones", listInscrip);
 		mav.addObject("usuarioId", u.getId() + 1);
 		return mav;

@@ -1,11 +1,12 @@
 package com.example.demo.models;
 
 public class InscripcionModel {
-	
+
 	private CursoModel curso;
 	private AlumnoModel alumno;
 	private boolean inscrito;
-	
+	private boolean comentario;
+
 	public InscripcionModel() {
 		super();
 	}
@@ -15,6 +16,22 @@ public class InscripcionModel {
 		this.curso = curso;
 		this.alumno = alumno;
 		this.inscrito = inscrito;
+	}
+
+	public InscripcionModel(CursoModel curso, AlumnoModel alumno, boolean inscrito, boolean comentario) {
+		super();
+		this.curso = curso;
+		this.alumno = alumno;
+		this.inscrito = inscrito;
+		this.comentario = comentario;
+	}
+
+	public boolean isComentario() {
+		return comentario;
+	}
+
+	public void setComentario(boolean comentario) {
+		this.comentario = comentario;
 	}
 
 	public CursoModel getCurso() {
@@ -45,8 +62,5 @@ public class InscripcionModel {
 	public String toString() {
 		return "InscripcionModel [curso=" + curso + ", alumno=" + alumno + ", inscrito=" + inscrito + "]";
 	}
-	
-	
-	
-	
+
 }

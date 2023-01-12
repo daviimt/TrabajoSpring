@@ -1,6 +1,6 @@
 package com.example.demo.models;
 
-
+import java.util.Objects;
 
 public class CursoModel {
 	
@@ -89,5 +89,24 @@ public class CursoModel {
 		return "CursoModel [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel=" + nivel
 				+ ", idProfesor=" + idProfesor + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CursoModel other = (CursoModel) obj;
+		return id == other.id;
+	}
+	
+	
 	
 }
