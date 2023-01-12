@@ -26,10 +26,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Noticia;
 import com.example.demo.entity.Usuario;
+import com.example.demo.models.CursoModel;
 import com.example.demo.models.MatriculaModel;
 import com.example.demo.models.NoticiaModel;
 import com.example.demo.repository.NoticiaRepository;
 import com.example.demo.repository.UsuarioRepository;
+import com.example.demo.service.CursoService;
 import com.example.demo.service.MatriculaService;
 import com.example.demo.service.NoticiaService;
 import com.example.demo.upload.FileSystemStorageService;
@@ -39,7 +41,9 @@ import com.example.demo.upload.StorageService;
 @RequestMapping("/matriculas")
 public class MatriculaController {
 
-	
+	@Autowired
+	@Qualifier("cursoService")
+	private CursoService cursoService;
 	// Inyectamos el servicio
 	@Autowired
 	@Qualifier("matriculaService")
@@ -75,5 +79,18 @@ public class MatriculaController {
 		
 		return "redirect:/cursos/listCursosAlumno";
 
+	}
+	
+	@PostMapping("/calificar/{idCurso}/{idAlumno}")
+	public String calificar(@PathVariable(name = "idCurso", required = true) Integer idCurso,@PathVariable(name = "idAlumno", required = true) Integer idAlumno,@ModelAttribute("valoracion") int valoracion, RedirectAttributes flash) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+
+		MatriculaModel m=matriculaService.findMatricula(idCurso, idAlumno);
+		m.setValoracion(valoracion);
+		matriculaService.updateMatricula(m);
+		flash.addFlashAttribute("success", "Nota insertada con éxito");
+		
+		return "redirect:/cursos/listCursosProfesor/";
 	}
 }

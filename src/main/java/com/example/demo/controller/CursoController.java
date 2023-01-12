@@ -203,7 +203,7 @@ public class CursoController {
 		}
 		
 		mav.addObject("alumnos", listAlumnos);
-		
+		mav.addObject("idCurso", id);
 		return mav;
 	}
 	

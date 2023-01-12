@@ -52,4 +52,19 @@ public class MatriculaServiceImpl implements MatriculaService{
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(course, MatriculaModel.class);
 	}
+
+	@Override
+	public MatriculaModel findMatricula(int idCurso, int idAlumno) {
+		List<MatriculaModel> listMatriculas = listAllMatriculas();
+		
+		System.out.println(listMatriculas);
+		for(MatriculaModel m:listMatriculas) {
+			if(m.getIdCurso()==idCurso && m.getIdAlumno()==idAlumno) {
+				return m;
+			}
+			
+		}
+		return null;
+		
+	}
 }
