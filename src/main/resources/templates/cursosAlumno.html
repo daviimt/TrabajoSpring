@@ -51,7 +51,7 @@
 				<a th:if="${inscripcion.inscrito == false}" th:href="@{/matriculas/addMatricula/} + ${inscripcion.curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-plus"></i></button>
 				</a>
-				<a th:if="${inscripcion.comentario == true}" th:href="@{/cursos/addComentario/}">
+				<a th:if="${inscripcion.comentario == true}" th:href="@{/comentario/formComentario/}+ ${inscripcion.curso.id}">
 					<button type="button" class="btn btn-default">	<i class="fa-solid fa-comment"></i></button>
 				</a>
 				</th>

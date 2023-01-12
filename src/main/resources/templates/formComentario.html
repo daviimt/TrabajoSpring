@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<meta charset="UTF-8">
+<title>Formulario comentario</title>
+</head>
+<body>
+	<div th:replace="fragments :: header"></div>
+	<br>
+	<form th:action="@{/comentario/addComentario/}" th:object="${comentario}" method="post" style="text-align:center;width: 500px;margin: auto;" enctype="multipart/form-data">
+		<h1 >Nuevo comentario</h1>
+		<input type="hidden" th:field="*{id}" id="id">
+		<div class="form-group">
+		<label for="titulo">Comentario</label> 
+		<input type="text" th:field="*{Comentario}"
+				class="form-control" id="titulo" placeholder="Introduce el comentario" required>
+		</div>
+		<input type="hidden" th:field="*{id_curso}" id="id_curso">
+		<input type="hidden" th:field="*{id_alumno}" id="id_alumno">
+		<br><br>
+		<input type="submit" class="btn btn-primary">
+		<a th:href="@{/cursos/listCursosAlumno}">
+		<button type="button" class="btn btn-primary">Regresar</button>
+		</a>
+	</form>
+	<br><br>
+	<div class="alert alert-success" th:if="${success != null}"
+		th:text="${success}"></div>
+	<div class="alert alert-warning" th:if="${warning != null}"
+		th:text="${warning}"></div>
+	<div class="alert alert-info" th:if="${info != null}"
+		th:text="${info}"></div>
+</body>
+</html>
