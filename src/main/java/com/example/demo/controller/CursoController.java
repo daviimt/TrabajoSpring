@@ -194,9 +194,14 @@ public class CursoController {
 	@GetMapping("/inscritos/{id}")
 	public ModelAndView inscritosCurso(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(INSCRITOS_CURSO);
-		
+		List<CursoModel> cursosAcabados=cursoService.findCursosAcabados();
 		List<Matricula> listMatriculas = matriculaRepository.findBycursoId(id);
 		List<AlumnoModel> listAlumnos = new ArrayList();
+		CursoModel c=cursoService.findCurso(id);
+		
+		boolean cond=cursosAcabados.contains(c);
+		System.out.println(cond);
+		
 		for(Matricula m : listMatriculas) {
 			AlumnoModel a = alumnoService.findStudent(matriculaService.transform(m).getIdAlumno());
 			listAlumnos.add(a);
@@ -204,6 +209,7 @@ public class CursoController {
 		
 		mav.addObject("alumnos", listAlumnos);
 		mav.addObject("idCurso", id);
+		mav.addObject("finalizado",cond);
 		return mav;
 	}
 	

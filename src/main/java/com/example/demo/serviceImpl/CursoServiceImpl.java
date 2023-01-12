@@ -118,6 +118,7 @@ public class CursoServiceImpl implements CursoService{
 		return listInscrip;
 	}
 	
+	@Override
 	public List<CursoModel> findCursosAcabados() {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());

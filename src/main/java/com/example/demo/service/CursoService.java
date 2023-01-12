@@ -17,4 +17,5 @@ public interface CursoService {
 	public abstract Curso transform(CursoModel cursoModel);
 	public abstract CursoModel transform(Curso curso);
 	public abstract List<InscripcionModel> listInscripcion(AlumnoModel alumno, List<CursoModel>listCurso);
+	public List<CursoModel> findCursosAcabados();
 }

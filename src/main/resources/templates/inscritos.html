@@ -28,7 +28,7 @@
 			<tr>
 				<th th:text=${alumno.nombre}></th>
 				<th th:text=${alumno.apellidos}></th>
-				<th><a sec:authorize="hasAuthority('ROL_PROFESOR')"
+				<th><a th:if="${finalizado==true}" sec:authorize="hasAuthority('ROL_PROFESOR')"
 					class="nav-link">
 						<button type="button" onclick="window.modal1.showModal();"
 							class="btn btn-default">
