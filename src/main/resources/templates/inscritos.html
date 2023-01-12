@@ -15,7 +15,7 @@
 			<tr>
 				<th>Nombre</th>
 				<th>Apellidos</th>
-				
+				<th></th>
 	
 			</tr>
 		</thead>
@@ -23,7 +23,13 @@
 			<tr>
 				<th th:text=${alumno.nombre}></th>
 				<th th:text=${alumno.apellidos}></th>
-				
+				<th>
+					<a sec:authorize="hasAuthority('ROL_PROFESOR')" class="nav-link" th:href="@{/profesores/formProfesorEmail/}+${#authentication.name}">
+						<button type="button" class="btn btn-default">
+							<i class="fa-solid fa-pen-to-square"></i>
+						</button>
+					</a>
+				</th>
 			</tr>
 		</tbody>
 	</table>
