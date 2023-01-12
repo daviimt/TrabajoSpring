@@ -34,23 +34,23 @@
 </div>
 
 <div class="container" th:each="noticia: ${noticias}">
-  <div class="card float-left">
+  <div class="card float-left" style="width: 650px;margin: auto;">
     <div class="row ">
 
       <div class="col-sm-7">
         <div class="card-block">
-          <!--           <h4 class="card-title">Small card</h4> -->
-			<th th:text=${noticia.titulo}></th>
+			<h2 th:text=${noticia.titulo}></h2>
+			<br>
 			<th th:text=${noticia.descripcion}></th>
-          <!--  <a href="#" class="btn btn-primary btn-sm">Read More</a> -->
         </div>
       </div>
 
       <div class="col-sm-5">
-        <img th:src="@{images/}+${noticia.imagen}" ></img>
+        <img th:src="@{images/}+${noticia.imagen}" width="200px" height="200px" ></img>
       </div>
     </div>
   </div>
+  <br>
  </div>
     <div class="alert alert-success" th:if="${success != null}"
 		th:text="${success}"></div>
