@@ -91,7 +91,14 @@ public class CursoServiceImpl implements CursoService{
 		List<MatriculaModel> matr = matriculaService.listAllMatriculas();
 		List<CursoModel> listCursosAcabados=findCursosAcabados();
 		
-		
+		Calendar c1 = Calendar.getInstance();
+		Calendar calen = new GregorianCalendar();
+
+		int dia = calen.get(Calendar.DATE);
+		int mes = (calen.get(Calendar.MONTH) + 1);
+		int annio = calen.get(Calendar.YEAR);
+
+		LocalDate fechaActual = LocalDate.of(annio, mes, dia);
 		
 		MatriculaModel m = new MatriculaModel();
 		matr.add(m);
@@ -102,14 +109,23 @@ public class CursoServiceImpl implements CursoService{
 		for(CursoModel c :listCursos) {
 			InscripcionModel insc=new InscripcionModel();
 			boolean comentario= listCursosAcabados.contains(c);
+			boolean finalizado=false;
+			String[] fechafin = c.getFechaFin().split("-");
+			LocalDate fechaCurso = LocalDate.of(Integer.parseInt(fechafin[0]), Integer.parseInt(fechafin[1]),
+					Integer.parseInt(fechafin[2]));
+			
+			if (fechaCurso.isBefore(fechaActual)) {
+					finalizado=true;		
+			}
+			
 			
 			for(MatriculaModel matricula :matr) {
 				
 				if(matricula.getIdCurso()==c.getId() && matricula.getIdAlumno()==(u.getId()+1)) {
-					insc=new InscripcionModel(c,alumno,true,comentario);
+					insc=new InscripcionModel(c,alumno,true,comentario,finalizado);
 					break;
 				}else {
-					insc=new InscripcionModel(c,alumno,false,comentario);
+					insc=new InscripcionModel(c,alumno,false,comentario,finalizado);
 				}
 			}
 			

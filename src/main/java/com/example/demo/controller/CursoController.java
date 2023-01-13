@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +107,7 @@ public class CursoController {
 		
 		mav.addObject("inscripciones", listInscrip);
 		mav.addObject("usuarioId", u.getId() + 1);
+		
 		return mav;
 	}
 
@@ -247,9 +251,7 @@ public class CursoController {
 	public ModelAndView filtroCursosFechas(@ModelAttribute("fechaInicio") String fechaInicio,
 			@ModelAttribute("fechaFin") String fechaFin, RedirectAttributes flash) {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
-		System.out.println("entra bien");
-		System.out.println(fechaInicio + "  " + fechaFin);
-		System.out.println("---------------");
+		
 		List<CursoModel> cus = profesorService.findCursosFechas(fechaInicio, fechaFin);
 
 		mav.addObject("cursos", cus);

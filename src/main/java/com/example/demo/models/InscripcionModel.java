@@ -6,6 +6,7 @@ public class InscripcionModel {
 	private AlumnoModel alumno;
 	private boolean inscrito;
 	private boolean comentario;
+	private boolean finalizado;
 
 	public InscripcionModel() {
 		super();
@@ -24,6 +25,16 @@ public class InscripcionModel {
 		this.alumno = alumno;
 		this.inscrito = inscrito;
 		this.comentario = comentario;
+	}
+
+	public InscripcionModel(CursoModel curso, AlumnoModel alumno, boolean inscrito, boolean comentario,
+			boolean finalizado) {
+		super();
+		this.curso = curso;
+		this.alumno = alumno;
+		this.inscrito = inscrito;
+		this.comentario = comentario;
+		this.finalizado = finalizado;
 	}
 
 	public boolean isComentario() {
@@ -58,9 +69,18 @@ public class InscripcionModel {
 		this.inscrito = inscrito;
 	}
 
+	public boolean isFinalizado() {
+		return finalizado;
+	}
+
+	public void setFinalizado(boolean finalizado) {
+		this.finalizado = finalizado;
+	}
+
 	@Override
 	public String toString() {
-		return "InscripcionModel [curso=" + curso + ", alumno=" + alumno + ", inscrito=" + inscrito + "]";
+		return "InscripcionModel [curso=" + curso + ", alumno=" + alumno + ", inscrito=" + inscrito + ", comentario="
+				+ comentario + ", finalizado=" + finalizado + "]";
 	}
 
 }
