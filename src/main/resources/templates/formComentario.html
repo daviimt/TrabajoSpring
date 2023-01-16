@@ -9,7 +9,7 @@
 <body>
 	<div th:replace="fragments :: header"></div>
 	<br>
-	<form th:action="@{/comentario/addComentario/}" th:object="${comentario}" method="post" style="text-align:center;width: 500px;margin: auto;" enctype="multipart/form-data">
+	<form th:if="${inscrito == true and finalizado==true}" th:action="@{/comentario/addComentario/}" th:object="${comentario}" method="post" style="text-align:center;width: 500px;margin: auto;" enctype="multipart/form-data">
 		<h1 >Nuevo comentario</h1>
 		<input type="hidden" th:field="*{id}" id="id">
 		<div class="form-group">
@@ -36,8 +36,7 @@
 <div class="container" th:each="resenya: ${resenyas}">
   <div class="card float-left" style="width: 650px;margin: auto;">
     <div class="row ">
-
-      <div >
+      <div>
         <div class="card-block">
         <h2 th:text=${resenya.alumno.nombre}></h2>
 		<p th:text=${resenya.comentario.comentario}></p>

@@ -71,10 +71,23 @@ public class ComentarioController {
 		List<ComentarioModel>comentarios=comentarioService.ListComentarioCurso(idCurso);
 		List<ResenyaModel> resenyas=new ArrayList();
 		
+		boolean inscrito=true;
+		boolean finalizado=false;
+		for(InscripcionModel insc:inscritos) {
+			inscrito=true;
+			if(idCurso==insc.getCurso().getId() && (u.getId()+1)==insc.getAlumno().getId() && insc.isFinalizado()){
+				inscrito=false;
+				finalizado=true;
+			}
+		}
+		
 		for(ComentarioModel co:comentarios) {
 			ResenyaModel rm=new ResenyaModel(co,alumnoService.findStudent(comentario.getIdAlumno()));
 			resenyas.add(rm);
 		}
+
+		mav.addObject("inscrito",inscrito);
+		mav.addObject("finalizado",finalizado);
 		mav.addObject("resenyas",resenyas);
 		
 		model.addAttribute("comentario", comentario);
