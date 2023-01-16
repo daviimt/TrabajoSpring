@@ -1,9 +1,12 @@
 package com.example.demo.models;
 
+import com.example.demo.entity.Matricula;
+
 public class InscripcionModel {
 
 	private CursoModel curso;
 	private AlumnoModel alumno;
+	private MatriculaModel matricula;
 	private boolean inscrito;
 	private boolean comentario;
 	private boolean finalizado;
@@ -11,6 +14,21 @@ public class InscripcionModel {
 	public InscripcionModel() {
 		super();
 	}
+	
+	
+
+	public InscripcionModel(CursoModel curso, AlumnoModel alumno, MatriculaModel matricula, boolean inscrito,
+			boolean comentario, boolean finalizado) {
+		super();
+		this.curso = curso;
+		this.alumno = alumno;
+		this.matricula = matricula;
+		this.inscrito = inscrito;
+		this.comentario = comentario;
+		this.finalizado = finalizado;
+	}
+
+
 
 	public InscripcionModel(CursoModel curso, AlumnoModel alumno, boolean inscrito) {
 		super();
@@ -36,6 +54,19 @@ public class InscripcionModel {
 		this.comentario = comentario;
 		this.finalizado = finalizado;
 	}
+
+	
+	public MatriculaModel getMatricula() {
+		return matricula;
+	}
+
+
+
+	public void setMatricula(MatriculaModel matricula) {
+		this.matricula = matricula;
+	}
+
+
 
 	public boolean isComentario() {
 		return comentario;

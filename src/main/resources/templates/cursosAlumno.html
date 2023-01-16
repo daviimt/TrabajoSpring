@@ -33,6 +33,7 @@
 				<th>Nivel</th>
 				<th>Fecha Inicio</th>
 				<th>Fecha Fin</th>
+				<th>Nota</th>
 			</tr>
 		</thead>
 		<tbody th:each="inscripcion: ${inscripciones}">
@@ -42,6 +43,7 @@
 				<th th:text="${inscripcion.curso.nivel}"></th>
 				<th th:text="${inscripcion.curso.fechaInicio}"></th>
 				<th th:text="${inscripcion.curso.fechaFin}"></th>
+				<th th:text="${inscripcion.inscrito == true and inscripcion.finalizado == true} ? ${inscripcion.matricula.valoracion} : '-'" ></th>
 				
 				<th>
 				<a th:if="${inscripcion.inscrito == true}">

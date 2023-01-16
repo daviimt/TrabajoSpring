@@ -122,10 +122,10 @@ public class CursoServiceImpl implements CursoService{
 			for(MatriculaModel matricula :matr) {
 				
 				if(matricula.getIdCurso()==c.getId() && matricula.getIdAlumno()==(u.getId()+1)) {
-					insc=new InscripcionModel(c,alumno,true,comentario,finalizado);
+					insc=new InscripcionModel(c,alumno,matricula,true,comentario,finalizado);
 					break;
 				}else {
-					insc=new InscripcionModel(c,alumno,false,comentario,finalizado);
+					insc=new InscripcionModel(c,alumno,matricula,false,comentario,finalizado);
 				}
 			}
 			
