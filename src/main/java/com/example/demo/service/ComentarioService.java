@@ -14,4 +14,6 @@ public interface ComentarioService {
 	public abstract Comentario updateComentario(ComentarioModel comentarioModel);
 	public abstract Comentario transform(ComentarioModel comentarioModel);
 	public abstract ComentarioModel transform(Comentario comentario);
+	public abstract List<ComentarioModel> ListComentarioCurso(int idCurso);
+	
 }

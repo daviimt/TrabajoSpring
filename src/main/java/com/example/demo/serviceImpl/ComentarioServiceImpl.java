@@ -1,5 +1,6 @@
 package com.example.demo.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +53,21 @@ public class ComentarioServiceImpl implements ComentarioService{
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(comentario, ComentarioModel.class);
 	}
+
+	@Override
+	public List<ComentarioModel> ListComentarioCurso(int idCurso) {
+		List<ComentarioModel> listComentariosCurso=new ArrayList();
+		List<ComentarioModel> listComentarios= ListAllComentario();
+		
+		for(ComentarioModel c:listComentarios) {
+			if(c.getIdCurso()==idCurso)
+				listComentariosCurso.add(c);
+		}
+		
+		return listComentariosCurso;
+	}
+	
+	
 	
 
 }

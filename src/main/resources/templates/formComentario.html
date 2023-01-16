@@ -25,6 +25,29 @@
 		<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
 	</form>
+	
+	<br><br>
+
+
+
+  <div class="title h1 text-center">Comentarios</div>
+
+
+<div class="container" th:each="resenya: ${resenyas}">
+  <div class="card float-left" style="width: 650px;margin: auto;">
+    <div class="row ">
+
+      <div >
+        <div class="card-block">
+        <h2 th:text=${resenya.alumno.nombre}></h2>
+		<p th:text=${resenya.comentario.comentario}></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <br>
+ </div>
 	<br><br>
 	<div class="alert alert-success" th:if="${success != null}"
 		th:text="${success}"></div>
