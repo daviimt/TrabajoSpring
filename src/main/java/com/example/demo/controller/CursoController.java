@@ -127,7 +127,7 @@ public class CursoController {
 	@GetMapping(value = { "/formCursoProfesor", "/formCursoProfesor/{id}" })
 	public String formCursoProfesor(@PathVariable(name = "id", required = false) Integer id, Model model) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+		
 		model.addAttribute("profesor", profesorService.findProfesor(userDetails.getUsername()));
 
 		if (id == null) {

@@ -28,7 +28,7 @@
 		<div class="form-group">
 			<label for="nivel">Nivel</label> <input type="number" step="any"
 				th:field="*{nivel}" class="form-control" id="nivel"
-				placeholder="Introduce el nivel" >
+				placeholder="Introduce el nivel" min="0" max="10" >
 		</div>
 		
 		<div class="form-group">
@@ -54,7 +54,7 @@
 		</div>
 		<br><br>
 		<input type="submit" class="btn btn-primary">
-		<a th:href="@{/cursos/listCursosProfesor}">
+		<a th:href="@{/cursos/listCursosProfesor/}+${profesor.id}">
 		<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
 	</form>

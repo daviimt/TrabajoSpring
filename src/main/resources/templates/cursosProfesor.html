@@ -13,6 +13,7 @@
 	<br>
 	<div style="text-align: center; width: 1200px; margin: auto;">
 	<h1>Lista de cursos impartidos</h1>
+	<br>
 		<form th:action="@{/cursos/filtroCursosFechas}">
 		
 			<label for="fechaInicio">Fecha Inicio</label> <input type="date"
@@ -37,6 +38,7 @@
 
 	</div>
 	<br>
+	<div style="margin: 40px;">
 	<table class="table table-striped table-bordered">
 		<thead class="thead-light">
 			<tr>
@@ -70,6 +72,7 @@
 			</tr>
 		</tbody>
 	</table>
+	</div>
 	<br>
 	<div class="alert alert-success" th:if="${success != null}"
 		th:text="${success}"></div>
@@ -86,5 +89,6 @@
 			<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
 	</div>
+	<br>
 </body>
 </html>

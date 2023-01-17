@@ -14,7 +14,7 @@
 	<div style="text-align: center; width: 1200px; margin: auto;">
 		<h1>Lista de alumnos inscritos</h1>
 	</div>
-
+<div style="margin: 40px;">
 	<table class="table table-striped table-bordered">
 		<thead class="thead-light">
 			<tr>
@@ -50,6 +50,7 @@
 			</tr>
 		</tbody>
 	</table>
+	</div>
 	<br>
 	<div class="alert alert-success" th:if="${success != null}"
 		th:text="${success}"></div>
@@ -60,10 +61,19 @@
 	<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
 
 	<div style="text-align: center; width: 500px; margin: auto;">
-
+        <div sec:authorize="hasAuthority('ROL_PROFESOR')" class="nav-item">
 		<a th:href="@{/cursos/listCursosProfesor/}+${idProfesor}">
 			<button type="button" class="btn btn-primary">Regresar</button>
 		</a>
+        
+        </div>
+        
+        <div sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item">
+		<a th:href="@{/cursos/listCursos}">
+			<button type="button" class="btn btn-primary">Regresar</button>
+		</a>
+        
+        </div>
 	</div>
 </body>
 </html>
