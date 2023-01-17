@@ -91,6 +91,6 @@ public class MatriculaController {
 		matriculaService.updateMatricula(m);
 		flash.addFlashAttribute("success", "Nota insertada con éxito");
 		
-		return "redirect:/cursos/listCursosProfesor/";
+		return "redirect:/cursos/listCursosProfesor/"+(u.getId()+1);
 	}
 }

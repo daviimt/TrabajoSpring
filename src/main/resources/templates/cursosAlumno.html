@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div th:replace="fragments :: header"></div>
-	<br>
+	<br><br>
 	<div style="text-align: center; width: 1200px; margin: auto;">
 
 		<a th:href="@{/cursos/filtroCursosBasicos}">
@@ -56,9 +56,6 @@
 				<a th:if="${inscripcion.inscrito == false and inscripcion.comentario == false}" th:href="@{/matriculas/addMatricula/} + ${inscripcion.curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
 						<button type="button" class="btn btn-default"><i class="fa-solid fa-plus"></i></button>
 				</a>
-				<!-- <a th:if="${inscripcion.comentario == true and inscripcion.inscrito}" th:href="@{/comentario/formComentario/}+ ${inscripcion.curso.id}">
-					<button type="button" class="btn btn-default">	<i class="fa-solid fa-comment"></i></button>
-				</a> -->
 				<a th:href="@{/comentario/formComentario/}+ ${inscripcion.curso.id}">
 					<button type="button" class="btn btn-default">	<i class="fa-solid fa-comment"></i></button>
 				</a>

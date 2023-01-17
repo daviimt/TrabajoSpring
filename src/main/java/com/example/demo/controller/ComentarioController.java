@@ -71,12 +71,12 @@ public class ComentarioController {
 		List<ComentarioModel>comentarios=comentarioService.ListComentarioCurso(idCurso);
 		List<ResenyaModel> resenyas=new ArrayList();
 		
-		boolean inscrito=true;
+		boolean inscrito=false;
 		boolean finalizado=false;
 		for(InscripcionModel insc:inscritos) {
-			inscrito=true;
+			inscrito=false;
 			if(idCurso==insc.getCurso().getId() && (u.getId()+1)==insc.getAlumno().getId() && insc.isFinalizado()){
-				inscrito=false;
+				inscrito=true;
 				finalizado=true;
 			}
 		}
