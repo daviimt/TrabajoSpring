@@ -202,6 +202,8 @@ public class CursoController {
 		List<Matricula> listMatriculas = matriculaRepository.findBycursoId(id);
 		List<AlumnoModel> listAlumnos = new ArrayList();
 		CursoModel c=cursoService.findCurso(id);
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		
 		boolean cond=cursosAcabados.contains(c);
 		System.out.println(cond);
@@ -210,7 +212,7 @@ public class CursoController {
 			AlumnoModel a = alumnoService.findStudent(matriculaService.transform(m).getIdAlumno());
 			listAlumnos.add(a);
 		}
-		
+		mav.addObject("idProfesor", u.getId()+1);
 		mav.addObject("alumnos", listAlumnos);
 		mav.addObject("idCurso", id);
 		mav.addObject("finalizado",cond);
