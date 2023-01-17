@@ -48,16 +48,16 @@
 				
 				<th>
 				<a th:if="${inscripcion.inscrito == true}">
-					<button type="button" class="btn btn-default">	<i class="fa-solid fa-check"></i></button>
+					<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Inscrito"><i class="fa-solid fa-check"></i></button>
 				</a>
 				<a th:if="${inscripcion.comentario == true and inscripcion.inscrito== false}">
-					<button type="button" class="btn btn-default">	<i class="fa-solid fa-ban"></i></button>
+					<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Curso finalizado">	<i class="fa-solid fa-ban"></i></button>
 				</a>
-				<a th:if="${inscripcion.inscrito == false and inscripcion.comentario == false}" th:href="@{/matriculas/addMatricula/} + ${inscripcion.curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso');">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-plus"></i></button>
+				<a th:if="${inscripcion.inscrito == false and inscripcion.comentario == false}" th:href="@{/matriculas/addMatricula/} + ${inscripcion.curso.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas incribirte en el curso?');">
+						<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Inscribirse"><i class="fa-solid fa-plus"></i></button>
 				</a>
 				<a th:href="@{/comentario/formComentario/}+ ${inscripcion.curso.id}">
-					<button type="button" class="btn btn-default">	<i class="fa-solid fa-comment"></i></button>
+					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="A&ntilde;adir comentario"><i class="fa-solid fa-comment"></i></button>
 				</a>
 				</th>
 			</tr>

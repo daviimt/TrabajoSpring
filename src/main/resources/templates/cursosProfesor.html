@@ -62,12 +62,12 @@
 						</button>
 				</a> <a th:href="@{/cursos/deleteCursoProfesor/}+ ${curso.id}"
 					th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
-						<button type="button" class="btn btn-default">
+						<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Eliminar el curso">
 							<i class="fa-solid fa-trash" aria-hidden="true"></i>
 						</button>
 				</a>
 				<a th:href="@{/cursos/inscritos/}+ ${curso.id}" >
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
+						<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Actualizar curso"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
 				</a></th>
 			</tr>
 		</tbody>

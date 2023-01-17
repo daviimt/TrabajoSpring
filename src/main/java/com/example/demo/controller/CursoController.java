@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.example.demo.entity.Alumno;
 import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.AlumnoModel;
@@ -69,7 +65,12 @@ public class CursoController {
 	@Qualifier("matriculaRepository")
 	private MatriculaRepository matriculaRepository;
 
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
+//Método redirect
+	@GetMapping("/")
+	public RedirectView redirect() {
+		return new RedirectView("/cursos/listCursos");
+	}
+	
 	@GetMapping(value = { "/listCursos", "/listCursos/{id}" })
 	public ModelAndView listCursos(@PathVariable(name = "id", required = false) Integer id) {
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
@@ -81,7 +82,43 @@ public class CursoController {
 		}
 		return mav;
 	}
+	
+//Añadir o actualizar curso
+	@PostMapping("/addCurso")
+	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
+		if (cursoModel.getId() == 0) {
+			cursoService.addCurso(cursoModel);
+			flash.addFlashAttribute("success", "Curso insertado con éxito");
+		} else {
+			cursoService.updateCurso(cursoModel);
+			flash.addFlashAttribute("success", "Curso modificado con éxito");
+		}
+		return "redirect:/cursos/listCursos";
+	}
 
+//Borrar curso
+	@GetMapping("/deleteCurso/{id}")
+	public String deleteCurso(@PathVariable("id") int id, RedirectAttributes flash) {
+		if (cursoService.removeCurso(id) == 0)
+			flash.addFlashAttribute("success", "Curso eliminado con éxito");
+		else
+			flash.addFlashAttribute("error", "No se pudo eliminar el curso");
+		return "redirect:/cursos/listCursos";
+	}
+
+//Formulario curso
+	@GetMapping(value = { "/formCurso", "/formCurso/{id}" })
+	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
+
+		model.addAttribute("profesores", profesorService.listAllProfesores());
+		if (id == null) {
+			model.addAttribute("curso", new CursoModel());
+		} else {
+			model.addAttribute("curso", cursoService.findCurso(id));
+		}
+		return FORM_VIEW;
+	}
+	
 	@GetMapping(value = { "/listCursosProfesor", "/listCursosProfesor/{id}" })
 	public ModelAndView listCursosProfesor(@PathVariable(name = "id", required = false) Integer id) {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
@@ -95,35 +132,7 @@ public class CursoController {
 		return mav;
 	}
 
-	@GetMapping("/listCursosAlumno")
-	public ModelAndView listCursosAlumno() {
-		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
-		List<CursoModel> cursos = cursoService.ListAllCursos();
-
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
-		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);
-		List<InscripcionModel> listInscrip = cursoService.listInscripcion(alumno,cursos);
-		
-		mav.addObject("inscripciones", listInscrip);
-		mav.addObject("usuarioId", u.getId() + 1);
-		
-		return mav;
-	}
-
-	@GetMapping(value = { "/formCurso", "/formCurso/{id}" })
-	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
-
-		model.addAttribute("profesores", profesorService.listAllProfesores());
-		if (id == null) {
-			model.addAttribute("curso", new CursoModel());
-		} else {
-			model.addAttribute("curso", cursoService.findCurso(id));
-		}
-		return FORM_VIEW;
-	}
-
-	// metodo para insertar y actualizar el curso del profesor
+//Metodo para insertar y actualizar el curso del profesor
 	@GetMapping(value = { "/formCursoProfesor", "/formCursoProfesor/{id}" })
 	public String formCursoProfesor(@PathVariable(name = "id", required = false) Integer id, Model model) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -138,18 +147,7 @@ public class CursoController {
 		return FORM_PROFESOR_VIEW;
 	}
 
-	@PostMapping("/addCurso")
-	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
-		if (cursoModel.getId() == 0) {
-			cursoService.addCurso(cursoModel);
-			flash.addFlashAttribute("success", "Curso insertado con éxito");
-		} else {
-			cursoService.updateCurso(cursoModel);
-			flash.addFlashAttribute("success", "Curso modificado con éxito");
-		}
-		return "redirect:/cursos/listCursos";
-	}
-
+	
 	@PostMapping("/addCursoProfesor")
 	public String addCursoProfesor(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -173,16 +171,6 @@ public class CursoController {
 		return "redirect:/cursos/listCursosProfesor/" + id;
 	}
 
-	// Metodo de borrar
-	@GetMapping("/deleteCurso/{id}")
-	public String deleteCurso(@PathVariable("id") int id, RedirectAttributes flash) {
-		if (cursoService.removeCurso(id) == 0)
-			flash.addFlashAttribute("success", "Curso eliminado con éxito");
-		else
-			flash.addFlashAttribute("error", "No se pudo eliminar el curso");
-		return "redirect:/cursos/listCursos";
-	}
-
 	@GetMapping("/deleteCursoProfesor/{id}")
 	public String deleteCursoProfesor(@PathVariable("id") int id, RedirectAttributes flash) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -195,6 +183,22 @@ public class CursoController {
 		return "redirect:/cursos/listCursosProfesor/" + (u.getId() + 1);
 	}
 
+	@GetMapping("/listCursosAlumno")
+	public ModelAndView listCursosAlumno() {
+		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);
+		List<CursoModel> cursos = cursoService.ListAllCursos();
+
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		AlumnoModel alumno = alumnoService.findStudent(u.getId() + 1);
+		List<InscripcionModel> listInscrip = cursoService.listInscripcion(alumno,cursos);
+		
+		mav.addObject("inscripciones", listInscrip);
+		mav.addObject("usuarioId", u.getId() + 1);
+		
+		return mav;
+	}
+	
 	@GetMapping("/inscritos/{id}")
 	public ModelAndView inscritosCurso(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(INSCRITOS_CURSO);
@@ -219,12 +223,7 @@ public class CursoController {
 		return mav;
 	}
 	
-	// Metodo redirect
-	@GetMapping("/")
-	public RedirectView redirect() {
-		return new RedirectView("/cursos/listCursos");
-	}
-
+//filtro cursos por FECHAS
 	@GetMapping("/filtroCursosAcabados")
 	public ModelAndView filtroCursosAcabados() {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
@@ -270,7 +269,8 @@ public class CursoController {
 		mav.addObject("cursos", cus);
 		return mav;
 	}
-
+	
+//filtros cursos por NIVELES
 	@GetMapping("/filtroCursosBasicos")
 	public ModelAndView filtroCursosBasicos() {
 		ModelAndView mav = new ModelAndView(COURSES_ALUMNO_VIEW);

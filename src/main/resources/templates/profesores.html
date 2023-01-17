@@ -10,6 +10,7 @@
 <body>
 	<div th:replace="fragments :: header"></div>
 	<br>
+		<div style="margin: 40px">
 		<table class="table table-striped table-bordered">
 			<thead class="thead-light">
 				<tr>
@@ -25,15 +26,16 @@
 					<th th:text=${profesor.email}></th>
 					<th>
 					<a th:href="@{/profesores/formProfesor/} + ${profesor.id}">
-						<button type="button" class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></button>
+						<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Actualizar profesor"><i class="fa-solid fa-pen-to-square"></i></button>
 					</a> 
 					<a th:href="@{/profesores/deleteProfesor/} + ${profesor.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');" >
-							<button type="button" class="btn btn-default"><i class="fa-solid fa-trash" aria-hidden=true></i></button>
+							<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Eliminar profesor"><i class="fa-solid fa-trash" aria-hidden=true></i></button>
 					</a>
 					</th>
 				</tr>
 			</tbody>
 		</table>
+		</div>
 	<br>
 	<div class="alert alert-success" th:if="${success != null}"
 						th:text="${success}"></div>
