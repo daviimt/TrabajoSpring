@@ -226,9 +226,12 @@ public class CursoController {
 	}
 
 	@GetMapping("/filtroCursosAcabados")
-	public ModelAndView filtroCursosAcabadors() {
+	public ModelAndView filtroCursosAcabados() {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 		List<CursoModel> cus = profesorService.findCursosAcabados();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		mav.addObject("idProfesor", u.getId()+1);
 		mav.addObject("cursos", cus);
 		return mav;
 	}
@@ -237,6 +240,9 @@ public class CursoController {
 	public ModelAndView filtroCursosSinEmpezar() {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 		List<CursoModel> cus = profesorService.findCursosSinEmpezar();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		mav.addObject("idProfesor", u.getId()+1);
 		mav.addObject("cursos", cus);
 		return mav;
 	}
@@ -245,6 +251,9 @@ public class CursoController {
 	public ModelAndView filtroCursosImpartiendose() {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
 		List<CursoModel> cus = profesorService.findCursosImpartiendose();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		mav.addObject("idProfesor", u.getId()+1);
 		mav.addObject("cursos", cus);
 		return mav;
 	}
@@ -253,9 +262,11 @@ public class CursoController {
 	public ModelAndView filtroCursosFechas(@ModelAttribute("fechaInicio") String fechaInicio,
 			@ModelAttribute("fechaFin") String fechaFin, RedirectAttributes flash) {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		
 		List<CursoModel> cus = profesorService.findCursosFechas(fechaInicio, fechaFin);
-
+		mav.addObject("idProfesor", u.getId()+1);
 		mav.addObject("cursos", cus);
 		return mav;
 	}
