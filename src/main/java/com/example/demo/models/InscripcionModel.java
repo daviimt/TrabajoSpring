@@ -17,6 +17,15 @@ public class InscripcionModel {
 	
 	
 
+	public InscripcionModel(CursoModel curso, AlumnoModel alumno, MatriculaModel matricula) {
+		super();
+		this.curso = curso;
+		this.alumno = alumno;
+		this.matricula = matricula;
+	}
+
+
+
 	public InscripcionModel(CursoModel curso, AlumnoModel alumno, MatriculaModel matricula, boolean inscrito,
 			boolean comentario, boolean finalizado) {
 		super();

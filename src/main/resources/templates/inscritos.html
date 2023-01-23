@@ -20,33 +20,38 @@
 			<tr>
 				<th>Nombre</th>
 				<th>Apellidos</th>
-				<th></th>
+				<th th:if="${finalizado==true}">Nota</th>
+				<th th:if="${finalizado==true}"></th>
 
 			</tr>
 		</thead>
-		<tbody th:each="alumno: ${alumnos}">
+		<tbody th:each="inscrito: ${inscritos}">
 			<tr>
-				<th th:text=${alumno.nombre}></th>
-				<th th:text=${alumno.apellidos}></th>
-				<th><a th:if="${finalizado==true}" sec:authorize="hasAuthority('ROL_PROFESOR')"
-					class="nav-link">
-						<button type="button" onclick="window.modal1.showModal();"
-							class="btn btn-default">
-							<i class="fa-solid fa-pen-to-square"></i>
-						</button> 
-						<dialog id="modal1"> 
-						<h1 for="valoracion">Calificaci&oacute;n:</h1>
-						<form th:action="${'/matriculas/calificar/' + {idCurso} + '/' + {alumno.id}}" method="post">
-						
-						<input type="number" step="any" class="form-control"
-							placeholder="Introduce la calificaci&oacute;n" min="0" max="10" id="valoracion" name="valoracion">
-						<br>
-						<button type="submit">Confirmar</button>
-						</form>
-						
-						<button onclick="window.modal1.close();">Cerrar</button>
-						</dialog>
-				</a></th>
+				<th th:text=${inscrito.alumno.nombre}></th>
+				<th th:text=${inscrito.alumno.apellidos}></th>
+				
+				<th th:if="${finalizado==true}"><a sec:authorize="hasAuthority('ROL_PROFESOR')" th:text=${inscrito.matricula.valoracion}></a></th>
+				
+				<th th:if="${finalizado==true}"><a sec:authorize="hasAuthority('ROL_PROFESOR')"
+                    class="nav-link">
+                        <button type="button" onclick="window.modal1.showModal();"
+                            class="btn btn-default">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button> 
+                        <dialog id="modal1"> 
+                        <h1 for="valoracion">Calificaci&oacute;n:</h1>
+                        <form th:action="${'/matriculas/calificar/' + {idCurso} + '/' + {inscrito.alumno.id}}" method="post">
+
+                        <input type="number" step="any" class="form-control"
+                            placeholder="Introduce la calificaci&oacute;n" min="0" max="10" id="valoracion" name="valoracion">
+                        <br>
+                        <button type="submit">Confirmar</button>
+                        </form>
+
+                        <button onclick="window.modal1.close();">Cerrar</button>
+                        </dialog>
+                </a></th>
+				
 			</tr>
 		</tbody>
 	</table>

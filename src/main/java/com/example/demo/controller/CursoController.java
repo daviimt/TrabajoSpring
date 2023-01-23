@@ -204,7 +204,8 @@ public class CursoController {
 		ModelAndView mav = new ModelAndView(INSCRITOS_CURSO);
 		List<CursoModel> cursosAcabados=cursoService.findCursosAcabados();
 		List<Matricula> listMatriculas = matriculaRepository.findBycursoId(id);
-		List<AlumnoModel> listAlumnos = new ArrayList();
+		List<InscripcionModel> listInscritos=new ArrayList();
+		
 		CursoModel c=cursoService.findCurso(id);
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
@@ -214,10 +215,11 @@ public class CursoController {
 		
 		for(Matricula m : listMatriculas) {
 			AlumnoModel a = alumnoService.findStudent(matriculaService.transform(m).getIdAlumno());
-			listAlumnos.add(a);
+			InscripcionModel ins=new InscripcionModel(c,a,matriculaService.transform(m));
+			listInscritos.add(ins);
 		}
 		mav.addObject("idProfesor", u.getId()+1);
-		mav.addObject("alumnos", listAlumnos);
+		mav.addObject("inscritos", listInscritos);
 		mav.addObject("idCurso", id);
 		mav.addObject("finalizado",cond);
 		return mav;
