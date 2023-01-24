@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -125,14 +126,14 @@ public class AlumnoController {
 		List<MatriculaModel> listMatriculas= matriculaService.listAllMatriculas();
 
 		List<CursoModel> cursosAcabados=cursoService.findCursosAcabados();
-		List<MatriculaModel> matriculasAcabadas=new ArrayList();
+		List<MatriculaModel> matriculasAcabadas=new ArrayList<>();
 		for(MatriculaModel m:listMatriculas) {
 			CursoModel c=cursoService.findCurso(m.getIdCurso());
 			if(cursosAcabados.contains(c)) {
 				matriculasAcabadas.add(m);
 			}
 		}
-		List<InscripcionModel> listInscritos=new ArrayList();
+		List<InscripcionModel> listInscritos=new ArrayList<>();
 		
 		for(AlumnoModel a: listAlumnos) {
 			int nota=0;
@@ -150,8 +151,9 @@ public class AlumnoController {
 				listInscritos.add(new InscripcionModel(a,media));
 			}
 		}
-		
-		List<InscripcionModel> listAlumnosOrdenados= listInscritos.stream().sorted((i,j)->i.getNotaMedia()+j.getNotaMedia()).collect(Collectors.toList());
+		System.out.println(listInscritos);
+		List<InscripcionModel> listAlumnosOrdenados= listInscritos.stream().sorted(Comparator.comparing(InscripcionModel::getNotaMedia).reversed()).collect(Collectors.toList());
+		System.out.println(listAlumnosOrdenados);
 		mav.addObject("lista",false);
 		mav.addObject("inscritos", listAlumnosOrdenados);
 		return mav;

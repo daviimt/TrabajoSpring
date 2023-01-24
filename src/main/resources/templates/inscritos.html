@@ -13,6 +13,11 @@
 	<br>
 	<div style="text-align: center; width: 1200px; margin: auto;">
 		<h1>Lista de alumnos inscritos</h1>
+
+		<a th:href="@{/cursos/ordenarNotas/}+${idCurso}">
+			<button >Ordenar por nota</button>
+		</a>
+
 	</div>
 <div style="margin: 40px;">
 	<table class="table table-striped table-bordered">
@@ -30,7 +35,7 @@
 				<th th:text=${inscrito.alumno.nombre}></th>
 				<th th:text=${inscrito.alumno.apellidos}></th>
 				
-				<th th:if="${finalizado==true}"><a sec:authorize="hasAuthority('ROL_PROFESOR')" th:text=${inscrito.matricula.valoracion}></a></th>
+				<th th:if="${finalizado==true}"><a th:text=${inscrito.matricula.valoracion}></a></th>
 				
 				<th th:if="${finalizado==true}"><a sec:authorize="hasAuthority('ROL_PROFESOR')"
                     class="nav-link">

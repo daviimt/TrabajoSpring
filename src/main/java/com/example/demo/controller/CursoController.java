@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -218,6 +220,34 @@ public class CursoController {
 			InscripcionModel ins=new InscripcionModel(c,a,matriculaService.transform(m));
 			listInscritos.add(ins);
 		}
+		mav.addObject("idProfesor", u.getId()+1);
+		mav.addObject("inscritos", listInscritos);
+		mav.addObject("idCurso", id);
+		mav.addObject("finalizado",cond);
+		return mav;
+	}
+	
+	@GetMapping("/ordenarNotas/{id}")
+	public ModelAndView ordenarNotas(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView(INSCRITOS_CURSO);
+		List<CursoModel> cursosAcabados=cursoService.findCursosAcabados();
+		List<Matricula> listMatriculas = matriculaRepository.findBycursoId(id);
+		
+		List<InscripcionModel> listInscritos=new ArrayList();
+		
+		CursoModel c=cursoService.findCurso(id);
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		
+		boolean cond=cursosAcabados.contains(c);
+		System.out.println(cond);
+		List<Matricula> listMatriculasOrdeadas=listMatriculas.stream().sorted(Comparator.comparing(Matricula::getValoracion).reversed()).collect(Collectors.toList());
+		for(Matricula m : listMatriculasOrdeadas) {
+			AlumnoModel a = alumnoService.findStudent(matriculaService.transform(m).getIdAlumno());
+			InscripcionModel ins=new InscripcionModel(c,a,matriculaService.transform(m));
+			listInscritos.add(ins);
+		}
+
 		mav.addObject("idProfesor", u.getId()+1);
 		mav.addObject("inscritos", listInscritos);
 		mav.addObject("idCurso", id);
