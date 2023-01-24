@@ -22,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.AlumnoModel;
+import com.example.demo.models.CursoModel;
 import com.example.demo.models.InscripcionModel;
 import com.example.demo.models.MatriculaModel;
 import com.example.demo.repository.UsuarioRepository;
@@ -122,6 +123,15 @@ public class AlumnoController {
 		ModelAndView mav = new ModelAndView(STUDENTS_VIEW);
 		List<AlumnoModel> listAlumnos=alumnoService.ListAllAlumnos();
 		List<MatriculaModel> listMatriculas= matriculaService.listAllMatriculas();
+
+		List<CursoModel> cursosAcabados=courseService.findCursosAcabados();
+		List<MatriculaModel> matriculasAcabadas=new ArrayList();
+		for(MatriculaModel m:listMatriculas) {
+			CursoModel c=courseService.findCurso(m.getIdCurso());
+			if(cursosAcabados.contains(c)) {
+				matriculasAcabadas.add(m);
+			}
+		}
 		List<InscripcionModel> listInscritos=new ArrayList();
 		
 		for(AlumnoModel a: listAlumnos) {
@@ -129,7 +139,7 @@ public class AlumnoController {
 			int matr=0;
 			int media=0;
 			
-			for(MatriculaModel m:listMatriculas) {
+			for(MatriculaModel m:matriculasAcabadas) {
 				if(m.getIdAlumno()==a.getId()) {
 					nota+=m.getValoracion();
 					matr+=1;
