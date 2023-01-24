@@ -61,7 +61,15 @@ public class AlumnoController {
 	@GetMapping("/listAlumnos")
 	public ModelAndView listAlumnos() {
 		ModelAndView mav = new ModelAndView(STUDENTS_VIEW);
-		mav.addObject("alumnos", alumnoService.ListAllAlumnos());
+		List<AlumnoModel> list=alumnoService.ListAllAlumnos();
+		List<InscripcionModel> listAlumnos=new ArrayList();
+		for(AlumnoModel a:list) {
+			InscripcionModel ins=new InscripcionModel();
+			ins.setAlumno(a);
+			listAlumnos.add(ins);
+		}
+		mav.addObject("lista",true);
+		mav.addObject("inscritos", listAlumnos);
 		return mav;
 	}
 
@@ -132,14 +140,10 @@ public class AlumnoController {
 				listInscritos.add(new InscripcionModel(a,media));
 			}
 		}
-		System.out.println(listInscritos);
-		List<InscripcionModel> listAlumnosOrdenados= listInscritos.stream().sorted((i,j)->i.getNotaMedia()-j.getNotaMedia()).collect(Collectors.toList());
-		System.out.println(listAlumnosOrdenados);
-		List<AlumnoModel> listAlumns=new ArrayList();
-		for(InscripcionModel i:listAlumnosOrdenados) {
-			listAlumns.add(i.getAlumno());
-		}
-		mav.addObject("alumnos", listAlumns);
+		
+		List<InscripcionModel> listAlumnosOrdenados= listInscritos.stream().sorted((i,j)->i.getNotaMedia()+j.getNotaMedia()).collect(Collectors.toList());
+		mav.addObject("lista",false);
+		mav.addObject("inscritos", listAlumnosOrdenados);
 		return mav;
 	}
 	

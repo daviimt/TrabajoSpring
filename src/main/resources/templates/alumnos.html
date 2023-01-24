@@ -13,7 +13,7 @@
 	<div style="text-align: center; width: 1200px; margin: auto;">
 
 		<a th:href="@{/alumnos/ordenarAlumnos}">
-			<button >Ordenar</button>
+			<button >Ordenar por nota media</button>
 		</a>
 
 	</div>
@@ -27,21 +27,23 @@
 					<th>Nombre</th>
 					<th>Apellidos</th>
 					<th>Email</th>
+					<th th:if="${lista == false}">Nota Media</th>
 				</tr>
 			</thead>
 
-			<tbody th:each="alumno: ${alumnos}">
+			<tbody th:each="inscrito: ${inscritos}">
 				<tr>
-					<th th:text=${alumno.nombre}></th>
-					<th th:text=${alumno.apellidos}></th>
-					<th th:text=${alumno.email}></th>
+					<th th:text=${inscrito.alumno.nombre}></th>
+					<th th:text=${inscrito.alumno.apellidos}></th>
+					<th th:text=${inscrito.alumno.email}></th>
+					<th th:if="${inscrito.notaMedia != 0}" th:text=${inscrito.notaMedia}></th>
 					<th>
-						<a th:href="@{/alumnos/deleteAlumno/} + ${alumno.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
+						<a th:href="@{/alumnos/deleteAlumno/} + ${inscrito.alumno.id}" th:onclick="return confirm('&iquest;Est&aacute;s seguro que deseas eliminar el registro?');">
                             <button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Eliminar alumno">
                             	<i class="fa-solid fa-trash" aria-hidden=true></i>
                             </button>
 						</a> 
-						<a th:href="@{/usuarios/activarUsuario/} + ${alumno.email}">
+						<a th:href="@{/usuarios/activarUsuario/} + ${inscrito.alumno.email}">
 							<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Activar alumno">
 								<i class="fas fa-user-times"> </i>
 							</button>
