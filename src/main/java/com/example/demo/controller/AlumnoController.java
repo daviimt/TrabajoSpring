@@ -48,7 +48,7 @@ public class AlumnoController {
 
 	@Autowired
 	@Qualifier("cursoService")
-	private CursoService courseService;
+	private CursoService cursoService;
 	
 	@Autowired
 	@Qualifier("usuarioService")
@@ -95,7 +95,7 @@ public class AlumnoController {
 	public String addAlumno(@Valid @ModelAttribute("alumno") AlumnoModel studentModel, BindingResult bindingResult,
 			RedirectAttributes flash, Model model) {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("curso", courseService.ListAllCursos());
+			model.addAttribute("curso", cursoService.ListAllCursos());
 			return FORM_VIEW;
 		} else {
 			alumnoService.updateAlumno(studentModel);
@@ -124,10 +124,10 @@ public class AlumnoController {
 		List<AlumnoModel> listAlumnos=alumnoService.ListAllAlumnos();
 		List<MatriculaModel> listMatriculas= matriculaService.listAllMatriculas();
 
-		List<CursoModel> cursosAcabados=courseService.findCursosAcabados();
+		List<CursoModel> cursosAcabados=cursoService.findCursosAcabados();
 		List<MatriculaModel> matriculasAcabadas=new ArrayList();
 		for(MatriculaModel m:listMatriculas) {
-			CursoModel c=courseService.findCurso(m.getIdCurso());
+			CursoModel c=cursoService.findCurso(m.getIdCurso());
 			if(cursosAcabados.contains(c)) {
 				matriculasAcabadas.add(m);
 			}
