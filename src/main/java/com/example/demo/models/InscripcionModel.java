@@ -10,12 +10,20 @@ public class InscripcionModel {
 	private boolean inscrito;
 	private boolean comentario;
 	private boolean finalizado;
+	private int notaMedia;
+
 
 	public InscripcionModel() {
 		super();
 	}
-	
-	
+
+	public InscripcionModel( AlumnoModel alumno, int notaMedia) {
+		super();
+		this.alumno = alumno;
+		this.notaMedia = notaMedia;
+	}
+
+
 
 	public InscripcionModel(CursoModel curso, AlumnoModel alumno, MatriculaModel matricula) {
 		super();
@@ -23,8 +31,6 @@ public class InscripcionModel {
 		this.alumno = alumno;
 		this.matricula = matricula;
 	}
-
-
 
 	public InscripcionModel(CursoModel curso, AlumnoModel alumno, MatriculaModel matricula, boolean inscrito,
 			boolean comentario, boolean finalizado) {
@@ -36,8 +42,6 @@ public class InscripcionModel {
 		this.comentario = comentario;
 		this.finalizado = finalizado;
 	}
-
-
 
 	public InscripcionModel(CursoModel curso, AlumnoModel alumno, boolean inscrito) {
 		super();
@@ -64,18 +68,13 @@ public class InscripcionModel {
 		this.finalizado = finalizado;
 	}
 
-	
 	public MatriculaModel getMatricula() {
 		return matricula;
 	}
 
-
-
 	public void setMatricula(MatriculaModel matricula) {
 		this.matricula = matricula;
 	}
-
-
 
 	public boolean isComentario() {
 		return comentario;
@@ -117,10 +116,19 @@ public class InscripcionModel {
 		this.finalizado = finalizado;
 	}
 
+	public int getNotaMedia() {
+		return notaMedia;
+	}
+	
+	public void setNotaMedia(int notaMedia) {
+		this.notaMedia = notaMedia;
+	}
+
 	@Override
 	public String toString() {
-		return "InscripcionModel [curso=" + curso + ", alumno=" + alumno + ", inscrito=" + inscrito + ", comentario="
-				+ comentario + ", finalizado=" + finalizado + "]";
+		return "InscripcionModel [curso=" + curso + ", alumno=" + alumno + ", matricula=" + matricula + ", inscrito="
+				+ inscrito + ", comentario=" + comentario + ", finalizado=" + finalizado + ", notaMedia=" + notaMedia
+				+ "]";
 	}
 
 }

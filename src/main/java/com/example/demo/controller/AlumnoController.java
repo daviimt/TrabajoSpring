@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +22,12 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.models.AlumnoModel;
+import com.example.demo.models.InscripcionModel;
+import com.example.demo.models.MatriculaModel;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.AlumnoService;
 import com.example.demo.service.CursoService;
+import com.example.demo.service.MatriculaService;
 import com.example.demo.serviceImpl.UsuarioService;
 
 @Controller
@@ -33,6 +40,10 @@ public class AlumnoController {
 	@Autowired
 	@Qualifier("alumnoService")
 	private AlumnoService alumnoService;
+	
+	@Autowired
+	@Qualifier("matriculaService")
+	private MatriculaService matriculaService;
 
 	@Autowired
 	@Qualifier("cursoService")
@@ -97,6 +108,41 @@ public class AlumnoController {
 			int id=i+1;
 		return "redirect:/alumnos/formAlumno/"+id;
 	}
+	
+	@GetMapping("/ordenarAlumnos")
+	public ModelAndView ordenarAlumnos() {
+		ModelAndView mav = new ModelAndView(STUDENTS_VIEW);
+		List<AlumnoModel> listAlumnos=alumnoService.ListAllAlumnos();
+		List<MatriculaModel> listMatriculas= matriculaService.listAllMatriculas();
+		List<InscripcionModel> listInscritos=new ArrayList();
+		
+		for(AlumnoModel a: listAlumnos) {
+			int nota=0;
+			int matr=0;
+			int media=0;
+			
+			for(MatriculaModel m:listMatriculas) {
+				if(m.getIdAlumno()==a.getId()) {
+					nota+=m.getValoracion();
+					matr+=1;
+				}
+			}
+			if(matr!=0) {
+				media=(nota/matr);
+				listInscritos.add(new InscripcionModel(a,media));
+			}
+		}
+		System.out.println(listInscritos);
+		List<InscripcionModel> listAlumnosOrdenados= listInscritos.stream().sorted((i,j)->i.getNotaMedia()-j.getNotaMedia()).collect(Collectors.toList());
+		System.out.println(listAlumnosOrdenados);
+		List<AlumnoModel> listAlumns=new ArrayList();
+		for(InscripcionModel i:listAlumnosOrdenados) {
+			listAlumns.add(i.getAlumno());
+		}
+		mav.addObject("alumnos", listAlumns);
+		return mav;
+	}
+	
 	// Metodo redirect
 	@GetMapping("/")
 	public RedirectView redirect() {
