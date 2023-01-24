@@ -11,19 +11,23 @@ public class InscripcionModel {
 	private boolean comentario;
 	private boolean finalizado;
 	private int notaMedia;
-
+	private int numeroMatriculas;
 
 	public InscripcionModel() {
 		super();
 	}
 
-	public InscripcionModel( AlumnoModel alumno, int notaMedia) {
+	public InscripcionModel(AlumnoModel alumno, int notaMedia) {
 		super();
 		this.alumno = alumno;
 		this.notaMedia = notaMedia;
 	}
 
-
+	public InscripcionModel(CursoModel curso, int numeroMatriculas) {
+		super();
+		this.curso = curso;
+		this.numeroMatriculas = numeroMatriculas;
+	}
 
 	public InscripcionModel(CursoModel curso, AlumnoModel alumno, MatriculaModel matricula) {
 		super();
@@ -119,9 +123,17 @@ public class InscripcionModel {
 	public int getNotaMedia() {
 		return notaMedia;
 	}
-	
+
 	public void setNotaMedia(int notaMedia) {
 		this.notaMedia = notaMedia;
+	}
+
+	public int getNumeroMatriculas() {
+		return numeroMatriculas;
+	}
+
+	public void setNumeroMatriculas(int numeroMatriculas) {
+		this.numeroMatriculas = numeroMatriculas;
 	}
 
 	@Override

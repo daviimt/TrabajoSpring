@@ -43,6 +43,8 @@ public class CursoController {
 	private static final String FORM_VIEW = "formCurso";
 	private static final String FORM_PROFESOR_VIEW = "formCursoProfesor";
 	private static final String INSCRITOS_CURSO = "inscritos";
+	private static final String RANKING_CURSOS = "cursosRanking";
+	
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
@@ -252,6 +254,24 @@ public class CursoController {
 		mav.addObject("inscritos", listInscritos);
 		mav.addObject("idCurso", id);
 		mav.addObject("finalizado",cond);
+		return mav;
+	}
+	
+	@GetMapping("/cursosRanking")
+	public ModelAndView cursosRanking() {
+		ModelAndView mav = new ModelAndView(RANKING_CURSOS);
+		List<CursoModel> cursos=cursoService.ListAllCursos();
+		List<InscripcionModel> listInscritos=new ArrayList();
+		
+		
+		for(CursoModel curso : cursos) {
+			List<Matricula> listMatriculas = matriculaRepository.findBycursoId(curso.getId());
+			InscripcionModel curs=new InscripcionModel(curso,listMatriculas.size());
+			listInscritos.add(curs);
+		}
+		List<InscripcionModel> listMatriculasOrdeadas=listInscritos.stream().sorted(Comparator.comparing(InscripcionModel::getNumeroMatriculas).reversed()).collect(Collectors.toList());
+
+		mav.addObject("inscritos", listMatriculasOrdeadas);
 		return mav;
 	}
 	
