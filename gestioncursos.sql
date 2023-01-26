@@ -2,9 +2,9 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2023 a las 07:16:24
--- Versión del servidor: 10.4.24-MariaDB
+-- Servidor: localhost
+-- Tiempo de generación: 26-01-2023 a las 08:37:37
+-- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -91,11 +91,10 @@ CREATE TABLE `curso` (
 --
 
 INSERT INTO `curso` (`id`, `descripcion`, `fecha_fin`, `fecha_inicio`, `nivel`, `nombre`, `id_profesor`) VALUES
-(7, 'Asignatura 2º Dam', '2023-03-03', '2022-09-16', 8, 'Acceso a datos', 4),
+(31, 'programacion', '2023-01-29', '2022-12-24', 5, 'curso de Django', 4),
 (8, 'Asignatura 2º Dam', '2023-03-03', '2022-09-16', 6, 'Desarrollo de interfaces', 6),
 (16, 'Asignatura 1º Dam', '2022-12-30', '2022-10-03', 4, 'Base de datos', 6),
-(17, 'Asignatura 1º Dam', '2023-01-09', '2022-09-05', 9, 'Programación', 4),
-(18, 'Curso de programación con Django', '2023-09-21', '2023-04-12', 10, 'Programación Django ', 4);
+(30, 'programacion', '2023-01-13', '2022-12-09', 9, 'Programacion', 4);
 
 -- --------------------------------------------------------
 
@@ -112,7 +111,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(24);
+(34);
 
 -- --------------------------------------------------------
 
@@ -132,8 +131,9 @@ CREATE TABLE `matricula` (
 --
 
 INSERT INTO `matricula` (`id`, `valoracion`, `alumno_id`, `curso_id`) VALUES
-(15, 0, 14, 7),
-(23, 0, 20, 7);
+(33, 0, 20, 31),
+(24, 0, 14, 8),
+(32, 0, 14, 30);
 
 -- --------------------------------------------------------
 
