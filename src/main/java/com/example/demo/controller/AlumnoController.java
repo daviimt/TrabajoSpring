@@ -9,6 +9,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -107,7 +109,14 @@ public class AlumnoController {
 	
 	@GetMapping("/formAlumno/{id}")
 	public String formAlumno(@PathVariable(name = "id", required = false) int id, Model model) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		
+		if ((u.getId() + 1) == id) {
 			model.addAttribute("alumno", alumnoService.findStudent(id));
+		} else {
+			return "/error/403";
+		}
 		return FORM_VIEW;
 	}
 	

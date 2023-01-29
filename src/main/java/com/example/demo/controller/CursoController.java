@@ -126,12 +126,20 @@ public class CursoController {
 	@GetMapping(value = { "/listCursosProfesor", "/listCursosProfesor/{id}" })
 	public ModelAndView listCursosProfesor(@PathVariable(name = "id", required = false) Integer id) {
 		ModelAndView mav = new ModelAndView(COURSES_PROFESOR_VIEW);
+		ModelAndView mavError = new ModelAndView("/error/403");
 
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		
 		if (id == null)
 			mav.addObject("cursos", cursoService.ListAllCursos());
 		else {
-			ProfesorModel profesor = profesorService.findProfesor(id);
-			mav.addObject("cursos", profesorService.findCursosByIdProfesor(profesor));
+			if ((u.getId() + 1) == id) {
+				ProfesorModel profesor = profesorService.findProfesor(id);
+				mav.addObject("cursos", profesorService.findCursosByIdProfesor(profesor));
+			} else {
+				return mavError;
+			}
 		}
 		return mav;
 	}
@@ -140,13 +148,17 @@ public class CursoController {
 	@GetMapping(value = { "/formCursoProfesor", "/formCursoProfesor/{id}" })
 	public String formCursoProfesor(@PathVariable(name = "id", required = false) Integer id, Model model) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		model.addAttribute("profesor", profesorService.findProfesor(userDetails.getUsername()));
 
 		if (id == null) {
 			model.addAttribute("curso", new CursoModel());
 		} else {
-			model.addAttribute("curso", cursoService.findCurso(id));
+			if ((u.getId() + 1) == id) {
+				model.addAttribute("curso", cursoService.findCurso(id));				
+			} else {
+				return "/error/403";
+			}
 		}
 		return FORM_PROFESOR_VIEW;
 	}
@@ -206,6 +218,8 @@ public class CursoController {
 	@GetMapping("/inscritos/{id}")
 	public ModelAndView inscritosCurso(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(INSCRITOS_CURSO);
+		ModelAndView mavError = new ModelAndView("/error/403");
+		
 		List<CursoModel> cursosAcabados=cursoService.findCursosAcabados();
 		List<Matricula> listMatriculas = matriculaRepository.findBycursoId(id);
 		List<InscripcionModel> listInscritos=new ArrayList();
@@ -213,6 +227,8 @@ public class CursoController {
 		CursoModel c=cursoService.findCurso(id);
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		
+		if ((u.getId() + 1) == c.getIdProfesor() || u.getId()==1) {
 		
 		boolean cond=cursosAcabados.contains(c);
 		System.out.println(cond);
@@ -227,19 +243,28 @@ public class CursoController {
 		mav.addObject("idCurso", id);
 		mav.addObject("finalizado",cond);
 		return mav;
+		
+		} else {
+			return mavError;
+		}
 	}
 	
 	@GetMapping("/ordenarNotas/{id}")
 	public ModelAndView ordenarNotas(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(INSCRITOS_CURSO);
+		ModelAndView mavError = new ModelAndView("/error/403");
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
+		CursoModel c=cursoService.findCurso(id);
+		
+		if ((u.getId() + 1) == c.getIdProfesor()) {
+			
 		List<CursoModel> cursosAcabados=cursoService.findCursosAcabados();
 		List<Matricula> listMatriculas = matriculaRepository.findBycursoId(id);
 		
 		List<InscripcionModel> listInscritos=new ArrayList();
 		
-		CursoModel c=cursoService.findCurso(id);
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		
 		boolean cond=cursosAcabados.contains(c);
 		System.out.println(cond);
@@ -255,6 +280,9 @@ public class CursoController {
 		mav.addObject("idCurso", id);
 		mav.addObject("finalizado",cond);
 		return mav;
+		} else {
+			return mavError;
+		}
 	}
 	
 	@GetMapping("/cursosRanking")
