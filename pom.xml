@@ -92,6 +92,41 @@
 
 			</plugin>
 
+			<plugin>
+				<groupId>com.microsoft.azure</groupId>
+				<artifactId>azure-webapp-maven-plugin</artifactId>
+				<!-- check Maven Central for the latest version -->
+				<version>1.10.0</version>
+				<configuration>
+					<schemaVersion>v2</schemaVersion>
+					<resourceGroup>azureTestGroup</resourceGroup>
+					<appName>gestioncursos</appName>
+					<region>West Europe</region>
+					<pricingTier>T1</pricingTier>
+					<runtime>
+						<os>windows</os>
+						<!--  <os>linux</os> -->
+						<javaVersion>17</javaVersion>
+						<webContainer>tomcat 8.5</webContainer>
+					</runtime>
+					<deployment>
+						<resources>
+							<resource>
+								<directory>${project.basedir}/target</directory>
+								<includes>
+									<include>*.jar</include>
+								</includes>
+							</resource>
+							<resource>
+								<directory>${project.basedir}/src/main/resources</directory>
+								<includes>
+									<include>web.config</include>
+								</includes>
+							</resource>
+						</resources>
+					</deployment>
+				</configuration>
+			</plugin>
 
 		</plugins>
 	</build>
