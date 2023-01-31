@@ -96,18 +96,18 @@
 				<groupId>com.microsoft.azure</groupId>
 				<artifactId>azure-webapp-maven-plugin</artifactId>
 				<!-- check Maven Central for the latest version -->
-				<version>1.10.0</version>
+				<version>2.2.0</version>
 				<configuration>
 					<schemaVersion>v2</schemaVersion>
 					<resourceGroup>azureTestGroup</resourceGroup>
 					<appName>gestioncursos</appName>
 					<region>West Europe</region>
-					<pricingTier>T1</pricingTier>
+					<pricingTier>F1</pricingTier>
 					<runtime>
 						<os>windows</os>
 						<!--  <os>linux</os> -->
-						<javaVersion>17</javaVersion>
-						<webContainer>tomcat 8.5</webContainer>
+						<javaVersion>Java 11</javaVersion>
+						<webContainer>Java SE</webContainer>
 					</runtime>
 					<deployment>
 						<resources>
