@@ -228,7 +228,7 @@ public class CursoController {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		
-		if ((u.getId() + 1) == c.getIdProfesor() || u.getId()==1) {
+		if ((u.getId() + 1) == c.getIdProfesor() || u.getUsername().equals("admin@admin.com")) {
 		
 		boolean cond=cursosAcabados.contains(c);
 		System.out.println(cond);
@@ -258,7 +258,7 @@ public class CursoController {
 		Usuario u = usuarioRepository.findByUsername(userDetails.getUsername());
 		CursoModel c=cursoService.findCurso(id);
 		
-		if ((u.getId() + 1) == c.getIdProfesor()) {
+		if (u.getUsername().equals("admin@admin.com")) {
 			
 		List<CursoModel> cursosAcabados=cursoService.findCursosAcabados();
 		List<Matricula> listMatriculas = matriculaRepository.findBycursoId(id);

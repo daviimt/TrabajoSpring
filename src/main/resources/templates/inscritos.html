@@ -14,7 +14,7 @@
 	<div style="text-align: center; width: 1200px; margin: auto;">
 		<h1>Lista de alumnos inscritos</h1>
 
-		<a th:href="@{/cursos/ordenarNotas/}+${idCurso}">
+		<a sec:authorize="hasAuthority('ROL_ADMIN')" th:href="@{/cursos/ordenarNotas/}+${idCurso}">
 			<button >Ordenar por nota</button>
 		</a>
 
